@@ -15,6 +15,11 @@ list_of_latex = [
           'a = b + c',
           # a slightly more complicated latex input; still works. No problem here
           'x^2 + \int f(x) dx = 3',
+          # with spacing; see https://github.com/sympy/sympy/issues/19075
+          'x\\ y = f',
+          'x\\; y = f',
+          'x\\, y = f',
+          'x\\: y = f',
           # the following cannot be evaluated mathematically but is valid latex. 
           # this fails in Sympy with the message "I expected one of these: '='"          
           '\sum_{x+y}^{a} \int_{3}^6 dy = 3',
