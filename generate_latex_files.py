@@ -11,6 +11,12 @@ import subprocess  # https://stackoverflow.com/questions/39187886/what-is-the-di
 # as verified by the production of pdf files compiled with latex
 # some of these are parsed by Sympy, others are not
 list_of_latex = [
+          # without an equal sign
+          'a',
+          # more valid latex without equal sign
+          'a + b',
+          # inequality
+          'a > b',
           # a trivial latex input to verify that Sympy works as expected. No problem here
           'a = b + c',
           # a slightly more complicated latex input; still works. No problem here

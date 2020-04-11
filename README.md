@@ -1,6 +1,10 @@
 # latex_tests
 test of latex
 
+    docker build -t 'lat' .
+    docker run -it --rm lat:latest /bin/bash
+    python generate_latex_files.py
+
 This is in support of https://github.com/sympy/sympy/issues/19075
 and https://github.com/allofphysicsgraph/proofofconcept/issues/79
 
