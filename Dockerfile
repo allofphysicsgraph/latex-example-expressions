@@ -4,7 +4,7 @@
 # docker run -it --rm -v `pwd`:/scratch latex:latest python3 generate_latex_files.py
 
 # https://hub.docker.com/r/phusion/baseimage/tags
-FROM phusion/baseimage:0.11
+FROM phusion/baseimage:focal-1.1.0
 
 RUN apt-get update && \
     apt-get install -y \
@@ -20,23 +20,23 @@ RUN apt-get update && \
 # compile .tex to verify the latex is valid
          texlive
 
-RUN pip3 install antlr4-python3-runtime mpmath
+#RUN pip3 install antlr4-python3-runtime mpmath
 
 WORKDIR /opt/
 
-RUN wget https://github.com/msgoff/sympy/archive/master.zip
-RUN unzip master.zip
+#RUN wget https://github.com/msgoff/sympy/archive/master.zip
+#RUN unzip master.zip
 
 # this contains the list of all possible symbols the parser can be expected to handle
 # https://ctan.org/pkg/amsmath?lang=en
 RUN wget http://mirrors.ctan.org/macros/latex/required/amsmath.zip
 RUN unzip amsmath.zip
 
-WORKDIR /opt/sympy-master/
+#WORKDIR /opt/sympy-master/
 
-RUN wget https://raw.githubusercontent.com/allofphysicsgraph/proofofconcept/gh-pages/v7_pickle_web_interface/flask/data.json
+#RUN wget https://raw.githubusercontent.com/allofphysicsgraph/proofofconcept/gh-pages/v7_pickle_web_interface/flask/data.json
 
-COPY generate_latex_files.py /opt/sympy-master/
+#COPY generate_latex_files.py /opt/sympy-master/
 
 RUN echo "alias python=python3" > /root/.bashrc
 #RUN /bin/bash -l /root/.bashrc

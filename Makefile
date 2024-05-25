@@ -7,10 +7,10 @@ help:
 
 docker:
 	sudo service docker start
-	sudo docker build -t msg_sympy .
-	sudo docker run -it --rm msg_sympy /bin/bash
+	sudo docker build -t latex-examples .
+	sudo docker run -it --rm latex-examples /bin/bash
 
 docmac:
-	docker build -t msg_sympy .
-	docker run -it --rm msg_sympy /bin/bash
+	docker build -t latex-examples .
+	docker run -it --rm latex-examples /bin/bash
 
