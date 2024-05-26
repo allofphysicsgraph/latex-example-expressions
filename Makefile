@@ -20,3 +20,7 @@ docmac:
 
 pythonmac:
 	docker run -it --rm --workdir /scratch -v `pwd`:/scratch $(IMAGENAME) python3 /scratch/generate_pdf_from_latex_files.py
+
+
+clean:
+	rm -rf *.aux *.log *.tex *.pdf *.dvi
