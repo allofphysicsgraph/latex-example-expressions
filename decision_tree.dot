@@ -22,14 +22,14 @@ digraph G {
  
   "cleaned Latex" ->  sympy_parse_clean;
 
-  sympy_raw_success [shape="house"];
-  sympy_raw_error [shape="house" style=filled color=red];
+  sympy_raw_success [shape="house", label="SymPy parse success"];
+  sympy_raw_error [shape="house" style=filled color=red, label="SymPy parse error"];
 
   sympy_parse_raw -> sympy_raw_success;
   sympy_parse_raw -> sympy_raw_error;
 
-  sympy_clean_success [shape="house"];
-  sympy_clean_error [shape="house" style=filled color=red];
+  sympy_clean_success [shape="house", label="SymPy parse success"];
+  sympy_clean_error [shape="house" style=filled color=red, label="SymPy parse error"];
   
   sympy_parse_clean -> sympy_clean_success;
   sympy_parse_clean -> sympy_clean_error;
