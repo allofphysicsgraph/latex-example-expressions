@@ -1,0 +1,74 @@
+digraph G {
+    rankdir="LR";
+
+  "raw Latex" [shape="oval"]; // manual
+  "expected symbols" [shape="oval"]; // manual
+  
+  "raw Latex" -> "expected symbols";
+  
+  "cleaning" [shape="rectangle"]; // action
+  
+  "raw Latex" -> "cleaning";
+ 
+  "cleaned Latex" [shape="invtrapezium"]; // intermediate file
+  
+  "cleaning" -> "cleaned Latex";
+  
+  sympy_parse_raw [shape="rectangle" label="SymPy parse expression"]; // action
+  
+  "raw Latex" -> sympy_parse_raw;
+
+  sympy_parse_clean [shape="rectangle" label="SymPy parse expression"]; // action
+ 
+  "cleaned Latex" ->  sympy_parse_clean;
+
+  sympy_raw_success [shape="house"];
+  sympy_raw_error [shape="house" style=filled color=red];
+
+  sympy_parse_raw -> sympy_raw_success;
+  sympy_parse_raw -> sympy_raw_error;
+
+  sympy_clean_success [shape="house"];
+  sympy_clean_error [shape="house" style=filled color=red];
+  
+  sympy_parse_clean -> sympy_clean_success;
+  sympy_parse_clean -> sympy_clean_error;
+  
+  raw_sympy_expr  [label="expression" shape="invtrapezium"]; // intermediate file
+  raw_sympy_atoms  [label="atoms" shape="invtrapezium"]; // intermediate file
+
+  sympy_raw_success -> raw_sympy_expr;
+  sympy_raw_success -> raw_sympy_atoms;
+
+  clean_sympy_expr  [label="expression" shape="invtrapezium"]; // intermediate file
+  clean_sympy_atoms  [label="atoms" shape="invtrapezium"]; // intermediate file
+  
+  sympy_clean_success -> clean_sympy_expr;
+  sympy_clean_success -> clean_sympy_atoms;
+  
+  sympy_clean_expr_correct [shape=cds style=filled color=green, label="correct"];
+  sympy_clean_expr_wrong [shape=cds style=filled color=red, label="wrong"];
+ 
+  clean_sympy_expr -> sympy_clean_expr_correct;
+  clean_sympy_expr -> sympy_clean_expr_wrong;
+
+  sympy_clean_atoms_correct [shape=cds style=filled color=green, label="correct"];
+  sympy_clean_atoms_wrong [shape=cds style=filled color=red, label="wrong"];
+ 
+  clean_sympy_atoms -> sympy_clean_atoms_correct;
+  clean_sympy_atoms -> sympy_clean_atoms_wrong;
+ 
+  sympy_raw_expr_correct [shape=cds style=filled color=green, label="correct"];
+  sympy_raw_expr_wrong [shape=cds style=filled color=red, label="wrong"];
+ 
+  raw_sympy_expr -> sympy_raw_expr_correct;
+  raw_sympy_expr -> sympy_raw_expr_wrong;
+
+  sympy_raw_atoms_correct [shape=cds style=filled color=green, label="correct"];
+  sympy_raw_atoms_wrong [shape=cds style=filled color=red, label="wrong"];
+ 
+  raw_sympy_atoms -> sympy_raw_atoms_correct;
+  raw_sympy_atoms -> sympy_raw_atoms_wrong;
+ 
+  
+}

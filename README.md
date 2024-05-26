@@ -1,3 +1,8 @@
+
+![alt text](https://raw.githubusercontent.com/allofphysicsgraph/latex-example-expressions/master/decision_tree.png)
+
+![alt test](/assets/images/decision_tree.png)
+
 Explanation of files in this repo:
 
 # manually created files
