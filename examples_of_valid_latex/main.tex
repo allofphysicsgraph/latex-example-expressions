@@ -31,95 +31,358 @@ This is not meant to comprehensively represent all expression found in pure math
 \section{Unsorted}
 
 Missing an equal sign. Valid \LaTeX. Would show up as a `feed' but is not a valid expression since there's no relational operator.
-\input{expression_600}
-Expected tokens: $a$
+\input{60000_expression_latex}
+parses to
+\input{60000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{60000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{60000_cleaned_latex}
+parses to
+\input{60000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{60000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{60000_expected_tokens}
+
 
 \hrulefill
 
 problem for Sympy is the bar
-\input{expression_610}
-Expected tokens: $a$, $b$, $x$
+\input{61000_expression_latex}
+parses to
+\input{61000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{61000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{61000_cleaned_latex}
+parses to
+\input{61000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{61000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{61000_expected_tokens}
 
 \hrulefill
 
 valid math and valid \LaTeX but fails in Sympy
-\input{expression_620}
-Expected tokens: $a$
+\input{62000_expression_latex}
+parses to
+\input{62000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{62000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{62000_cleaned_latex}
+parses to
+\input{62000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{62000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{62000_expected_tokens}
 
 \hrulefill
 
 used in quantum mechanics and is valid latex. Fails in Sympy
-\input{expression_630}
-Expected tokens: $\hat{x}$
+\input{63000_expression_latex}
+parses to
+\input{63000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{63000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{63000_cleaned_latex}
+parses to
+\input{63000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{63000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{63000_expected_tokens}
 
 \hrulefill
 
 succeeds in Sympy, indicating an argument is expected
-\input{expression_640}
-Expected tokens: $x$
+\input{64000_expression_latex}
+parses to
+\input{64000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{64000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{64000_cleaned_latex}
+parses to
+\input{64000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{64000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{64000_expected_tokens}
+
 
 \hrulefill
 
 fails in sympy and is (usually) incomplete mathematically
-\input{expression_650}
-Expected tokens: $x$
+\input{65000_expression_latex}
+parses to
+\input{65000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{65000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{65000_cleaned_latex}
+parses to
+\input{65000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{65000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{65000_expected_tokens}
 
 \hrulefill
 
 used in quantum mechanics and is valid latex. Fails in Sympy
-\input{expression_660}
-Expected tokens: $\hbar$
+\input{66000_expression_latex}
+parses to
+\input{66000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{66000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{66000_cleaned_latex}
+parses to
+\input{66000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{66000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{66000_expected_tokens}
 
 \hrulefill
 
 complicated but valid math and valid latex. Fails in the second array  
-\input{expression_670}
-Expected tokens: $\cos$
+\input{67000_expression_latex}
+parses to
+\input{67000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{67000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{67000_cleaned_latex}
+parses to
+\input{67000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{67000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{67000_expected_tokens}
 
 \hrulefill
 
-I isolate the problem array
-\input{expression_671}
-Expected tokens: $A_{x}$
+Isolate the problem array
+\input{67100_expression_latex}
+parses to
+\input{67100_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{67100_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{67100_cleaned_latex}
+parses to
+\input{67100_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{67100_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{67100_expected_tokens}
+
 
 \hrulefill
 
 the following cannot be evaluated mathematically but is valid latex. 
 This fails in Sympy with the message ``I expected one of these: '='''
-\input{expression_680}
-Expected tokens: $dy$
+\input{68000_expression_latex}
+parses to
+\input{68000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{68000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{68000_cleaned_latex}
+parses to
+\input{68000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{68000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{68000_expected_tokens}
+
 
 \hrulefill
 
 with spacing; see https://github.com/sympy/sympy/issues/19075
-\input{expression_690}
-Expected tokens: $x$
+\input{69000_expression_latex}
+parses to
+\input{69000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{69000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{69000_cleaned_latex}
+parses to
+\input{69000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{69000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{69000_expected_tokens}
 
 \hrulefill
 
-\input{expression_691}
-Expected tokens: $x$
+\input{69100_expression_latex}
+parses to
+\input{69100_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{69100_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{69100_cleaned_latex}
+parses to
+\input{69100_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{69100_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{69100_expected_tokens}
+
 
 \hrulefill
 
-\input{expression_692}
-Expected tokens: $x$
+\input{69200_expression_latex}
+parses to
+\input{69200_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{69200_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{69200_cleaned_latex}
+parses to
+\input{69200_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{69200_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{69200_expected_tokens}
+
 
 \hrulefill
 
-\input{expression_693}
-Expected tokens: $x$
+\input{69300_expression_latex}
+parses to
+\input{69300_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{69300_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{69300_cleaned_latex}
+parses to
+\input{69300_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{69300_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{69300_expected_tokens}
 
 \hrulefill
 
-\input{expression_694}
-Expected tokens: $x$
+\input{69400_expression_latex}
+parses to
+\input{69400_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{69400_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{69400_cleaned_latex}
+parses to
+\input{69400_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{69400_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{69400_expected_tokens}
+
 
 \hrulefill
 
 inequality
-\input{expression_695}
-Expected tokens: $a$
+\input{69500_expression_latex}
+parses to
+\input{69500_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{69500_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{69500_cleaned_latex}
+parses to
+\input{69500_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{69500_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{69500_expected_tokens}
 
 \hrulefill
 
@@ -127,428 +390,845 @@ Expected tokens: $a$
 
 \hrulefill
 
-\input{expression_010}
+raw \LaTeX
+\input{01000_expression_latex}
 parses to 
-\begin{verbatim}
-Eq(a, b)    
-\end{verbatim}
-with atoms ${a, b}$\\
+\input{01000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms 
+\input{01000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
-Expected tokens: $a$, $b$, $=$.
+\ \\
+cleaned \LaTeX
+\input{01000_cleaned_latex}
+parses to 
+\input{01000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms 
+\input{01000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens: 
+\input{01000_expected_tokens}
 
 \hrulefill
 
 polynomial
-\input{expression_015}    
+\input{01500_expression_latex}    
 parses to
-\begin{verbatim}
-Eq(x**n + y**n, z**n)
-\end{verbatim}
-with atoms ${y, n, x, z}$\\
+\input{01500_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms 
+\input{01500_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
-Expected tokens: $x$, $y$, $z$, $=$, $n$, $+$, power.
+\ \\
+Expected tokens: 
+\input{01500_expected_tokens}
 
 \hrulefill
 
 polynomial with subscripts
-\input{expression_016}  
+\input{01600_expression_latex}  
 parses to
-\begin{verbatim}
-Eq(a_{1}**2 + b_{1}**2, c_{1}**2)
-\end{verbatim}
-with atoms ${b_{1}, 2, a_{1}, c_{1}}$\\
+\input{01600_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms 
+\input{01600_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
-Expected tokens: $a_1$, $b_1$, $c_1$, $+$, $=$, $2$, power.
+\ \\
+Expected tokens:
+\input{01600_expected_tokens}
+
 
 \hrulefill
 
 
-\input{expression_017}
+\input{01700_expression_latex}
 parses to
-\begin{verbatim}
-Eq(k_{n + 1}, -k_{n - 1} + (k_{n}**2 + n**2))
-\end{verbatim}
-with atoms ${k_{n - 1}, 2, k_{n + 1}, k_{n}, n, -1}$\\
+\input{01700_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms 
+\input{01700_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
-Expected tokens: $k_{n+1}$, $n$, $2$, $+$, $-$, $k_{n-1}$, $=$, power.
+\ \\
+Expected tokens: 
+\input{01700_expected_tokens}
 
 \hrulefill
 
 
-\input{expression_018}
-\begin{verbatim}
-antlr4.error.Errors.LexerNoViableAltException: LexerNoViableAltException('\')
+\input{01800_expression_latex}
+\input{01800_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 
-sympy.parsing.latex.errors.LaTeXParsingError: I don't understand this
-\cos(2\ \theta\ \phi)=\cos^{2}\theta\phi-\sin^{2}(\theta\ \phi)
-~~~~~~^
-\end{verbatim}
-
-
-Expected tokens: $\cos$, power, 2, $\theta$, $\phi$, $-$, $=$
+\ \\
+Expected tokens: 
+\input{01800_expected_tokens}
 
 \hrulefill
 
 
-\input{expression_019}
-\begin{verbatim}
-antlr4.error.Errors.LexerNoViableAltException: LexerNoViableAltException('\')
+\input{01900_expression_latex}
 
-sympy.parsing.latex.errors.LaTeXParsingError: I don't understand this
-\sqrt{|x\ y|}\leq\left|\frac{x+y}{2}\right|
-~~~~~~~~^
-\end{verbatim}
+\input{01900_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 
-
-Expected tokens: $\sqrt{}$, $x$, $y$, $\leq$, $/$, 2, $+$
+\ \\
+Expected tokens: 
+\input{01900_expected_tokens}
 
 \hrulefill
 
 
 function of a variable
-\input{expression_030}
+\input{03000_expression_latex}
 parses to
-\begin{verbatim}
-Eq(f(x), y**2)
-\end{verbatim}
-with atoms ${x, 2, y}$\\
+\input{03000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{03000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
-Expected tokens: $f(x)$, $x$, $=$, $y$, power, 2.
+\ \\
+cleaned \LaTeX
+\input{03000_cleaned_latex}
+parses to
+\input{03000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{03000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{03000_expected_tokens}
+
 
 \hrulefill
 
 
 With constraint
-\input{expression_040}
-\begin{verbatim}
-antlr4.error.Errors.LexerNoViableAltException: LexerNoViableAltException('\')
+\input{04000_expression_latex}
+parses to
+\input{04000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{04000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
 
-sympy.parsing.latex.errors.LaTeXParsingError: I don't understand this
-K = G + 1 \ {\rm when}\ K << G
-~~~~~~~~~~^
-\end{verbatim}
+\ \\
+cleaned \LaTeX
+\input{04000_cleaned_latex}
+parses to
+\input{04000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{04000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
-Expected tokens: $K$, $G$, $+$, $1$, $=$, $<<$
+\ \\
+Expected tokens:
+\input{04000_expected_tokens}
+
 
 \hrulefill
 
 
 Equation with range:
-\input{expression_050}
-\begin{verbatim}
-antlr4.error.Errors.LexerNoViableAltException: LexerNoViableAltException('\')
+\input{05000_expression_latex}
+parses to
+\input{05000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{05000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
 
-sympy.parsing.latex.errors.LaTeXParsingError: I don't understand this
-f(x) = x^2 \ {\rm when}\ x>0
-~~~~~~~~~~~^
-\end{verbatim}
+\ \\
+cleaned \LaTeX
+\input{05000_cleaned_latex}
+parses to
+\input{05000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{05000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
-Expected tokens: 
-
-\hrulefill
-
-
-\input{expression_051}
-\begin{verbatim}
-antlr4.error.Errors.LexerNoViableAltException: LexerNoViableAltException('&')
-
-sympy.parsing.latex.errors.LaTeXParsingError: I don't understand this
-|x|=\begin{cases}
- x  & \text{if }x\geq 0\\\
--x  & \text{if }x< 0
-\end{cases}
-~~~~^
-\end{verbatim}
-
-Expected tokens: 
+\ \\
+Expected tokens:
+\input{05000_expected_tokens}
 
 \hrulefill
 
 
-\input{expression_998}
-Expected tokens: 
+\input{05100_expression_latex}
+parses to
+\input{05100_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{05100_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{05100_cleaned_latex}
+parses to
+\input{05100_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{05100_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{05100_expected_tokens}
+
+
+\hrulefill
+
+
+\input{99800_expression_latex}
+parses to
+\input{99800_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{99800_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{99800_cleaned_latex}
+parses to
+\input{99800_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{99800_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{99800_expected_tokens}
+
 
 \hrulefill
 
 %https://www.authorea.com/users/3/articles/165181-latex-mathematics-examples
 continued fractions
-\input{expression_055}    
+\input{05500_expression_latex}    
 parses to
-\begin{verbatim}
-Eq(x, a_{0} + 1/(a_{1} + 1/(a_{2} + 1/(a_{3} + a_{4}))))
-\end{verbatim}
-with atoms ${a_{3}, a_{0}, x, -1, a_{1}, a_{2}, a_{4}}$\\
+\input{05500_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{05500_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
+\ \\
+cleaned \LaTeX
+\input{05500_cleaned_latex}
+parses to
+\input{05500_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{05500_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
-Expected tokens: 
+\ \\
+Expected tokens:
+\input{05500_expected_tokens}
+
 
 \hrulefill
 
 As the fractions continue, they get smaller. If you want to keep the size consistent, use the display style
-\input{expression_056}
+\input{05600_expression_latex}
 parses to
-\begin{verbatim}
-Eq(x, a_{0} + 1/(a_{1}*displaystyle + 1/(a_{2}*displaystyle + 1/(a_{3}*displaystyle + a_{4}))))
-\end{verbatim}
-with atoms ${a_{3}, x, a_{1}, displaystyle, a_{0}, a_{2}, a_{4}, -1}$\\
+\input{05600_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{05600_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
-Expected tokens: 
+\ \\
+cleaned \LaTeX
+\input{05600_cleaned_latex}
+parses to
+\input{05600_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{05600_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{05600_expected_tokens}
+
 
 \hrulefill
 
 system of equations
-\input{expression_058}
+\input{05800_expression_latex}
 parses to
-\begin{verbatim}
-Eq(u, (-y)/(x**2 + y**2))
-\end{verbatim}
-with atoms ${2, u, x, y, -1}$\\
+\input{05800_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{05800_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
-Expected tokens: 
+\ \\
+cleaned \LaTeX
+\input{05800_cleaned_latex}
+parses to
+\input{05800_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{05800_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{05800_expected_tokens}
+
 
 \hrulefill
 
 Multi-line equation:
-\input{expression_060}
-\begin{verbatim}
-antlr4.error.Errors.LexerNoViableAltException: LexerNoViableAltException('\')
+\input{06000_expression_latex}
+parses to
+\input{06000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{06000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
 
-sympy.parsing.latex.errors.LaTeXParsingError: I don't understand this
-\begin{split}
-a = x + \\
- c + b * \\
- (y + z)
-\end{split}
-~~~~~~~~^
-\end{verbatim}
+\ \\
+cleaned \LaTeX
+\input{06000_cleaned_latex}
+parses to
+\input{06000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{06000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
-Expected tokens: 
+\ \\
+Expected tokens:
+\input{06000_expected_tokens}
+
 
 \hrulefill
 
 Multi-line equation with alignment:
-\input{expression_070}
-\begin{verbatim}
-antlr4.error.Errors.LexerNoViableAltException: LexerNoViableAltException('\')
+\input{07000_expression_latex}
+parses to
+\input{07000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{07000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
 
-sympy.parsing.latex.errors.LaTeXParsingError: I don't understand this
-\begin{split}
-a = x - \\
-& c + b - \\
-& f + k
-\end{split}
-~~~~~~~~^
-\end{verbatim}
+\ \\
+cleaned \LaTeX
+\input{07000_cleaned_latex}
+parses to
+\input{07000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{07000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
-Expected tokens: 
+\ \\
+Expected tokens:
+\input{07000_expected_tokens}
+
 
 \hrulefill
 
 Simultaneous equations
-\input{expression_999}
-Expected tokens: 
+\input{99900_expression_latex}
+parses to
+\input{99900_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{99900_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{99900_cleaned_latex}
+parses to
+\input{99900_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{99900_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{99900_expected_tokens}
+
 
 \hrulefill
 
 % https://gitmind.com/faq/formula-list.html
 fractions, nested
-\input{expression_071}
+\input{07100_expression_latex}
 parses to
-\begin{verbatim}
-Eq(((1 - (1/2)**n)/2)/(1 - 1/2), s_{n})
-\end{verbatim}
-with atoms ${1, 2, n, -1, s_{n}}$\\
+\input{07100_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{07100_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
-Expected tokens: 
+\ \\
+cleaned \LaTeX
+\input{07100_cleaned_latex}
+parses to
+\input{07100_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{07100_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{07100_expected_tokens}
 
 \hrulefill
 
 binomial
-\input{expression_072}
-Expected tokens: 
+\input{07200_expression_latex}
+parses to
+\input{07200_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{07200_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{07200_cleaned_latex}
+parses to
+\input{07200_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{07200_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{07200_expected_tokens}
 
 \hrulefill
 
 % https://www.authorea.com/users/3/articles/165181-latex-mathematics-examples
 The Taylor series expansion for $e^x$ is 
-\input{expression_073}
-\begin{verbatim}
-antlr4.error.Errors.NoViableAltException: None
+\input{07300_expression_latex}
+parses to
+\input{07300_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{07300_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
 
-sympy.parsing.latex.errors.LaTeXParsingError: I expected something else here
-1 + x + \frac{x^2}{2} + \frac{x^3}{6} + \cdots = \sum_{n\geq 0} \frac{x^n}{n!}
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
-\end{verbatim}
+\ \\
+cleaned \LaTeX
+\input{07300_cleaned_latex}
+parses to
+\input{07300_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{07300_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
-Expected tokens: 
+\ \\
+Expected tokens:
+\input{07300_expected_tokens}
+
 
 \hrulefill
 
 
 For any non-negative integer $n$,
-\input{expression_074}
+\input{07400_expression_latex}
 parses to
-\begin{verbatim}
-Eq((x + 1)**n, Sum(x**i*binomial(n, i), (i, 0, n)))
-\end{verbatim}
-with atoms ${x, 1, 0, i, n}$\\
+\input{07400_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{07400_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
+\ \\
+cleaned \LaTeX
+\input{07400_cleaned_latex}
+parses to
+\input{07400_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{07400_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
-
-Expected tokens: 
+\ \\
+Expected tokens:
+\input{07400_expected_tokens}
 
 \hrulefill
 
 
 \section{Calculus}
 limit
-\input{expression_077}
-Expected tokens: 
+\input{07700_expression_latex}
+parses to
+\input{07700_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{07700_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{07700_cleaned_latex}
+parses to
+\input{07700_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{07700_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{07700_expected_tokens}
+
 
 \hrulefill
 
 
 integration
-\input{expression_075}
-Expected tokens: 
+\input{07500_expression_latex}
+parses to
+\input{07500_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{07500_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{07500_cleaned_latex}
+parses to
+\input{07500_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{07500_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{07500_expected_tokens}
+
 
 \hrulefill
 
 
 % https://gitmind.com/faq/formula-list.html
-\input{expression_078}
-Expected tokens: 
+\input{07800_expression_latex}
+parses to
+\input{07800_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{07800_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{07800_cleaned_latex}
+parses to
+\input{07800_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{07800_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{07800_expected_tokens}
 
 \hrulefill
 
 
-\input{expression_079}
-Expected tokens: 
+\input{07900_expression_latex}
+parses to
+\input{07900_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{07900_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{07900_cleaned_latex}
+parses to
+\input{07900_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{07900_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{07900_expected_tokens}
+
 
 \hrulefill
 
 
 partial differential
-\input{expression_076}
-Expected tokens: 
+\input{07600_expression_latex}
+parses to
+\input{07600_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{07600_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{07600_cleaned_latex}
+parses to
+\input{07600_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{07600_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{07600_expected_tokens}
+
 
 \hrulefill
 
 
 \section{Linear Algebra}
 vector and matrix notation
-\input{expression_020}    
+\input{02000_expression_latex}    
 parses to
-\begin{verbatim}
-Eq(vec*x, A*hat)
-\end{verbatim}
-with atoms ${x, vec, A, hat}$\\
+\input{02000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms 
+\input{02000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 $\rightarrow$ SymPy's atoms are wrong.
 
-Expected tokens: $\vec{x}$,$\hat{A}$
+Expected tokens: 
+\input{02000_expected_tokens}
 
 \hrulefill
 
 
 
 row vector:
-\input{expression_080}
-Expected tokens: $\vec{x}$, $=$, $0$, $3$, $y$
+\input{08000_expression_latex}
+parses to
+\input{08000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{08000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{08000_cleaned_latex}
+parses to
+\input{08000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{08000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{08000_expected_tokens}
+
 
 \hrulefill
 
 
 column vector:
-\input{expression_090}
-Expected tokens: $\vec{x}$, $=$, $x_1$, $x_2$, $x_3$
+\input{09000_expression_latex}
+parses to
+\input{09000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{09000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{09000_cleaned_latex}
+parses to
+\input{09000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{09000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{09000_expected_tokens}
 
 \hrulefill
 
 
 column vector, arbitrary size:
-\input{expression_100}
-Expected tokens: $\vec{x}$, $=$, $x_1$, $x_2$, $x_3$
+\input{10000_expression_latex}
+parses to
+\input{10000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{10000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{10000_cleaned_latex}
+parses to
+\input{10000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{10000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{10000_expected_tokens}
+
 
 \hrulefill
 
 
 
 matrix:
-\input{expression_110}
-Expected tokens: 
+\input{11000_expression_latex}
+parses to
+\input{11000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{11000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{11000_cleaned_latex}
+parses to
+\input{11000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{11000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{11000_expected_tokens}
 
 \hrulefill
 
 
 matrix, arbitrary size:
-\input{expression_120}
-Expected tokens: 
+\input{12000_expression_latex}
+parses to
+\input{12000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{12000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{12000_cleaned_latex}
+parses to
+\input{12000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{12000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{12000_expected_tokens}
+
 
 \hrulefill
 
 
 % https://tex.stackexchange.com/a/153616/235813
 matrix math:
-\input{expression_130}
-Expected tokens: 
+\input{13000_expression_latex}
+parses to
+\input{13000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{13000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{13000_cleaned_latex}
+parses to
+\input{13000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{13000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{13000_expected_tokens}
+
 
 \hrulefill
 
 
 \section{Quantum: Dirac Notation}
 
-bra
-% https://tex.stackexchange.com/a/553176/235813
-\input{expression_800}
-Expected tokens: $\psi$
-
 How to indicate using tokens that this is "bra"? Seems similar to $f(x)$
 
+% https://tex.stackexchange.com/a/553176/235813
+\input{80000_expression_latex}
+parses to
+\input{80000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{80000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{80000_cleaned_latex}
+parses to
+\input{80000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{80000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{80000_expected_tokens}
+
+
 \hrulefill
 
-
-ket
-% https://tex.stackexchange.com/a/553176/235813
-\input{expression_810}
-Expected tokens: $\phi$
 
 How to indicate using tokens that this is "ket"? Seems similar to $f(x)$
+% https://tex.stackexchange.com/a/553176/235813
+\input{81000_expression_latex}
+parses to
+\input{81000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{81000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{81000_cleaned_latex}
+parses to
+\input{81000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{81000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{81000_expected_tokens}
+
 
 \hrulefill
 
 
 % https://tex.stackexchange.com/a/553176/235813
-\input{expression_820}
-Expected tokens: $\psi$, $\phi$
-
 Seems similar to $f(x, y)$
+\input{82000_expression_latex}
+parses to
+\input{82000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{82000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{82000_cleaned_latex}
+parses to
+\input{82000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{82000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{82000_expected_tokens}
+
+
 
 \hrulefill
 
-
-\input{expression_830}
-Expected tokens: 
-
 Seems similar to $f(x, y, z)$
+\input{83000_expression_latex}
+parses to
+\input{83000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{83000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{83000_cleaned_latex}
+parses to
+\input{83000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{83000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{83000_expected_tokens}
+
+
 
 \hrulefill
 
 
 expectation
-\input{expression_840}
-Expected tokens: 
+\input{84000_expression_latex}
+parses to
+\input{84000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{84000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{84000_cleaned_latex}
+parses to
+\input{84000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{84000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{84000_expected_tokens}
+
 
 \hrulefill
 
@@ -559,25 +1239,74 @@ Expected tokens:
 
 \href{https://en.wikipedia.org/wiki/Einstein_notation}{Einstein notation}
 
-\input{expression_700}
-Expected tokens: $C$, $A$, $B$, $=$, $i$, $k$, $j$.
+\input{70000_expression_latex}
+parses to
+\input{70000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{70000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{70000_cleaned_latex}
+parses to
+\input{70000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{70000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{70000_expected_tokens}
+
 
 \hrulefill
 
 
 The \href{https://en.wikipedia.org/wiki/Kronecker_delta}{Kronecker delta}
-\input{expression_705}
-Expected tokens: $\sum$, $j$, $\delta$, $i$, $j$, $a$, $=$.
+\input{70500_expression_latex}
+parses to
+\input{70500_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{70500_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{70500_cleaned_latex}
+parses to
+\input{70500_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{70500_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{70500_expected_tokens}
+
 
 \hrulefill
 
 
 
-\input{expression_710}
-Expected tokens: 
+\input{71000_expression_latex}
+parses to
+\input{71000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{71000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{71000_cleaned_latex}
+parses to
+\input{71000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{71000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{71000_expected_tokens}
+
 
 \hrulefill
-
-
 
 \end{document}
