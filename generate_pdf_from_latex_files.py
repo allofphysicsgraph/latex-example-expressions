@@ -1,4 +1,12 @@
 #!/usr/bin/env python3
+
+"""
+The purpose of this script is to validate that 
+each Latex expression can be rendered as a PDF
+
+However, BHP actually uses overleaf to edit main.tex and validate rendering
+"""
+
 import json
 import glob
 
@@ -68,11 +76,11 @@ def compile_main_to_pdf(folder_with_valid_latex: str)->None:
     dvi_to_pdf("main")
 
 def compile_each_example_to_pdf(folder_with_valid_latex: str)->None:
-    list_of_latex_expressions = glob.glob(folder_with_valid_latex+"expression_*.tex")
+    list_of_latex_expression_files = glob.glob(folder_with_valid_latex+"expression_*.tex")
 
-    print("list_of_latex_expressions=",list_of_latex_expressions)
+    print("list_of_latex_expression_files=",list_of_latex_expression_files)
 
-    for latex_expr_filename in list_of_latex_expressions:
+    for latex_expr_filename in list_of_latex_expression_files:
         with open(latex_expr_filename,'r') as file_handle:
             file_content = file_handle.read()
 

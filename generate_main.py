@@ -1,3 +1,9 @@
+#!/usr/bin/env python3
+
+"""
+BHP wrote this as a one-time script on 2024-05-25 
+and doesn't expect to re-use this content.
+"""
 
 import glob
 
