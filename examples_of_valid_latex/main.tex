@@ -33,6 +33,7 @@ This file was partially generated using
 
 \section{Unsorted}
 
+60000: 
 Missing an equal sign. Valid \LaTeX. Would show up as a `feed' but is not a valid expression since there's no relational operator.
 \input{60000_expression_latex}
 parses to
@@ -56,6 +57,7 @@ Expected tokens:
 
 \hrulefill
 
+61000:
 problem for Sympy is the bar
 \input{61000_expression_latex}
 parses to
@@ -78,6 +80,7 @@ Expected tokens:
 
 \hrulefill
 
+62000: 
 valid math and valid \LaTeX but fails in Sympy
 \input{62000_expression_latex}
 parses to
@@ -100,28 +103,8 @@ Expected tokens:
 
 \hrulefill
 
-used in quantum mechanics and is valid latex. Fails in Sympy
-\input{63000_expression_latex}
-parses to
-\input{63000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
-with atoms
-\input{63000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
-using antlr4-python3-runtime==4.11 and sympy==1.12
 
-\ \\
-cleaned \LaTeX
-\input{63000_cleaned_latex}
-parses to
-\input{63000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
-with atoms
-\input{63000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
-
-\ \\
-Expected tokens:
-\input{63000_expected_tokens}
-
-\hrulefill
-
+64000: 
 succeeds in Sympy, indicating an argument is expected
 \input{64000_expression_latex}
 parses to
@@ -145,6 +128,7 @@ Expected tokens:
 
 \hrulefill
 
+65000: 
 fails in sympy and is (usually) incomplete mathematically
 \input{65000_expression_latex}
 parses to
@@ -167,28 +151,7 @@ Expected tokens:
 
 \hrulefill
 
-used in quantum mechanics and is valid latex. Fails in Sympy
-\input{66000_expression_latex}
-parses to
-\input{66000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
-with atoms
-\input{66000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
-using antlr4-python3-runtime==4.11 and sympy==1.12
-
-\ \\
-cleaned \LaTeX
-\input{66000_cleaned_latex}
-parses to
-\input{66000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
-with atoms
-\input{66000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
-
-\ \\
-Expected tokens:
-\input{66000_expected_tokens}
-
-\hrulefill
-
+67000:
 complicated but valid math and valid latex. Fails in the second array  
 \input{67000_expression_latex}
 parses to
@@ -211,6 +174,7 @@ Expected tokens:
 
 \hrulefill
 
+67100:
 Isolate the problem array
 \input{67100_expression_latex}
 parses to
@@ -234,6 +198,7 @@ Expected tokens:
 
 \hrulefill
 
+68000:
 the following cannot be evaluated mathematically but is valid latex. 
 This fails in Sympy with the message ``I expected one of these: '='''
 \input{68000_expression_latex}
@@ -258,6 +223,7 @@ Expected tokens:
 
 \hrulefill
 
+69000:
 with spacing; see https://github.com/sympy/sympy/issues/19075
 \input{69000_expression_latex}
 parses to
@@ -280,6 +246,7 @@ Expected tokens:
 
 \hrulefill
 
+69100:
 \input{69100_expression_latex}
 parses to
 \input{69100_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
@@ -302,6 +269,7 @@ Expected tokens:
 
 \hrulefill
 
+69200:
 \input{69200_expression_latex}
 parses to
 \input{69200_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
@@ -345,6 +313,7 @@ Expected tokens:
 
 \hrulefill
 
+69400:
 \input{69400_expression_latex}
 parses to
 \input{69400_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
@@ -393,6 +362,7 @@ Expected tokens:
 
 \hrulefill
 
+01000:
 raw \LaTeX
 \input{01000_expression_latex}
 parses to 
@@ -415,6 +385,7 @@ Expected tokens:
 
 \hrulefill
 
+01500:
 polynomial
 \input{01500_expression_latex}    
 parses to
@@ -503,7 +474,7 @@ Expected tokens:
 
 \hrulefill
 
-
+04000:
 With constraint
 \input{04000_expression_latex}
 parses to
@@ -527,7 +498,7 @@ Expected tokens:
 
 \hrulefill
 
-
+05000:
 Equation with range:
 \input{05000_expression_latex}
 parses to
@@ -596,6 +567,7 @@ Expected tokens:
 
 \hrulefill
 
+05500:
 %https://www.authorea.com/users/3/articles/165181-latex-mathematics-examples
 continued fractions
 \input{05500_expression_latex}    
@@ -620,6 +592,7 @@ Expected tokens:
 
 \hrulefill
 
+05600:
 As the fractions continue, they get smaller. If you want to keep the size consistent, use the display style
 \input{05600_expression_latex}
 parses to
@@ -666,6 +639,7 @@ Expected tokens:
 
 \hrulefill
 
+06000:
 Multi-line equation:
 \input{06000_expression_latex}
 parses to
@@ -735,6 +709,7 @@ Expected tokens:
 
 \hrulefill
 
+07100:
 % https://gitmind.com/faq/formula-list.html
 fractions, nested
 \input{07100_expression_latex}
@@ -780,6 +755,7 @@ Expected tokens:
 
 \hrulefill
 
+07300:
 % https://www.authorea.com/users/3/articles/165181-latex-mathematics-examples
 The Taylor series expansion for $e^x$ is 
 \input{07300_expression_latex}
@@ -852,7 +828,7 @@ Expected tokens:
 
 \hrulefill
 
-
+07500:
 integration
 \input{07500_expression_latex}
 parses to
@@ -899,7 +875,7 @@ Expected tokens:
 
 \hrulefill
 
-
+07900:
 \input{07900_expression_latex}
 parses to
 \input{07900_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
@@ -988,7 +964,7 @@ Expected tokens:
 
 \hrulefill
 
-
+09000:
 column vector:
 \input{09000_expression_latex}
 parses to
@@ -1011,7 +987,7 @@ Expected tokens:
 
 \hrulefill
 
-
+10000:
 column vector, arbitrary size:
 \input{10000_expression_latex}
 parses to
@@ -1059,7 +1035,7 @@ Expected tokens:
 
 \hrulefill
 
-
+12000:
 matrix, arbitrary size:
 \input{12000_expression_latex}
 parses to
@@ -1136,7 +1112,7 @@ Expected tokens:
 
 \hrulefill
 
-
+81000:
 How to indicate using tokens that this is "ket"? Seems similar to $f(x)$
 % https://tex.stackexchange.com/a/553176/235813
 \input{81000_expression_latex}
@@ -1162,6 +1138,52 @@ Expected tokens:
 \hrulefill
 
 
+66000: 
+used in quantum mechanics and is valid latex. Fails in Sympy
+\input{66000_expression_latex}
+parses to
+\input{66000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{66000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{66000_cleaned_latex}
+parses to
+\input{66000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{66000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{66000_expected_tokens}
+
+\hrulefill
+63000: 
+used in quantum mechanics and is valid latex. Fails in Sympy
+\input{63000_expression_latex}
+parses to
+\input{63000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{63000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+\ \\
+cleaned \LaTeX
+\input{63000_cleaned_latex}
+parses to
+\input{63000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{63000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens:
+\input{63000_expected_tokens}
+
+\hrulefill
+
+82000:
 % https://tex.stackexchange.com/a/553176/235813
 Seems similar to $f(x, y)$
 \input{82000_expression_latex}
@@ -1242,6 +1264,7 @@ Expected tokens:
 
 \href{https://en.wikipedia.org/wiki/Einstein_notation}{Einstein notation}
 
+70000:
 \input{70000_expression_latex}
 parses to
 \input{70000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
@@ -1264,7 +1287,7 @@ Expected tokens:
 
 \hrulefill
 
-
+70500:
 The \href{https://en.wikipedia.org/wiki/Kronecker_delta}{Kronecker delta}
 \input{70500_expression_latex}
 parses to
@@ -1289,7 +1312,7 @@ Expected tokens:
 \hrulefill
 
 
-
+71000:
 \input{71000_expression_latex}
 parses to
 \input{71000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
