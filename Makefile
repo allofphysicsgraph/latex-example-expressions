@@ -1,3 +1,5 @@
+IMAGENAME=latex-examples
+
 help:
 	@echo "make docker"
 	@echo "         for linux"
@@ -5,12 +7,16 @@ help:
 	@echo "make docmac"
 	@echo "         for Mac"
 
+# on linux
 docker:
 	sudo service docker start
-	sudo docker build -t latex-examples .
-	sudo docker run -it --rm latex-examples /bin/bash
+	sudo docker build -t $(IMAGENAME) .
+	sudo docker run -it --rm $(IMAGENAME) /bin/bash
 
+# for Mac
 docmac:
-	docker build -t latex-examples .
-	docker run -it --rm latex-examples /bin/bash
+	docker build -t $(IMAGENAME) .
+	docker run -it --rm -v `pwd`:/scratch $(IMAGENAME) /bin/bash
 
+pythonmac:
+	docker run -it --rm --workdir /scratch -v `pwd`:/scratch $(IMAGENAME) python3 /scratch/generate_pdf_from_latex_files.py
