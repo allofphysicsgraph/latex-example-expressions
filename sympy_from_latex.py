@@ -19,10 +19,14 @@ from sympy.core.sympify import SympifyError
 
 from sympy.parsing.latex.errors import LaTeXParsingError
 
+#category = "cleaned"
+category = "expression"
+
+
 if __name__ == "__main__":
     folder_with_valid_latex = "examples_of_valid_latex/"
 
-    list_of_latex_expression_files = glob.glob(folder_with_valid_latex+"*_cleaned_latex.tex")
+    list_of_latex_expression_files = glob.glob(folder_with_valid_latex+"*_"+category+"_latex.tex")
 
     #print("list_of_latex_expressions=",list_of_latex_expression_files)
 
@@ -70,7 +74,7 @@ if __name__ == "__main__":
             print("\\begin{verbatim}")
             print(str(expr))
             print("\\end{verbatim}")
-            with open(folder_with_valid_latex+prefix+"_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression.tex","w") as file_handle:
+            with open(folder_with_valid_latex+prefix+"_"+category+"_latex_sympy_112_antlr4-python3-runtime411_expression.tex","w") as file_handle:
                 file_handle.write("\\begin{verbatim}\n")
                 file_handle.write(str(expr))
                 file_handle.write("\n\\end{verbatim}\n")
@@ -80,10 +84,10 @@ if __name__ == "__main__":
             #atoms = atoms.replace("\\","\\\\")
             print("$"+atoms+"$")
             #print("using antlr4-python3-runtime==4.11 and sympy==1.12")
-            with open(folder_with_valid_latex+prefix+"_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms.tex","w") as file_handle:
+            with open(folder_with_valid_latex+prefix+"_"+category+"_latex_sympy_112_antlr4-python3-runtime411_atoms.tex","w") as file_handle:
                 file_handle.write("$"+atoms+"$")
         else: # error in SymPy parsing of Latex
-            with open(folder_with_valid_latex+prefix+"_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression.tex","w") as file_handle:
+            with open(folder_with_valid_latex+prefix+"_"+category+"_latex_sympy_112_antlr4-python3-runtime411_expression.tex","w") as file_handle:
                 file_handle.write("\\begin{verbatim}\n")
                 file_handle.write(str(error_message))
                 file_handle.write("\n\\end{verbatim}\n")
