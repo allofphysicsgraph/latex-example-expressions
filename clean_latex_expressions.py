@@ -36,3 +36,7 @@ if __name__ == "__main__":
 
         print("cleaned Latex:")
         print(cleaned_latex)
+
+        with open(folder_with_valid_latex+prefix+"_cleaned_latex.tex",'w') as file_handle:
+        	file_handle.write(cleaned_latex)
+        	
