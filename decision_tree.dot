@@ -1,5 +1,5 @@
 digraph G {
-    rankdir="LR";
+    //rankdir="LR";
 
   "raw Latex" [shape="oval"]; // manual
   "expected symbols" [shape="oval"]; // manual
@@ -22,14 +22,14 @@ digraph G {
  
   "cleaned Latex" ->  sympy_parse_clean;
 
-  sympy_raw_success [shape="house", label="SymPy parse success"];
-  sympy_raw_error [shape="house" style=filled color=red, label="SymPy parse error"];
+  sympy_raw_success [shape="house", label="SymPy parse\nsuccess: 31"];
+  sympy_raw_error [shape="house" style=filled color=red, label="SymPy parse\nerror:26 "];
 
   sympy_parse_raw -> sympy_raw_success;
   sympy_parse_raw -> sympy_raw_error;
 
-  sympy_clean_success [shape="house", label="SymPy parse success"];
-  sympy_clean_error [shape="house" style=filled color=red, label="SymPy parse error"];
+  sympy_clean_success [shape="house", label="SymPy parse\nsuccess: 36"];
+  sympy_clean_error [shape="house" style=filled color=red, label="SymPy parse\nerror: 21"];
   
   sympy_parse_clean -> sympy_clean_success;
   sympy_parse_clean -> sympy_clean_error;
@@ -69,6 +69,5 @@ digraph G {
  
   raw_sympy_atoms -> sympy_raw_atoms_correct;
   raw_sympy_atoms -> sympy_raw_atoms_wrong;
- 
   
 }

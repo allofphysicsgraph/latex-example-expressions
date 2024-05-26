@@ -19,9 +19,13 @@ from sympy.core.sympify import SympifyError
 
 from sympy.parsing.latex.errors import LaTeXParsingError
 
-#category = "cleaned"
-category = "expression"
+category = "cleaned"
+#category = "expression"
 
+write_results_to_file = False
+
+parse_success_count = 0
+parse_fail_count = 0
 
 if __name__ == "__main__":
     folder_with_valid_latex = "examples_of_valid_latex/"
@@ -52,44 +56,54 @@ if __name__ == "__main__":
         err = None
         try:
             expr = parse_latex(file_content)
+            parse_success_count+=1
         except LaTeXParsingError as err:
             expr_error = True
+            parse_fail_count+=1
             print("ERROR: sympy.parsing.latex.errors.LaTeXParsingError")
             print(err)
             error_message = str(err)
         except TypeError as err:
             expr_error = True
+            parse_fail_count+=1
             print("ERROR: TypeError")
             print(err)
             error_message = str(err)
         except SympifyError as err:
             expr_error = True
+            parse_fail_count+=1
             print("ERROR: sympy.core.sympify.SympifyError")
             print(err)
             error_message = str(err)
 
 
-        if not expr_error:
-            #print("type:",type(expr))
-            print("\\begin{verbatim}")
-            print(str(expr))
-            print("\\end{verbatim}")
-            with open(folder_with_valid_latex+prefix+"_"+category+"_latex_sympy_112_antlr4-python3-runtime411_expression.tex","w") as file_handle:
-                file_handle.write("\\begin{verbatim}\n")
-                file_handle.write(str(expr))
-                file_handle.write("\n\\end{verbatim}\n")
+        # if not expr_error:
+        #     #print("type:",type(expr))
+        #     print("\\begin{verbatim}")
+        #     print(str(expr))
+        #     print("\\end{verbatim}")
+        #     if write_results_to_file:
+        #         with open(folder_with_valid_latex+prefix+"_"+category+"_latex_sympy_112_antlr4-python3-runtime411_expression.tex","w") as file_handle:
+        #             file_handle.write("\\begin{verbatim}\n")
+        #             file_handle.write(str(expr))
+        #             file_handle.write("\n\\end{verbatim}\n")
 
-            print("atoms:")
-            atoms = str(expr.atoms())
-            #atoms = atoms.replace("\\","\\\\")
-            print("$"+atoms+"$")
-            #print("using antlr4-python3-runtime==4.11 and sympy==1.12")
-            with open(folder_with_valid_latex+prefix+"_"+category+"_latex_sympy_112_antlr4-python3-runtime411_atoms.tex","w") as file_handle:
-                file_handle.write("$"+atoms+"$")
-        else: # error in SymPy parsing of Latex
-            with open(folder_with_valid_latex+prefix+"_"+category+"_latex_sympy_112_antlr4-python3-runtime411_expression.tex","w") as file_handle:
-                file_handle.write("\\begin{verbatim}\n")
-                file_handle.write(str(error_message))
-                file_handle.write("\n\\end{verbatim}\n")
+        #     print("atoms:")
+        #     atoms = str(expr.atoms())
+        #     #atoms = atoms.replace("\\","\\\\")
+        #     print("$"+atoms+"$")
+        #     #print("using antlr4-python3-runtime==4.11 and sympy==1.12")
+        #     if write_results_to_file:
+        #         with open(folder_with_valid_latex+prefix+"_"+category+"_latex_sympy_112_antlr4-python3-runtime411_atoms.tex","w") as file_handle:
+        #             file_handle.write("$"+atoms+"$")
+        # else: # error in SymPy parsing of Latex
+        #     if write_results_to_file:
+        #         with open(folder_with_valid_latex+prefix+"_"+category+"_latex_sympy_112_antlr4-python3-runtime411_expression.tex","w") as file_handle:
+        #             file_handle.write("\\begin{verbatim}\n")
+        #             file_handle.write(str(error_message))
+        #             file_handle.write("\n\\end{verbatim}\n")
+
+print("parse_success_count =",parse_success_count)
+print("parse_fail_count =",parse_fail_count)
 
 #EOF
