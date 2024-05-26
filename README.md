@@ -35,12 +35,25 @@ The file
 is the cleaned version of
 `examples_of_valid_latex/*_expression_latex.tex`
 
+The command used was 
+```bash
+python3 clean_latex_expressions.py
+```
+
 Then SymPy 1.12 with antlr4-python3-runtime 4.11 is used on
 `examples_of_valid_latex/*_cleaned_latex.tex`
 to generate
 `examples_of_valid_latex/*_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression.tex`
 and
 `examples_of_valid_latex/*_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms.tex`
+
+The command is
+```bash
+docker run -it --rm -v `pwd`:/scratch --workdir /scratch sympyonubuntu python3 sympy_from_latex.py
+```
+
+That docker image is from <https://github.com/allofphysicsgraph/sympy-in-docker/tree/main>
+	
 
 # context
 
