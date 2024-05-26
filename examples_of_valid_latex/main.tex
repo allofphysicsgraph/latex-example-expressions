@@ -128,63 +128,143 @@ Expected tokens: $a$
 \hrulefill
 
 \input{expression_010}
+parses to 
+\begin{verbatim}
+Eq(a, b)    
+\end{verbatim}
+with atoms ${a, b}$\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
 Expected tokens: $a$, $b$, $=$.
 
 \hrulefill
 
 polynomial
 \input{expression_015}    
+parses to
+\begin{verbatim}
+Eq(x**n + y**n, z**n)
+\end{verbatim}
+with atoms ${y, n, x, z}$\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
 Expected tokens: $x$, $y$, $z$, $=$, $n$, $+$, power.
 
 \hrulefill
 
 polynomial with subscripts
-\input{expression_016}    
+\input{expression_016}  
+parses to
+\begin{verbatim}
+Eq(a_{1}**2 + b_{1}**2, c_{1}**2)
+\end{verbatim}
+with atoms ${b_{1}, 2, a_{1}, c_{1}}$\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
 Expected tokens: $a_1$, $b_1$, $c_1$, $+$, $=$, $2$, power.
 
 \hrulefill
 
 
-\input{expression_017}    
+\input{expression_017}
+parses to
+\begin{verbatim}
+Eq(k_{n + 1}, -k_{n - 1} + (k_{n}**2 + n**2))
+\end{verbatim}
+with atoms ${k_{n - 1}, 2, k_{n + 1}, k_{n}, n, -1}$\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
 Expected tokens: $k_{n+1}$, $n$, $2$, $+$, $-$, $k_{n-1}$, $=$, power.
 
 \hrulefill
 
 
-\input{expression_018}    
+\input{expression_018}
+\begin{verbatim}
+antlr4.error.Errors.LexerNoViableAltException: LexerNoViableAltException('\')
+
+sympy.parsing.latex.errors.LaTeXParsingError: I don't understand this
+\cos(2\ \theta\ \phi)=\cos^{2}\theta\phi-\sin^{2}(\theta\ \phi)
+~~~~~~^
+\end{verbatim}
+
+
 Expected tokens: $\cos$, power, 2, $\theta$, $\phi$, $-$, $=$
 
 \hrulefill
 
 
-\input{expression_019}    
+\input{expression_019}
+\begin{verbatim}
+antlr4.error.Errors.LexerNoViableAltException: LexerNoViableAltException('\')
+
+sympy.parsing.latex.errors.LaTeXParsingError: I don't understand this
+\sqrt{|x\ y|}\leq\left|\frac{x+y}{2}\right|
+~~~~~~~~^
+\end{verbatim}
+
+
 Expected tokens: $\sqrt{}$, $x$, $y$, $\leq$, $/$, 2, $+$
 
 \hrulefill
 
 
 function of a variable
-\input{expression_030}    
+\input{expression_030}
+parses to
+\begin{verbatim}
+Eq(f(x), y**2)
+\end{verbatim}
+with atoms ${x, 2, y}$\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
 Expected tokens: $f(x)$, $x$, $=$, $y$, power, 2.
 
 \hrulefill
 
 
 With constraint
-\input{expression_040}    
+\input{expression_040}
+\begin{verbatim}
+antlr4.error.Errors.LexerNoViableAltException: LexerNoViableAltException('\')
+
+sympy.parsing.latex.errors.LaTeXParsingError: I don't understand this
+K = G + 1 \ {\rm when}\ K << G
+~~~~~~~~~~^
+\end{verbatim}
+
 Expected tokens: $K$, $G$, $+$, $1$, $=$, $<<$
 
 \hrulefill
 
 
 Equation with range:
-\input{expression_050}    
+\input{expression_050}
+\begin{verbatim}
+antlr4.error.Errors.LexerNoViableAltException: LexerNoViableAltException('\')
+
+sympy.parsing.latex.errors.LaTeXParsingError: I don't understand this
+f(x) = x^2 \ {\rm when}\ x>0
+~~~~~~~~~~~^
+\end{verbatim}
+
 Expected tokens: 
 
 \hrulefill
 
 
 \input{expression_051}
+\begin{verbatim}
+antlr4.error.Errors.LexerNoViableAltException: LexerNoViableAltException('&')
+
+sympy.parsing.latex.errors.LaTeXParsingError: I don't understand this
+|x|=\begin{cases}
+ x  & \text{if }x\geq 0\\\
+-x  & \text{if }x< 0
+\end{cases}
+~~~~^
+\end{verbatim}
+
 Expected tokens: 
 
 \hrulefill
@@ -198,30 +278,76 @@ Expected tokens:
 %https://www.authorea.com/users/3/articles/165181-latex-mathematics-examples
 continued fractions
 \input{expression_055}    
+parses to
+\begin{verbatim}
+Eq(x, a_{0} + 1/(a_{1} + 1/(a_{2} + 1/(a_{3} + a_{4}))))
+\end{verbatim}
+with atoms ${a_{3}, a_{0}, x, -1, a_{1}, a_{2}, a_{4}}$\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+
 Expected tokens: 
 
 \hrulefill
 
 As the fractions continue, they get smaller. If you want to keep the size consistent, use the display style
-\input{expression_056}    
+\input{expression_056}
+parses to
+\begin{verbatim}
+Eq(x, a_{0} + 1/(a_{1}*displaystyle + 1/(a_{2}*displaystyle + 1/(a_{3}*displaystyle + a_{4}))))
+\end{verbatim}
+with atoms ${a_{3}, x, a_{1}, displaystyle, a_{0}, a_{2}, a_{4}, -1}$\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
 Expected tokens: 
 
 \hrulefill
 
 system of equations
 \input{expression_058}
+parses to
+\begin{verbatim}
+Eq(u, (-y)/(x**2 + y**2))
+\end{verbatim}
+with atoms ${2, u, x, y, -1}$\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
 Expected tokens: 
 
 \hrulefill
 
 Multi-line equation:
-\input{expression_060}    
+\input{expression_060}
+\begin{verbatim}
+antlr4.error.Errors.LexerNoViableAltException: LexerNoViableAltException('\')
+
+sympy.parsing.latex.errors.LaTeXParsingError: I don't understand this
+\begin{split}
+a = x + \\
+ c + b * \\
+ (y + z)
+\end{split}
+~~~~~~~~^
+\end{verbatim}
+
 Expected tokens: 
 
 \hrulefill
 
 Multi-line equation with alignment:
 \input{expression_070}
+\begin{verbatim}
+antlr4.error.Errors.LexerNoViableAltException: LexerNoViableAltException('\')
+
+sympy.parsing.latex.errors.LaTeXParsingError: I don't understand this
+\begin{split}
+a = x - \\
+& c + b - \\
+& f + k
+\end{split}
+~~~~~~~~^
+\end{verbatim}
+
 Expected tokens: 
 
 \hrulefill
@@ -235,6 +361,13 @@ Expected tokens:
 % https://gitmind.com/faq/formula-list.html
 fractions, nested
 \input{expression_071}
+parses to
+\begin{verbatim}
+Eq(((1 - (1/2)**n)/2)/(1 - 1/2), s_{n})
+\end{verbatim}
+with atoms ${1, 2, n, -1, s_{n}}$\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
 Expected tokens: 
 
 \hrulefill
@@ -248,6 +381,14 @@ Expected tokens:
 % https://www.authorea.com/users/3/articles/165181-latex-mathematics-examples
 The Taylor series expansion for $e^x$ is 
 \input{expression_073}
+\begin{verbatim}
+antlr4.error.Errors.NoViableAltException: None
+
+sympy.parsing.latex.errors.LaTeXParsingError: I expected something else here
+1 + x + \frac{x^2}{2} + \frac{x^3}{6} + \cdots = \sum_{n\geq 0} \frac{x^n}{n!}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+\end{verbatim}
+
 Expected tokens: 
 
 \hrulefill
@@ -255,6 +396,15 @@ Expected tokens:
 
 For any non-negative integer $n$,
 \input{expression_074}
+parses to
+\begin{verbatim}
+Eq((x + 1)**n, Sum(x**i*binomial(n, i), (i, 0, n)))
+\end{verbatim}
+with atoms ${x, 1, 0, i, n}$\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+
+
 Expected tokens: 
 
 \hrulefill
@@ -298,7 +448,16 @@ Expected tokens:
 \section{Linear Algebra}
 vector and matrix notation
 \input{expression_020}    
-Expected tokens: 
+parses to
+\begin{verbatim}
+Eq(vec*x, A*hat)
+\end{verbatim}
+with atoms ${x, vec, A, hat}$\\
+using antlr4-python3-runtime==4.11 and sympy==1.12
+
+$\rightarrow$ SymPy's atoms are wrong.
+
+Expected tokens: $\vec{x}$,$\hat{A}$
 
 \hrulefill
 
