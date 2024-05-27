@@ -1,7 +1,7 @@
 digraph G {
     //rankdir="LR";
 
-  "raw Latex" [shape="oval"]; // manual
+  "raw Latex" [shape="oval" label="raw Latex: 57"]; // manual
   "expected symbols" [shape="oval"]; // manual
   
   "raw Latex" -> "expected symbols";
@@ -10,7 +10,7 @@ digraph G {
   
   "raw Latex" -> "cleaning";
  
-  "cleaned Latex" [shape="invtrapezium"]; // intermediate file
+  "cleaned Latex" [shape="invtrapezium" label="raw Latex: 57"]; // intermediate file
   
   "cleaning" -> "cleaned Latex";
   
@@ -46,26 +46,34 @@ digraph G {
   sympy_clean_success -> clean_sympy_expr;
   sympy_clean_success -> clean_sympy_atoms;
   
-  sympy_clean_expr_correct [shape=cds style=filled color=green, label="correct"];
-  sympy_clean_expr_wrong [shape=cds style=filled color=red, label="wrong"];
+  sympy_clean_expr_correct [shape=cds style=filled color=green, label="correct: 27"];
+  // cat main.tex | grep "SymPy parsed clean" | grep CORRECT | wc -l
+  sympy_clean_expr_wrong [shape=cds style=filled color=red, label="wrong: 5"];
+  // cat main.tex | grep "SymPy parsed clean" | grep WRONG | wc -l
  
   clean_sympy_expr -> sympy_clean_expr_correct;
   clean_sympy_expr -> sympy_clean_expr_wrong;
 
-  sympy_clean_atoms_correct [shape=cds style=filled color=green, label="correct"];
-  sympy_clean_atoms_wrong [shape=cds style=filled color=red, label="wrong"];
+  sympy_clean_atoms_correct [shape=cds style=filled color=green, label="correct: 24"];
+  // cat main.tex | grep "SymPy clean atoms" | grep CORRECT | wc -l
+  sympy_clean_atoms_wrong [shape=cds style=filled color=red, label="wrong: 8"];
+  // cat main.tex | grep "SymPy clean atoms" | grep WRONG | wc -l
  
   clean_sympy_atoms -> sympy_clean_atoms_correct;
   clean_sympy_atoms -> sympy_clean_atoms_wrong;
  
-  sympy_raw_expr_correct [shape=cds style=filled color=green, label="correct"];
-  sympy_raw_expr_wrong [shape=cds style=filled color=red, label="wrong"];
+  sympy_raw_expr_correct [shape=cds style=filled color=green, label="correct: 26"];
+  // cat main.tex | grep "SymPy parsed raw" | grep CORRECT | wc -l
+  sympy_raw_expr_wrong [shape=cds style=filled color=red, label="wrong: 6"];
+  // cat main.tex | grep "SymPy parsed raw" | grep WRONG | wc -l
  
   raw_sympy_expr -> sympy_raw_expr_correct;
   raw_sympy_expr -> sympy_raw_expr_wrong;
 
-  sympy_raw_atoms_correct [shape=cds style=filled color=green, label="correct"];
-  sympy_raw_atoms_wrong [shape=cds style=filled color=red, label="wrong"];
+  sympy_raw_atoms_correct [shape=cds style=filled color=green, label="correct: 23"];
+  // cat main.tex | grep "SymPy raw atoms" | grep CORRECT | wc -l
+  sympy_raw_atoms_wrong [shape=cds style=filled color=red, label="wrong: 9"];
+  // cat main.tex | grep "SymPy raw atoms" | grep WRONG | wc -l
  
   raw_sympy_atoms -> sympy_raw_atoms_correct;
   raw_sympy_atoms -> sympy_raw_atoms_wrong;

@@ -37,23 +37,29 @@ This file was partially generated using
 Missing an equal sign. Valid \LaTeX. Would show up as a `feed' but is not a valid expression since there's no relational operator.
 \input{60000_expression_latex}
 parses to
-\input{60000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{60000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{60000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{60000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{60000_cleaned_latex}
 parses to
-\input{60000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{60000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{60000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{60000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{60000_expected_tokens}
 
+\ \\
+%manual review: \\
+SymPy parsed raw CORRECT, 
+SymPy raw atoms CORRECT, \\
+SymPy parsed clean CORRECT, 
+SymPy clean atoms CORRECT.
 
 \hrulefill
 
@@ -61,22 +67,29 @@ Expected tokens:
 problem for Sympy is the bar
 \input{61000_expression_latex}
 parses to
-\input{61000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{61000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{61000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{61000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{61000_cleaned_latex}
 parses to
-\input{61000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{61000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{61000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{61000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{61000_expected_tokens}
+
+\ \\
+%manual review: \\
+SymPy parsed raw WRONG, 
+SymPy raw atoms WRONG, \\
+SymPy parsed clean FAIL, 
+SymPy clean atoms N/A.
 
 \hrulefill
 
@@ -84,22 +97,30 @@ Expected tokens:
 valid math and valid \LaTeX but fails in Sympy
 \input{62000_expression_latex}
 parses to
-\input{62000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{62000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{62000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{62000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{62000_cleaned_latex}
 parses to
-\input{62000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{62000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{62000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{62000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{62000_expected_tokens}
+
+
+\ \\
+%manual review: \\
+SymPy parsed raw WRONG, 
+SymPy raw atoms WRONG, \\
+SymPy parsed clean WRONG, 
+SymPy clean atoms WRONG.
 
 \hrulefill
 
@@ -108,23 +129,29 @@ Expected tokens:
 succeeds in Sympy, indicating an argument is expected
 \input{64000_expression_latex}
 parses to
-\input{64000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{64000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{64000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{64000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{64000_cleaned_latex}
 parses to
-\input{64000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{64000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{64000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{64000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{64000_expected_tokens}
 
+\ \\
+%manual review: \\
+SymPy parsed raw CORRECT, 
+SymPy raw atoms WRONG, \\
+SymPy parsed clean CORRECT, 
+SymPy clean atoms WRONG.
 
 \hrulefill
 
@@ -132,22 +159,29 @@ Expected tokens:
 fails in sympy and is (usually) incomplete mathematically
 \input{65000_expression_latex}
 parses to
-\input{65000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{65000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{65000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{65000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{65000_cleaned_latex}
 parses to
-\input{65000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{65000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{65000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{65000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{65000_expected_tokens}
+
+\ \\
+%manual review: \\
+SymPy parsed raw WRONG, 
+SymPy raw atoms WRONG, \\
+SymPy parsed clean WRONG, 
+SymPy clean atoms WRONG.
 
 \hrulefill
 
@@ -155,22 +189,29 @@ Expected tokens:
 complicated but valid math and valid latex. Fails in the second array  
 \input{67000_expression_latex}
 parses to
-\input{67000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{67000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{67000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{67000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{67000_cleaned_latex}
 parses to
-\input{67000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{67000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{67000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{67000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{67000_expected_tokens}
+
+\ \\
+%manual review: \\
+SymPy parsed raw FAIL, 
+SymPy raw atoms N/A, \\
+SymPy parsed clean FAIL, 
+SymPy clean atoms N/A.
 
 \hrulefill
 
@@ -178,23 +219,29 @@ Expected tokens:
 Isolate the problem array
 \input{67100_expression_latex}
 parses to
-\input{67100_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{67100_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{67100_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{67100_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{67100_cleaned_latex}
 parses to
-\input{67100_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{67100_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{67100_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{67100_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{67100_expected_tokens}
 
+\ \\
+%manual review: \\
+SymPy parsed raw FAIL, 
+SymPy raw atoms N/A, \\
+SymPy parsed clean FAIL, 
+SymPy clean atoms N/A.
 
 \hrulefill
 
@@ -203,23 +250,29 @@ the following cannot be evaluated mathematically but is valid latex.
 This fails in Sympy with the message ``I expected one of these: '='''
 \input{68000_expression_latex}
 parses to
-\input{68000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{68000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{68000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{68000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{68000_cleaned_latex}
 parses to
-\input{68000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{68000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{68000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{68000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{68000_expected_tokens}
 
+\ \\
+%manual review: \\
+SymPy parsed raw FAIL, 
+SymPy raw atoms N/A, \\
+SymPy parsed clean FAIL, 
+SymPy clean atoms N/A.
 
 \hrulefill
 
@@ -227,138 +280,185 @@ Expected tokens:
 with spacing; see https://github.com/sympy/sympy/issues/19075
 \input{69000_expression_latex}
 parses to
-\input{69000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{69000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{69000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{69000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{69000_cleaned_latex}
 parses to
-\input{69000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{69000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{69000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{69000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{69000_expected_tokens}
+
+
+\ \\
+%manual review: \\
+SymPy parsed raw CORRECT, 
+SymPy raw atoms CORRECT, \\
+SymPy parsed clean CORRECT, 
+SymPy clean atoms CORRECT.
 
 \hrulefill
 
 69100:
 \input{69100_expression_latex}
 parses to
-\input{69100_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{69100_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{69100_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{69100_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{69100_cleaned_latex}
 parses to
-\input{69100_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{69100_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{69100_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{69100_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{69100_expected_tokens}
 
+\ \\
+%manual review: \\
+SymPy parsed raw CORRECT, 
+SymPy raw atoms CORRECT, \\
+SymPy parsed clean CORRECT, 
+SymPy clean atoms CORRECT.
 
 \hrulefill
 
 69200:
 \input{69200_expression_latex}
 parses to
-\input{69200_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{69200_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{69200_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{69200_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{69200_cleaned_latex}
 parses to
-\input{69200_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{69200_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{69200_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{69200_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{69200_expected_tokens}
 
 
+
+\ \\
+%manual review: \\
+SymPy parsed raw CORRECT, 
+SymPy raw atoms CORRECT, \\
+SymPy parsed clean CORRECT, 
+SymPy clean atoms CORRECT.
+
 \hrulefill
 
+69300:
 \input{69300_expression_latex}
 parses to
-\input{69300_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{69300_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{69300_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{69300_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{69300_cleaned_latex}
 parses to
-\input{69300_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{69300_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{69300_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{69300_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{69300_expected_tokens}
+
+
+\ \\
+%manual review: \\
+SymPy parsed raw CORRECT, 
+SymPy raw atoms CORRECT, \\
+SymPy parsed clean FAIL, 
+SymPy clean atoms N/A.
 
 \hrulefill
 
 69400:
 \input{69400_expression_latex}
 parses to
-\input{69400_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{69400_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{69400_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{69400_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{69400_cleaned_latex}
 parses to
-\input{69400_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{69400_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{69400_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{69400_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{69400_expected_tokens}
 
+\ \\
+%manual review: \\
+SymPy parsed raw CORRECT, 
+SymPy raw atoms WRONG, \\
+SymPy parsed clean CORRECT, 
+SymPy clean atoms WRONG.
 
 \hrulefill
 
+69500:
 inequality
 \input{69500_expression_latex}
 parses to
-\input{69500_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{69500_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{69500_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{69500_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{69500_cleaned_latex}
 parses to
-\input{69500_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{69500_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{69500_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{69500_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{69500_expected_tokens}
+
+
+\ \\
+%manual review: \\
+SymPy parsed raw CORRECT, 
+SymPy raw atoms CORRECT, \\
+SymPy parsed clean CORRECT, 
+SymPy clean atoms CORRECT.
 
 \hrulefill
 
 \section{Algebra}
+
 
 \hrulefill
 
@@ -380,8 +480,15 @@ with atoms
 \input{01000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens: 
+Expected tokens (manual): 
 \input{01000_expected_tokens}
+
+\ \\
+%manual review: \\
+SymPy parsed raw CORRECT, 
+SymPy raw atoms CORRECT, \\
+SymPy parsed clean CORRECT, 
+SymPy clean atoms CORRECT.
 
 \hrulefill
 
@@ -395,11 +502,29 @@ with atoms
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
-Expected tokens: 
+cleaned \LaTeX
+\input{01500_cleaned_latex}
+parses to
+\input{01500_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{01500_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+
+\ \\
+Expected tokens (manual): 
 \input{01500_expected_tokens}
+
+
+\ \\
+%manual review: \\
+SymPy parsed raw CORRECT, 
+SymPy raw atoms CORRECT, \\
+SymPy parsed clean CORRECT, 
+SymPy clean atoms CORRECT.
 
 \hrulefill
 
+01600:
 polynomial with subscripts
 \input{01600_expression_latex}  
 parses to
@@ -409,13 +534,27 @@ with atoms
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
-Expected tokens:
+cleaned \LaTeX
+\input{01600_cleaned_latex}
+parses to
+\input{01600_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{01600_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+\ \\
+Expected tokens (manual):
 \input{01600_expected_tokens}
 
+\ \\
+%manual review: \\
+SymPy parsed raw CORRECT, 
+SymPy raw atoms CORRECT, \\
+SymPy parsed clean CORRECT, 
+SymPy clean atoms CORRECT.
 
 \hrulefill
 
-
+01700:
 \input{01700_expression_latex}
 parses to
 \input{01700_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
@@ -424,53 +563,110 @@ with atoms
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
-Expected tokens: 
+cleaned \LaTeX
+\input{01700_cleaned_latex}
+parses to
+\input{01700_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{01700_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+
+\ \\
+Expected tokens (manual): 
 \input{01700_expected_tokens}
+
+
+\ \\
+%manual review: \\
+SymPy parsed raw CORRECT, 
+SymPy raw atoms CORRECT, \\
+SymPy parsed clean CORRECT, 
+SymPy clean atoms CORRECT.
 
 \hrulefill
 
-
+01800:
 \input{01800_expression_latex}
 \input{01800_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 
 \ \\
-Expected tokens: 
+cleaned \LaTeX
+\input{01800_cleaned_latex}
+parses to
+\input{01800_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{01800_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+
+\ \\
+Expected tokens (manual): 
 \input{01800_expected_tokens}
+
+
+\ \\
+%manual review: \\
+SymPy parsed raw FAIL, 
+SymPy raw atoms N/A, \\
+SymPy parsed clean CORRECT, 
+SymPy clean atoms CORRECT.
 
 \hrulefill
 
-
+01900:
 \input{01900_expression_latex}
-
+parses to
 \input{01900_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 
 \ \\
-Expected tokens: 
+cleaned \LaTeX
+\input{01900_cleaned_latex}
+parses to
+\input{01900_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+with atoms
+\input{01900_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
+
+
+\ \\
+Expected tokens (manual): 
 \input{01900_expected_tokens}
+
+
+\ \\
+%manual review: \\
+SymPy parsed raw FAIL, 
+SymPy raw atoms N/A, \\
+SymPy parsed clean CORRECT, 
+SymPy clean atoms CORRECT.
 
 \hrulefill
 
-
+03000:
 function of a variable
 \input{03000_expression_latex}
 parses to
-\input{03000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{03000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{03000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{03000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{03000_cleaned_latex}
 parses to
-\input{03000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{03000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{03000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{03000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{03000_expected_tokens}
 
+\ \\
+%manual review: \\
+SymPy parsed raw CORRECT, 
+SymPy raw atoms WRONG, \\
+SymPy parsed clean CORRECT, 
+SymPy clean atoms WRONG.
 
 \hrulefill
 
@@ -478,23 +674,29 @@ Expected tokens:
 With constraint
 \input{04000_expression_latex}
 parses to
-\input{04000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{04000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{04000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{04000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{04000_cleaned_latex}
 parses to
-\input{04000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{04000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{04000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{04000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{04000_expected_tokens}
 
+\ \\
+%manual review: \\
+SymPy parsed raw FAIL, 
+SymPy raw atoms N/A, \\
+SymPy parsed clean FAIL, 
+SymPy clean atoms N/A.
 
 \hrulefill
 
@@ -502,68 +704,87 @@ Expected tokens:
 Equation with range:
 \input{05000_expression_latex}
 parses to
-\input{05000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{05000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{05000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{05000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{05000_cleaned_latex}
 parses to
-\input{05000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{05000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{05000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{05000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{05000_expected_tokens}
+
+\ \\
+%manual review: \\
+SymPy parsed raw FAIL, 
+SymPy raw atoms N/A, \\
+SymPy parsed clean FAIL, 
+SymPy clean atoms N/A.
 
 \hrulefill
 
-
+05100:
 \input{05100_expression_latex}
 parses to
-\input{05100_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{05100_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{05100_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{05100_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{05100_cleaned_latex}
 parses to
-\input{05100_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{05100_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{05100_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{05100_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{05100_expected_tokens}
 
+\ \\
+%manual review: \\
+SymPy parsed raw FAIL, 
+SymPy raw atoms N/A, \\
+SymPy parsed clean FAIL, 
+SymPy clean atoms N/A.
 
 \hrulefill
 
-
+99800
 \input{99800_expression_latex}
 parses to
-\input{99800_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{99800_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{99800_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{99800_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{99800_cleaned_latex}
 parses to
-\input{99800_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{99800_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{99800_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{99800_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{99800_expected_tokens}
 
+\ \\
+%manual review: \\
+SymPy parsed raw FAIL, 
+SymPy raw atoms N/A, \\
+SymPy parsed clean FAIL, 
+SymPy clean atoms N/A.
 
 \hrulefill
 
@@ -572,23 +793,31 @@ Expected tokens:
 continued fractions
 \input{05500_expression_latex}    
 parses to
-\input{05500_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{05500_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{05500_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{05500_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{05500_cleaned_latex}
 parses to
-\input{05500_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{05500_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{05500_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{05500_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{05500_expected_tokens}
 
+
+
+\ \\
+%manual review: \\
+SymPy parsed raw CORRECT, 
+SymPy raw atoms CORRECT, \\
+SymPy parsed clean CORRECT, 
+SymPy clean atoms CORRECT.
 
 \hrulefill
 
@@ -596,46 +825,59 @@ Expected tokens:
 As the fractions continue, they get smaller. If you want to keep the size consistent, use the display style
 \input{05600_expression_latex}
 parses to
-\input{05600_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{05600_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{05600_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{05600_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{05600_cleaned_latex}
 parses to
-\input{05600_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{05600_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{05600_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{05600_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{05600_expected_tokens}
 
+\ \\
+%manual review: \\
+SymPy parsed raw WRONG, 
+SymPy raw atoms WRONG, \\
+SymPy parsed clean WRONG, 
+SymPy clean atoms WRONG.
 
 \hrulefill
 
+05800:
 system of equations
 \input{05800_expression_latex}
 parses to
-\input{05800_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{05800_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{05800_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{05800_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{05800_cleaned_latex}
 parses to
-\input{05800_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{05800_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{05800_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{05800_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{05800_expected_tokens}
 
+\ \\
+%manual review: \\
+SymPy parsed raw WRONG, 
+SymPy raw atoms WRONG, \\
+SymPy parsed clean WRONG, 
+SymPy clean atoms WRONG.
 
 \hrulefill
 
@@ -643,69 +885,88 @@ Expected tokens:
 Multi-line equation:
 \input{06000_expression_latex}
 parses to
-\input{06000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{06000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{06000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{06000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{06000_cleaned_latex}
 parses to
-\input{06000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{06000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{06000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{06000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{06000_expected_tokens}
 
+\ \\
+%manual review: \\
+SymPy parsed raw FAIL, 
+SymPy raw atoms N/A, \\
+SymPy parsed clean FAIL, 
+SymPy clean atoms N/A.
 
 \hrulefill
 
+07000:
 Multi-line equation with alignment:
 \input{07000_expression_latex}
 parses to
-\input{07000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{07000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{07000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{07000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{07000_cleaned_latex}
 parses to
-\input{07000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{07000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{07000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{07000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{07000_expected_tokens}
 
+\ \\
+%manual review: \\
+SymPy parsed raw FAIL, 
+SymPy raw atoms N/A, \\
+SymPy parsed clean FAIL, 
+SymPy clean atoms N/A.
 
 \hrulefill
 
 Simultaneous equations
 \input{99900_expression_latex}
 parses to
-\input{99900_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{99900_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{99900_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{99900_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{99900_cleaned_latex}
 parses to
-\input{99900_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{99900_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{99900_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{99900_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{99900_expected_tokens}
 
+\ \\
+%manual review: \\
+SymPy parsed raw FAIL, 
+SymPy raw atoms N/A, \\
+SymPy parsed clean FAIL, 
+SymPy clean atoms N/A.
 
 \hrulefill
 
@@ -714,44 +975,61 @@ Expected tokens:
 fractions, nested
 \input{07100_expression_latex}
 parses to
-\input{07100_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{07100_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{07100_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{07100_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{07100_cleaned_latex}
 parses to
-\input{07100_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{07100_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{07100_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{07100_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{07100_expected_tokens}
+
+
+\ \\
+%manual review: \\
+SymPy parsed raw CORRECT, 
+SymPy raw atoms CORRECT, \\
+SymPy parsed clean CORRECT, 
+SymPy clean atoms CORRECT.
 
 \hrulefill
 
+07200:
 binomial
 \input{07200_expression_latex}
 parses to
-\input{07200_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{07200_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{07200_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{07200_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{07200_cleaned_latex}
 parses to
-\input{07200_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{07200_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{07200_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{07200_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{07200_expected_tokens}
+
+
+\ \\
+%manual review: \\
+SymPy parsed raw CORRECT, 
+SymPy raw atoms CORRECT, \\
+SymPy parsed clean CORRECT, 
+SymPy clean atoms CORRECT.
 
 \hrulefill
 
@@ -760,71 +1038,93 @@ Expected tokens:
 The Taylor series expansion for $e^x$ is 
 \input{07300_expression_latex}
 parses to
-\input{07300_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{07300_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{07300_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{07300_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{07300_cleaned_latex}
 parses to
-\input{07300_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{07300_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{07300_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{07300_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{07300_expected_tokens}
 
+\ \\
+%manual review: \\
+SymPy parsed raw FAIL, 
+SymPy raw atoms N/A, \\
+SymPy parsed clean FAIL, 
+SymPy clean atoms N/A.
 
 \hrulefill
 
-
+07400:
 For any non-negative integer $n$,
 \input{07400_expression_latex}
 parses to
-\input{07400_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{07400_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{07400_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{07400_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{07400_cleaned_latex}
 parses to
-\input{07400_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{07400_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{07400_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{07400_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{07400_expected_tokens}
+
+
+\ \\
+%manual review: \\
+SymPy parsed raw CORRECT, 
+SymPy raw atoms CORRECT, \\
+SymPy parsed clean CORRECT, 
+SymPy clean atoms CORRECT.
 
 \hrulefill
 
 
 \section{Calculus}
+
+07700:
 limit
 \input{07700_expression_latex}
 parses to
-\input{07700_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{07700_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{07700_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{07700_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{07700_cleaned_latex}
 parses to
-\input{07700_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{07700_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{07700_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{07700_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{07700_expected_tokens}
 
+\ \\
+%manual review: \\
+SymPy parsed raw CORRECT, 
+SymPy raw atoms CORRECT, \\
+SymPy parsed clean CORRECT, 
+SymPy clean atoms CORRECT.
 
 \hrulefill
 
@@ -832,98 +1132,125 @@ Expected tokens:
 integration
 \input{07500_expression_latex}
 parses to
-\input{07500_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{07500_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{07500_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{07500_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{07500_cleaned_latex}
 parses to
-\input{07500_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{07500_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{07500_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{07500_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{07500_expected_tokens}
 
+\ \\
+%manual review: \\
+SymPy parsed raw CORRECT, 
+SymPy raw atoms CORRECT, \\
+SymPy parsed clean CORRECT, 
+SymPy clean atoms CORRECT.
 
 \hrulefill
 
-
+07800:
 % https://gitmind.com/faq/formula-list.html
 \input{07800_expression_latex}
 parses to
-\input{07800_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{07800_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{07800_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{07800_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{07800_cleaned_latex}
 parses to
-\input{07800_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{07800_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{07800_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{07800_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{07800_expected_tokens}
+
+\ \\
+%manual review: \\
+SymPy parsed raw CORRECT, 
+SymPy raw atoms CORRECT, \\
+SymPy parsed clean CORRECT, 
+SymPy clean atoms CORRECT.
 
 \hrulefill
 
 07900:
 \input{07900_expression_latex}
 parses to
-\input{07900_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{07900_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{07900_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{07900_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{07900_cleaned_latex}
 parses to
-\input{07900_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{07900_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{07900_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{07900_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{07900_expected_tokens}
 
+\ \\
+%manual review: \\
+SymPy parsed raw CORRECT, 
+SymPy raw atoms CORRECT, \\
+SymPy parsed clean CORRECT, 
+SymPy clean atoms CORRECT.
 
 \hrulefill
 
-
+07600:
 partial differential
 \input{07600_expression_latex}
 parses to
-\input{07600_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{07600_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{07600_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{07600_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{07600_cleaned_latex}
 parses to
-\input{07600_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{07600_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{07600_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{07600_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{07600_expected_tokens}
 
+\ \\
+%manual review: \\
+SymPy parsed raw FAIL, 
+SymPy raw atoms N/A, \\
+SymPy parsed clean FAIL, 
+SymPy clean atoms N/A.
 
 \hrulefill
 
 
 \section{Linear Algebra}
+
+02000:
 vector and matrix notation
 \input{02000_expression_latex}    
 parses to
@@ -934,33 +1261,46 @@ using antlr4-python3-runtime==4.11 and sympy==1.12
 
 $\rightarrow$ SymPy's atoms are wrong.
 
-Expected tokens: 
+Expected tokens (manual): 
 \input{02000_expected_tokens}
+
+\ \\
+%manual review: \\
+SymPy parsed raw CORRECT, 
+SymPy raw atoms WRONG, \\
+SymPy parsed clean CORRECT, 
+SymPy clean atoms WRONG.
 
 \hrulefill
 
 
-
+08000:
 row vector:
 \input{08000_expression_latex}
 parses to
-\input{08000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{08000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{08000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{08000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{08000_cleaned_latex}
 parses to
-\input{08000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{08000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{08000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{08000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{08000_expected_tokens}
 
+\ \\
+%manual review: \\
+SymPy parsed raw FAIL, 
+SymPy raw atoms N/A, \\
+SymPy parsed clean FAIL, 
+SymPy clean atoms N/A.
 
 \hrulefill
 
@@ -968,22 +1308,30 @@ Expected tokens:
 column vector:
 \input{09000_expression_latex}
 parses to
-\input{09000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{09000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{09000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{09000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{09000_cleaned_latex}
 parses to
-\input{09000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{09000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{09000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{09000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{09000_expected_tokens}
+
+
+\ \\
+%manual review: \\
+SymPy parsed raw FAIL, 
+SymPy raw atoms N/A, \\
+SymPy parsed clean FAIL, 
+SymPy clean atoms N/A.
 
 \hrulefill
 
@@ -991,47 +1339,60 @@ Expected tokens:
 column vector, arbitrary size:
 \input{10000_expression_latex}
 parses to
-\input{10000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{10000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{10000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{10000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{10000_cleaned_latex}
 parses to
-\input{10000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{10000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{10000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{10000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{10000_expected_tokens}
 
+\ \\
+%manual review: \\
+SymPy parsed raw FAIL, 
+SymPy raw atoms N/A, \\
+SymPy parsed clean FAIL, 
+SymPy clean atoms N/A.
 
 \hrulefill
 
-
-
+11000:
 matrix:
 \input{11000_expression_latex}
 parses to
-\input{11000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{11000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{11000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{11000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{11000_cleaned_latex}
 parses to
-\input{11000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{11000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{11000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{11000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{11000_expected_tokens}
+
+
+\ \\
+%manual review: \\
+SymPy parsed raw FAIL, 
+SymPy raw atoms N/A, \\
+SymPy parsed clean FAIL, 
+SymPy clean atoms N/A.
 
 \hrulefill
 
@@ -1039,76 +1400,97 @@ Expected tokens:
 matrix, arbitrary size:
 \input{12000_expression_latex}
 parses to
-\input{12000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{12000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{12000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{12000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{12000_cleaned_latex}
 parses to
-\input{12000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{12000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{12000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{12000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{12000_expected_tokens}
 
+\ \\
+%manual review: \\
+SymPy parsed raw FAIL, 
+SymPy raw atoms N/A, \\
+SymPy parsed clean FAIL, 
+SymPy clean atoms N/A.
 
 \hrulefill
 
-
+13000:
 % https://tex.stackexchange.com/a/153616/235813
 matrix math:
 \input{13000_expression_latex}
 parses to
-\input{13000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{13000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{13000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{13000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{13000_cleaned_latex}
 parses to
-\input{13000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{13000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{13000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{13000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{13000_expected_tokens}
 
+
+
+\ \\
+%manual review: \\
+SymPy parsed raw FAIL, 
+SymPy raw atoms N/A, \\
+SymPy parsed clean FAIL, 
+SymPy clean atoms N/A.
 
 \hrulefill
 
 
 \section{Quantum: Dirac Notation}
 
+80000:
 How to indicate using tokens that this is "bra"? Seems similar to $f(x)$
 
 % https://tex.stackexchange.com/a/553176/235813
 \input{80000_expression_latex}
 parses to
-\input{80000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{80000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{80000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{80000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{80000_cleaned_latex}
 parses to
-\input{80000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{80000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{80000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{80000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{80000_expected_tokens}
 
+\ \\
+%manual review: \\
+SymPy parsed raw CORRECT, 
+SymPy raw atoms CORRECT, \\
+SymPy parsed clean CORRECT, 
+SymPy clean atoms CORRECT.
 
 \hrulefill
 
@@ -1117,23 +1499,31 @@ How to indicate using tokens that this is "ket"? Seems similar to $f(x)$
 % https://tex.stackexchange.com/a/553176/235813
 \input{81000_expression_latex}
 parses to
-\input{81000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{81000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{81000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{81000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{81000_cleaned_latex}
 parses to
-\input{81000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{81000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{81000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{81000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{81000_expected_tokens}
 
+
+
+\ \\
+%manual review: \\
+SymPy parsed raw CORRECT, 
+SymPy raw atoms CORRECT, \\
+SymPy parsed clean CORRECT, 
+SymPy clean atoms CORRECT.
 
 \hrulefill
 
@@ -1142,44 +1532,61 @@ Expected tokens:
 used in quantum mechanics and is valid latex. Fails in Sympy
 \input{66000_expression_latex}
 parses to
-\input{66000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{66000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{66000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{66000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{66000_cleaned_latex}
 parses to
-\input{66000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{66000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{66000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{66000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{66000_expected_tokens}
 
+
+\ \\
+%manual review: \\
+SymPy parsed raw FAIL, 
+SymPy raw atoms N/A, \\
+SymPy parsed clean FAIL, 
+SymPy clean atoms N/A.
+
 \hrulefill
+
 63000: 
 used in quantum mechanics and is valid latex. Fails in Sympy
 \input{63000_expression_latex}
 parses to
-\input{63000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{63000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{63000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{63000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{63000_cleaned_latex}
 parses to
-\input{63000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{63000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{63000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{63000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{63000_expected_tokens}
+
+
+\ \\
+%manual review: \\
+SymPy parsed raw FAIL, 
+SymPy raw atoms N/A, \\
+SymPy parsed clean FAIL, 
+SymPy clean atoms N/A.
 
 \hrulefill
 
@@ -1188,72 +1595,89 @@ Expected tokens:
 Seems similar to $f(x, y)$
 \input{82000_expression_latex}
 parses to
-\input{82000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{82000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{82000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{82000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{82000_cleaned_latex}
 parses to
-\input{82000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{82000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{82000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{82000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{82000_expected_tokens}
 
-
+\ \\
+%manual review: \\
+SymPy parsed raw WRONG, 
+SymPy raw atoms CORRECT, \\
+SymPy parsed clean WRONG, 
+SymPy clean atoms CORRECT.
 
 \hrulefill
 
+83000:
 Seems similar to $f(x, y, z)$
 \input{83000_expression_latex}
 parses to
-\input{83000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{83000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{83000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{83000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{83000_cleaned_latex}
 parses to
-\input{83000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{83000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{83000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{83000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{83000_expected_tokens}
 
-
+\ \\
+%manual review: \\
+SymPy parsed raw CORRECT, 
+SymPy raw atoms CORRECT, \\
+SymPy parsed clean CORRECT, 
+SymPy clean atoms CORRECT.
 
 \hrulefill
 
-
+84000:
 expectation
 \input{84000_expression_latex}
 parses to
-\input{84000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{84000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{84000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{84000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{84000_cleaned_latex}
 parses to
-\input{84000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{84000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{84000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{84000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{84000_expected_tokens}
 
+\ \\
+%manual review: \\
+SymPy parsed raw FAIL, 
+SymPy raw atoms N/A, \\
+SymPy parsed clean FAIL, 
+SymPy clean atoms N/A.
 
 \hrulefill
 
@@ -1267,23 +1691,29 @@ Expected tokens:
 70000:
 \input{70000_expression_latex}
 parses to
-\input{70000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{70000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{70000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{70000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{70000_cleaned_latex}
 parses to
-\input{70000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{70000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{70000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{70000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{70000_expected_tokens}
 
+\ \\
+%manual review: \\
+SymPy parsed raw FAIL, 
+SymPy raw atoms N/A, \\
+SymPy parsed clean FAIL, 
+SymPy clean atoms N/A.
 
 \hrulefill
 
@@ -1291,23 +1721,29 @@ Expected tokens:
 The \href{https://en.wikipedia.org/wiki/Kronecker_delta}{Kronecker delta}
 \input{70500_expression_latex}
 parses to
-\input{70500_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{70500_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{70500_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{70500_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{70500_cleaned_latex}
 parses to
-\input{70500_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{70500_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{70500_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{70500_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{70500_expected_tokens}
 
+\ \\
+%manual review: \\
+SymPy parsed raw FAIL, 
+SymPy raw atoms N/A, \\
+SymPy parsed clean FAIL, 
+SymPy clean atoms N/A.
 
 \hrulefill
 
@@ -1315,23 +1751,31 @@ Expected tokens:
 71000:
 \input{71000_expression_latex}
 parses to
-\input{71000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{71000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{71000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
+\input{71000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}%\\
 using antlr4-python3-runtime==4.11 and sympy==1.12
 
 \ \\
 cleaned \LaTeX
 \input{71000_cleaned_latex}
 parses to
-\input{71000_expression_latex_sympy_112_antlr4-python3-runtime411_expression}
+\input{71000_cleaned_latex_sympy_112_antlr4-python3-runtime411_expression}
 with atoms
-\input{71000_expression_latex_sympy_112_antlr4-python3-runtime411_atoms}
+\input{71000_cleaned_latex_sympy_112_antlr4-python3-runtime411_atoms}
 
 \ \\
-Expected tokens:
+Expected tokens (manual):
 \input{71000_expected_tokens}
 
+
+
+\ \\
+%manual review: \\
+SymPy parsed raw CORRECT, 
+SymPy raw atoms CORRECT, \\
+SymPy parsed clean CORRECT, 
+SymPy clean atoms CORRECT.
 
 \hrulefill
 
