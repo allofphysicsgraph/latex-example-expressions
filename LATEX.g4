@@ -45,13 +45,9 @@ value:
     |  user_variable
     ;
 
-ams_angles:
-angle|measuredangle|sphericalangle;
-
+ams_angles:angle|measuredangle|sphericalangle;
 ams_delimiters:ulcorner|urcorner|llcorner|lrcorner;
-
 ams_dots:because|dotsi|therefore|dotsb|dotsm|dotsc|dotso;
-
 ams_greek_letters:digamma|varkappa;
 
 ams_harpoons:downharpoonleft|leftrightharpoons|upharpoonleft|downharpoonright|rightleftharpoons|upharpoonright;
@@ -61,7 +57,6 @@ ams_hebrew_letters:beth|gimel|daleth|aleph;
 ams_inequalities:eqslantgtr|gtrdot|lesseqgtr|ngeq|eqslantless|gtreqless|lesseqqgtr|ngeqq|geqq|gtreqqless|lessgtr|ngeqslant|geqslant|gtrless|lesssim|ngtr|ggg|gtrsim|lll|nleq|gnapprox|gvertneqq|lnapprox|nleqq|gneq|leqq|lneq|nleqslant|gneqq|leqslant|lneqq|nless|gnsim|lessapprox|lnsim|gtrapprox|lessdot|lvertneqq;
 
 ams_log_like_symbols:injlim|varinjlim|varlimsup|projlim|varliminf|varprojlim;
-
 ams_math_mode_accents:dddot|ddddot;
 
 ams_negated_arrows:nLeftarrow|nLeftrightarrow|nRightarrow|nleftarrow|nleftrightarrow|nrightarrow;
@@ -142,7 +137,6 @@ acsc: '\\acsc';
 acute: '\\acute';
 add: '\\add';
 adjustlimits: '\\adjustlimits';
-admat: '\\admat';
 aleph: '\\aleph';
 alignment_delimiter:'&';
 alpha: '\\alpha';
@@ -1503,9 +1497,7 @@ wedge: '\\wedge';
 widehat: '\\widehat';
 widetilde: '\\widetilde';
 within: '\\within';
-wp: '\\wp';
 wr: '\\wr';
-xcancel: '\\xcancel';
 xhookleftarrow: '\\xhookleftarrow';
 xhookrightarrow: '\\xhookrightarrow';
 xi: '\\xi';
@@ -1519,7 +1511,6 @@ xLeftrightarrow: '\\xLeftrightarrow';
 xleftrightharpoons: '\\xleftrightharpoons';
 xLeftrightharpoons: '\\xLeftrightharpoons';
 xlongequal: '\\xlongequal';
-xmapsto: '\\xmapsto';
 xmathstrut: '\\xmathstrut';
 xmatrix: '\\xmatrix';
 xmat: '\\xmat';
@@ -1528,10 +1519,7 @@ xRightarrow: '\\xRightarrow';
 xrightharpoondown: '\\xrightharpoondown';
 xrightharpoonup: '\\xrightharpoonup';
 xrightleftharpoons: '\\xrightleftharpoons';
-xRightleftharpoons: '\\xRightleftharpoons';
-xtofrom: '\\xtofrom';
-xtwoheadleftarrow: '\\xtwoheadleftarrow';
-xtwoheadrightarrow: '\\xtwoheadrightarrow';
+Rightleftharpoons: '\\xRightleftharpoons';
 yen: '\\yen';
 zeromatrix: '\\zeromatrix';
 zeta: '\\zeta';
