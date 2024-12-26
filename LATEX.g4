@@ -1,5 +1,37 @@
+//Symbol list from 
+//https://mirrors.mit.edu/CTAN/info/symbols/comprehensive/symbols-a4.pdf
+//Sympy LaTeX.g4
+//MathJax tex_macros
+
 grammar LATEX;
-IGNORE: ('\n'|' ') -> skip;
+NEW_LINE_SPACE_SKIP: ('\n'|' ') -> skip;
+THINSPACE: ('\\,' | '\\thinspace') -> skip;
+MEDSPACE: ('\\:' | '\\medspace') -> skip;
+THICKSPACE: ('\\;' | '\\thickspace') -> skip;
+QUAD: '\\quad' -> skip;
+QQUAD: '\\qquad' -> skip;
+NEGTHINSPACE: ('\\!' | '\\negthinspace') -> skip;
+NEGMEDSPACE: '\\negmedspace' -> skip;
+NEGTHICKSPACE: '\\negthickspace' -> skip;
+CMD_LEFT: '\\left' -> skip;
+CMD_RIGHT: '\\right' -> skip;
+
+IGNORE:
+	(
+		'\\vrule'
+		| '\\vcenter'
+		| '\\vbox'
+		| '\\vskip'
+		| '\\vspace'
+		| '\\hfil'
+		| '\\*'
+		| '\\-'
+		| '\\.'
+		| '\\/'
+		| '\\"'
+		| '\\('
+		| '\\='
+	) -> skip;
 array: '{' value (',' value)* '}';
 value:
     array
@@ -12,6 +44,77 @@ value:
     |  INT
     |  user_variable
     ;
+
+ams_angles:
+angle|measuredangle|sphericalangle;
+
+ams_delimiters:ulcorner|urcorner|llcorner|lrcorner;
+
+ams_dots:because|dotsi|therefore|dotsb|dotsm|dotsc|dotso;
+
+ams_greek_letters:digamma|varkappa;
+
+ams_harpoons:downharpoonleft|leftrightharpoons|upharpoonleft|downharpoonright|rightleftharpoons|upharpoonright;
+
+ams_hebrew_letters:beth|gimel|daleth|aleph;
+
+ams_inequalities:eqslantgtr|gtrdot|lesseqgtr|ngeq|eqslantless|gtreqless|lesseqqgtr|ngeqq|geqq|gtreqqless|lessgtr|ngeqslant|geqslant|gtrless|lesssim|ngtr|ggg|gtrsim|lll|nleq|gnapprox|gvertneqq|lnapprox|nleqq|gneq|leqq|lneq|nleqslant|gneqq|leqslant|lneqq|nless|gnsim|lessapprox|lnsim|gtrapprox|lessdot|lvertneqq;
+
+ams_log_like_symbols:injlim|varinjlim|varlimsup|projlim|varliminf|varprojlim;
+
+ams_math_mode_accents:dddot|ddddot;
+
+ams_negated_arrows:nLeftarrow|nLeftrightarrow|nRightarrow|nleftarrow|nleftrightarrow|nrightarrow;
+
+ams_triangle_relations:blacktriangleleft|ntriangleright|trianglerighteq|blacktriangleright|ntrianglerighteq|vartriangleleft|ntriangleleft|trianglelefteq|vartriangleright|ntrianglelefteq|triangleq;
+
+ams_variable_sized_delimiters:lvert|rvert|lVert|rVert;
+
+ams_variable_sized_math_operators:iint|iiint|iiiint|idotsint;
+
+ams_arrows:
+circlearrowleft|leftleftarrows|rightleftarrows|circlearrowright|leftrightarrows|rightrightarrows|curvearrowleft|leftrightsquigarrow|rightsquigarrow|curvearrowright|Lleftarrow|Rsh|dashleftarrow|looparrowleft|twoheadleftarrow|dashrightarrow|looparrowright|twoheadrightarrow|downdownarrows|Lsh|upuparrows|leftarrowtail|rightarrowtail;
+
+binary_operators:
+amalg|cup|oplus|times|ast|dagger|oslash|triangleleft|bigcirc|ddagger|otimes|triangleright|bigtriangledown|diamond|pm|unlhd|bigtriangleup|div|rhd|unrhd|bullet|lhd|setminus|uplus|cap|mp|sqcap|vee|cdot|odot|sqcup|wedge|circ|ominus|star|wr;
+
+ams_binary_operators:
+barwedge|circledcirc|intercal|boxdot|circleddash|leftthreetimes|boxminus|Cup|
+ltimes|boxplus|curlyvee|rightthreetimes|boxtimes|curlywedge|rtimes|Cap|divideontimes|smallsetminus|centerdot|dotplus|veebar|circledast|doublebarwedge;
+
+ams_binary_relation:
+approxeq|eqcirc|succapprox|backepsilon|fallingdotseq|succcurlyeq|backsim|multimap|succsim|backsimeq|pitchfork|therefore|because|precapprox|thickapprox|between|preccurlyeq|thicksim|Bumpeq|precsim|varpropto|bumpeq|risingdotseq|Vdash|circeq|shortmid|vDash|curlyeqprec|shortparallel|Vvdash|curlyeqsucc|smallfrown|doteqdot|smallsmile;
+
+ams_negated_binary_relations:
+ncong|nshortparallel|nVDash|nmid|nsim|precnapprox|nparallel|nsucc|precnsim|nprec|nsucceq|succnapprox|npreceq|nvDash|succnsim|nshortmid|nvdash;
+
+ams_subset_and_superset_relations:
+nsubseteq|subseteqq|supsetneqq|nsupseteq|subsetneq|varsubsetneq|nsupseteqq|subsetneqq|varsubsetneqq|sqsubset|Supset|varsupsetneq|sqsupset|supseteqq|varsupsetneqq|Subset|supsetneq;
+
+greek:
+alpha|beta|chi|delta|Delta|epsilon|eta|gamma|Gamma|iota|kappa|lambda|Lambda|mu|nu|omega|Omega|phi|Phi|pi|Pi|psi|Psi|rho|sigma|Sigma|tau|theta|Theta|upsilon|Upsilon|varepsilon|varphi|varrho|vartheta|xi|Xi|zeta;
+
+func_normal:
+	exp
+	| log
+	| lg
+	| ln
+	| sin
+	| cos
+	| tan
+	| csc
+	| sec
+	| cot
+	| arcsin
+	| arccos
+	| arctan
+	| arccsc
+	| arcsec
+	| arccot
+	| sinh
+	| cosh
+	| tanh;
+
 differential: 'dx'|'dy';
 user_function_def: 'f(x)';
 absolute_value: '|' user_variable '|' ;
@@ -738,8 +841,6 @@ nearrow: '\\nearrow';
 NeedsTeXFormat: '\\NeedsTeXFormat';
 negmedspace: '\\negmedspace';
 neg: '\\neg';
-negthickspace: '\\negthickspace';
-negthinspace: '\\negthinspace';
 ne: '\\ne';
 neq: '\\neq';
 newcommand: '\\newcommand';
@@ -906,11 +1007,9 @@ qor: '\\qor';
 qotherwise: '\\qotherwise';
 qq: '\\qq';
 qqtext: '\\qqtext';
-qquad: '\\qquad';
 qsince: '\\qsince';
 qthen: '\\qthen';
 qty: '\\qty';
-quad: '\\quad';
 quantity: '\\quantity';
 QuaternaryInfC: '\\QuaternaryInfC';
 QuaternaryInf: '\\QuaternaryInf';
@@ -1033,13 +1132,10 @@ sqsubset: '\\sqsubset';
 sqsupseteq: '\\sqsupseteq';
 sqsupset: '\\sqsupset';
 square: '\\square';
-S: '\\S';
 stackbin: '\\stackbin';
 stackrel: '\\stackrel';
 star: '\\star';
 strut: '\\strut';
-st: '\\st';
-style: '\\style';
 sub: '_' ;
 subsection: '\\subsection';
 subseteqq: '\\subseteqq';
@@ -1237,7 +1333,6 @@ theta: '\\theta';
 Theta: '\\Theta';
 thickapprox: '\\thickapprox';
 thicksim: '\\thicksim';
-thinspace: '\\thinspace';
 thmref: '\\thmref';
 TIC: '\\TIC';
 tilde: '\\tilde';
@@ -1248,7 +1343,7 @@ Tiny: '\\Tiny';
 title: '\\title';
 today: '\\today';
 toggle: '\\toggle';
-token: integral|differential|user_function_def|value|simple_expression|absolute_value|conditional|equals|end_line|matrix|sub|array|alignment_delimiter|equals|user_variable|braces|abs|add|alpha|appendix|author|backslash|Bar|begin|begin_align|begin_array|begin_bmatrix|begin_cases|begin_equation|begin_matrix|begin_pmatrix|begin_split|begin_verbatim|beta|bibitem|bigcup|bigg|biggl|biggr|bigl|bigr|binom|boldsymbol|box|boxed|boxmaxdepth|Breve|bslash|bysame|cap|caption|cdot|cdots|cf|cfrac|Cham|chardef|Check|chi|circ|cite|cn|colon|cos|cov|ctagsplit|cup|Cw|date|dbinom|ddddot|dddot|Ddot|ddots|DeclareMathOperator|def|delimiterfactor|delta|Delta|det|dfrac|dim|dimen|displaystyle|documentclass|Dot|dots|dotsb|dotsc|dotsi|dotsm|downarrow|dp|else|emph|end|end_align|end_array|end_bmatrix|end_cases|end_equation|endinput|end_matrix|end_pmatrix|end_split|end_verbatim|env|envert|enVert|eqref|equiv|esssup|eval|fi|fn|footins|footnote|footnoterule|forall|frac|G|gamma|Gamma|gdef|genfrac|geq|global|Grave|hat|Hat|hbar|hbox|hdots|hdotsfor|hfuzz|href|hrulefill|idotsint|iffalse|ifvoid|ifx|iiiint|iiint|iint|Im|IM|in|infty|input|int|interval|item|kappa|label|labelenumi|lambda|Lambda|langle|large|Large|lceil|le|left|Leftrightarrow|leftroot|lemref|leq|let|lim|liminf|limits|ln|log|lowercase|lvert|lVert|makeatletter|makeatother|maketitle|marginrulewidth|markboth|mathbf|mathcal|mathinner|mathop|maxdepth|mbox|meas|mid|mod|mu|multlinegap|nabla|ne|NeedsTeXFormat|newcommand|newdimen|newpage|newtheorem|non|norm|normalfont|not|notag|notin|ntt|nu|numberwithin|oddsidemargin|oint|omega|Omega|otimes|overleftarrow|overleftrightarrow|overline|overrightarrow|overset|pagestyle|partial|per|phantom|phi|Phi|pi|pkg|pmb|pmod|pod|prod|protect|psi|PY|qed|qquad|quad|rangle|rceil|Re|ref|relax|renewcommand|rho|right|rightarrow|rm|roman|rule|rvert|rVert|S|secref|section|sectionmark|seg|setbox|setlength|sideset|sigma|sim|sin|skip|smash|sqrt|st|subsection|subset|subseteq|substack|sum|tag|tan|tau|tbinom|TeX|text|textbf|textheight|textit|textstyle|textup|textwidth|tfrac|theequation|theoremstyle|theta|thmref|tilde|Tilde|times|title|to|today|topmargin|triangle|ttfamily|underleftarrow|underleftrightarrow|underrightarrow|underset|unvbox|uproot|usepackage|varepsilon|varinjlim|varliminf|varlimsup|varphi|varpi|varprojlim|varrho|vartheta|vbox|vdots|vec|Vec|verb|vert|vrule|vskip|vspace|widehat|widetilde|xi|xleftarrow|xrightarrow|zeta;
+token: greek|func_normal|integral|differential|user_function_def|value|simple_expression|absolute_value|conditional|equals|end_line|matrix|sub|array|alignment_delimiter|equals|user_variable|braces|abs|add|appendix|author|backslash|Bar|begin|begin_align|begin_array|begin_bmatrix|begin_cases|begin_equation|begin_matrix|begin_pmatrix|begin_split|begin_verbatim|bibitem|bigcup|bigg|biggl|biggr|bigl|bigr|binom|boldsymbol|box|boxed|boxmaxdepth|Breve|bslash|bysame|cap|caption|cdot|cdots|cf|cfrac|Cham|chardef|Check|chi|circ|cite|cn|colon|cov|ctagsplit|Cw|date|dbinom|ddddot|dddot|Ddot|ddots|DeclareMathOperator|def|delimiterfactor|delta|Delta|det|dfrac|dim|dimen|displaystyle|documentclass|Dot|dots|dotsb|dotsc|dotsi|dotsm|downarrow|dp|else|emph|end|end_align|end_array|end_bmatrix|end_cases|end_equation|endinput|end_matrix|end_pmatrix|end_split|end_verbatim|env|envert|enVert|eqref|equiv|esssup|eval|fi|fn|footins|footnote|footnoterule|forall|frac|G|gamma|Gamma|gdef|genfrac|geq|global|Grave|hat|Hat|hbar|hbox|hdots|hdotsfor|hfuzz|href|hrulefill|idotsint|iffalse|ifvoid|ifx|iiiint|iiint|iint|Im|IM|in|infty|input|int|interval|item|kappa|label|labelenumi|lambda|Lambda|langle|large|Large|lceil|le|left|Leftrightarrow|leftroot|lemref|leq|let|lim|liminf|limits|ln|log|lowercase|lvert|lVert|makeatletter|makeatother|maketitle|marginrulewidth|markboth|mathbf|mathcal|mathinner|mathop|maxdepth|mbox|meas|mid|mod|mu|multlinegap|nabla|ne|NeedsTeXFormat|newcommand|newdimen|newpage|newtheorem|non|norm|normalfont|not|notag|notin|ntt|nu|numberwithin|oddsidemargin|oint|omega|Omega|otimes|overleftarrow|overleftrightarrow|overline|overrightarrow|overset|pagestyle|partial|per|phantom|pi|pkg|pmb|pmod|pod|prod|protect|psi|PY|qed|rangle|rceil|Re|ref|relax|renewcommand|rho|right|rightarrow|rm|roman|rule|rvert|rVert|secref|section|sectionmark|seg|setbox|setlength|sideset|sigma|sim|skip|smash|sqrt|subsection|subset|subseteq|substack|sum|tag|tau|tbinom|TeX|text|textbf|textheight|textit|textstyle|textup|textwidth|tfrac|theequation|theoremstyle|theta|thmref|tilde|Tilde|times|title|to|today|topmargin|triangle|ttfamily|underleftarrow|underleftrightarrow|underrightarrow|underset|unvbox|uproot|usepackage|varepsilon|varinjlim|varliminf|varlimsup|varphi|varpi|varprojlim|varrho|vartheta|vbox|vdots|vec|Vec|verb|vert|vrule|vskip|vspace|widehat|widetilde|xleftarrow|xrightarrow;
 topmargin: '\\topmargin';
 top: '\\top';
 to: '\\to';
