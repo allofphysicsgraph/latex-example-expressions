@@ -20,6 +20,33 @@ class SympyEmitter(LaTeXListener):
     def exitMath(self, ctx):
         return self.setSympy("exitMath", ctx.getText())
 
+    def exitParenthesis(self, ctx):
+        return self.setSympy("exitParenthesis", ctx.getText())
+
+    def exitRltn(self, ctx):
+        return self.setSympy("exitRltn", ctx.getText())
+
+    def exitMult(self, ctx):
+        return self.setSympy("exitMult", ctx.getText())
+
+    def exitMulDiv(self, ctx):
+        return self.setSympy("exitMulDiv", ctx.getText())
+
+    def exitAddSub(self, ctx):
+        return self.setSympy("exitAddSub", ctx.getText())
+
+    def exitUnaryPlus(self, ctx):
+        return self.setSympy("exitUnaryPlus", ctx.getText())
+
+    def exitPow(self, ctx):
+        return self.setSympy("exitPow", ctx.getText())
+
+    def exitUnary(self, ctx):
+        return self.setSympy("exitUnary", ctx.getText())
+
+    def exitNm(self, ctx):
+        return self.setSympy("exitNm", ctx.getText())
+
     def exitRelation_NEQ_relation(self, ctx):
         return self.setSympy("exitRelation_NEQ_relation", ctx.getText())
 
@@ -32,107 +59,20 @@ class SympyEmitter(LaTeXListener):
     def exitRelation_GT_relation(self, ctx):
         return self.setSympy("exitRelation_GT_relation", ctx.getText())
 
-    def exitRelation_expr(self, ctx):
-        return self.setSympy("exitRelation_expr", ctx.getText())
-
     def exitRelation_LTE_relation(self, ctx):
         return self.setSympy("exitRelation_LTE_relation", ctx.getText())
 
     def exitRelation_GTE_relation(self, ctx):
         return self.setSympy("exitRelation_GTE_relation", ctx.getText())
 
-    def exitEquality(self, ctx):
-        return self.setSympy("exitEquality", ctx.getText())
-
-    def exitExpr(self, ctx):
-        return self.setSympy("exitExpr", ctx.getText())
-
-    def exitAdditive_add_additive(self, ctx):
-        return self.setSympy("exitAdditive_add_additive", ctx.getText())
-
-    def exitAdditive_sub_additive(self, ctx):
-        return self.setSympy("exitAdditive_sub_additive", ctx.getText())
-
-    def exitAdditive_mp(self, ctx):
-        return self.setSympy("exitAdditive_mp", ctx.getText())
-
-    def exitMp(self, ctx):
-        return self.setSympy("exitMp", ctx.getText())
-
-    def exitMp_nofunc(self, ctx):
-        return self.setSympy("exitMp_nofunc", ctx.getText())
-
-    def exitUnary(self, ctx):
-        return self.setSympy("exitUnary", ctx.getText())
-
-    def exitUnary_nofunc(self, ctx):
-        return self.setSympy("exitUnary_nofunc", ctx.getText())
-
-    def exitPostfix(self, ctx):
-        return self.setSympy("exitPostfix", ctx.getText())
-
-    def exitPostfix_nofunc(self, ctx):
-        return self.setSympy("exitPostfix_nofunc", ctx.getText())
-
-    def exitPostfix_op(self, ctx):
-        return self.setSympy("exitPostfix_op", ctx.getText())
-
-    def exitEval_at(self, ctx):
-        return self.setSympy("exitEval_at", ctx.getText())
-
-    def exitEval_at_sub(self, ctx):
-        return self.setSympy("exitEval_at_sub", ctx.getText())
-
-    def exitEval_at_sup(self, ctx):
-        return self.setSympy("exitEval_at_sup", ctx.getText())
-
-    def exitExp(self, ctx):
-        return self.setSympy("exitExp", ctx.getText())
-
-    def exitExp_nofunc(self, ctx):
-        return self.setSympy("exitExp_nofunc", ctx.getText())
-
-    def exitComp(self, ctx):
-        return self.setSympy("exitComp", ctx.getText())
-
-    def exitComp_nofunc(self, ctx):
-        return self.setSympy("exitComp_nofunc", ctx.getText())
-
-    def exitGroup(self, ctx):
-        return self.setSympy("exitGroup", ctx.getText())
-
-    def exitAbs_group(self, ctx):
-        return self.setSympy("exitAbs_group", ctx.getText())
+    def exitRelation_atom(self, ctx):
+        return self.setSympy("exitRelation_atom", ctx.getText())
 
     def exitNumber(self, ctx):
         return self.setSympy("exitNumber", ctx.getText())
 
     def exitAtom(self, ctx):
         return self.setSympy("exitAtom", ctx.getText())
-
-    def exitBra(self, ctx):
-        return self.setSympy("exitBra", ctx.getText())
-
-    def exitKet(self, ctx):
-        return self.setSympy("exitKet", ctx.getText())
-
-    def exitMathit(self, ctx):
-        return self.setSympy("exitMathit", ctx.getText())
-
-    def exitMathit_text(self, ctx):
-        return self.setSympy("exitMathit_text", ctx.getText())
-
-    def exitFrac(self, ctx):
-        return self.setSympy("exitFrac", ctx.getText())
-
-    def exitBinom(self, ctx):
-        return self.setSympy("exitBinom", ctx.getText())
-
-    def exitFloor(self, ctx):
-        return self.setSympy("exitFloor", ctx.getText())
-
-    def exitCeil(self, ctx):
-        return self.setSympy("exitCeil", ctx.getText())
 
     def exitTAN(self, ctx):
         return self.setSympy("exitTAN", ctx.getText())
@@ -199,33 +139,6 @@ class SympyEmitter(LaTeXListener):
 
     def exitCOSH(self, ctx):
         return self.setSympy("exitCOSH", ctx.getText())
-
-    def exitFunc(self, ctx):
-        return self.setSympy("exitFunc", ctx.getText())
-
-    def exitArgs(self, ctx):
-        return self.setSympy("exitArgs", ctx.getText())
-
-    def exitLimit_sub(self, ctx):
-        return self.setSympy("exitLimit_sub", ctx.getText())
-
-    def exitFunc_arg(self, ctx):
-        return self.setSympy("exitFunc_arg", ctx.getText())
-
-    def exitFunc_arg_noparens(self, ctx):
-        return self.setSympy("exitFunc_arg_noparens", ctx.getText())
-
-    def exitSubexpr(self, ctx):
-        return self.setSympy("exitSubexpr", ctx.getText())
-
-    def exitSupexpr(self, ctx):
-        return self.setSympy("exitSupexpr", ctx.getText())
-
-    def exitSubeq(self, ctx):
-        return self.setSympy("exitSubeq", ctx.getText())
-
-    def exitSupeq(self, ctx):
-        return self.setSympy("exitSupeq", ctx.getText())
 
 
 # from https://github.com/antlr/antlr4/blob/master/runtime/Python3/bin/pygrun
