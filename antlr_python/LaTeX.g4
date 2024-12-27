@@ -22,6 +22,7 @@ math: expression;
 expression:
     SUB expression                                              # Unary // Unary minus sign (negative numbers)
     | ADD expression                                            # UnaryPlus // Unary plus sign (positive numbers)
+  | expression GT expression # expression_GT_expression
     | expression op = ('^' | '**') expression                   # Pow // expr_1 to the expr_2 th power
     | expression op = (MUL | DIV|CMD_TIMES|CMD_DIV|COLON) expression                    # MulDiv // Multiplication or division
     | '(' expression ')'                                        # Parenthesis // Expression within parentheses
@@ -30,22 +31,16 @@ expression:
     | expression '(' expression ')'                             # Mult // Multiplication without sign
     | '(' expression ')' expression                             # Mult // Multiplication without sign
     | expression op = (ADD | SUB) expression                    # AddSub // Addition or subtraction
-    | relation  # Rltn
+    | expression EQUAL expression # expression_EQUAL_expression
+  | expression LT expression # expression_LT_expression 
+  | expression LTE expression # expression_LTE_expression 
+  | expression GTE expression # expression_GTE_expression
+  | expression NEQ expression # expression_NEQ_expression
     | number                                                    # Nm // Single integer or float number
     ;
 
-relation:
-  relation EQUAL relation # relation_EQUAL_relation
-  | relation LT relation # relation_LT_relation 
-  | relation LTE relation # relation_LTE_relation 
-  | relation GT relation # relation_GT_relation
-  | relation GTE relation # relation_GTE_relation
-  | relation NEQ relation # relation_NEQ_relation
-  | atom # relation_atom
-  ;
-
 //improve
-number: INT+ (',' DIGIT DIGIT DIGIT)* ('.' DIGIT+)?;
+number: INT+ (',' INT{3})* ('.' DIGIT+)?;
 INT: '0' | [1-9][0-9]* ; 
 
 atom: 
