@@ -163,7 +163,7 @@ class SympyEmitter(LaTeXListener):
         lh = sympy.Number(ctx.expression(0).getText())
         rh = sympy.Number(ctx.expression(1).getText())
         self.setSympy("exitAddition", ctx.getText())
-        self.results['expressions'].append(sympy.Add(lh, rh, evaluate=False))
+        self.results["expressions"].append(sympy.Add(lh, rh, evaluate=False))
         print(self.results)
         return self.setSympy("exitAddition", ctx.getText())
 
@@ -196,6 +196,12 @@ class SympyEmitter(LaTeXListener):
         return self.setSympy("exitParenthesis", ctx.getText())
 
     def exitSubtraction(self, ctx):
+        lh = sympy.Number(ctx.expression(0).getText())
+        rh = sympy.Number(ctx.expression(1).getText())
+        if hasattr(rh, "is_Atom") and rh.is_Atom:
+            print(sympy.Add(lh, -1 * rh, evaluate=False))
+            return sympy.Add(lh, -1 * rh, evaluate=False)
+        print(sympy.Add(lh, sympy.Mul(-1, rh, evaluate=False), evaluate=False))
         return self.setSympy("exitSubtraction", ctx.getText())
 
     def exitMult(self, ctx):
