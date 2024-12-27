@@ -157,14 +157,21 @@ SYMBOL: '\\' [a-zA-Z]+;
 math: relation;
 
 relation:
-	relation (EQUAL | LT | LTE | GT | GTE | NEQ) relation
-	| expr;
+  relation EQUAL relation # relation_EQUAL_relation
+  | relation LT relation # relation_LT_relation 
+  | relation LTE relation # relation_LTE_relation 
+  | relation GT relation # relation_GT_relation
+  | relation GTE relation # relation_GTE_relation
+  | relation NEQ relation # relation_NEQ_relation
+	| expr # relation_expr;
 
 equality: expr EQUAL expr;
 
 expr: additive;
 
-additive: additive (ADD | SUB) additive | mp;
+additive: additive ADD additive # additive_add_additive
+    | additive SUB additive # additive_sub_additive
+    | mp # additive_mp;
 
 // mult part
 mp:
@@ -310,4 +317,4 @@ subexpr: UNDERSCORE (atom | L_BRACE expr R_BRACE);
 supexpr: CARET (atom | L_BRACE expr R_BRACE);
 
 subeq: UNDERSCORE L_BRACE equality R_BRACE;
-supeq: UNDERSCORE L_BRACE equality R_BRACE;
+supeq: CARET L_BRACE equality R_BRACE;
