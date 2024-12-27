@@ -25,11 +25,10 @@ relation:
   | relation GT relation # relation_GT_relation
   | relation GTE relation # relation_GTE_relation
   | relation NEQ relation # relation_NEQ_relation
-	| expr # relation_expr;
+  | additive # relation_additive;
 
-equality: expr EQUAL expr;
+equality: additive EQUAL additive;
 
-expr: additive;
 
 additive: additive ADD additive # additive_add_additive
     | additive SUB additive # additive_sub_additive
@@ -37,7 +36,12 @@ additive: additive ADD additive # additive_add_additive
 
 // mult part
 mp:
-	mp (MUL | CMD_TIMES | CMD_CDOT | DIV | CMD_DIV | COLON) mp
+	| mp MUL mp
+    | mp CMD_TIMES mp 
+    | mp CMD_CDOT mp 
+    | mp DIV mp  
+    | mp CMD_DIV mp  
+    | mp COLON mp
 	| unary;
 
 mp_nofunc:
@@ -51,10 +55,10 @@ mp_nofunc:
 	) mp_nofunc
 	| unary_nofunc;
 
-unary: (ADD | SUB) unary | postfix+;
+unary: ADD unary | SUB unary | postfix+;
 
 unary_nofunc:
-	(ADD | SUB) unary_nofunc
+	ADD unary_nofunc | SUB unary_nofunc
 	| postfix postfix_nofunc*;
 
 postfix: exp postfix_op*;
@@ -62,16 +66,17 @@ postfix_nofunc: exp_nofunc postfix_op*;
 postfix_op: BANG | eval_at;
 
 eval_at:
-	BAR (eval_at_sup | eval_at_sub | eval_at_sup eval_at_sub);
+	BAR eval_at_sup 
+    | BAR eval_at_sub |  BAR eval_at_sup eval_at_sub;
 
-eval_at_sub: UNDERSCORE L_BRACE (expr | equality) R_BRACE;
+eval_at_sub: UNDERSCORE L_BRC (additive | equality) R_BRC;
 
-eval_at_sup: CARET L_BRACE (expr | equality) R_BRACE;
+eval_at_sup: CARET L_BRC (additive | equality) R_BRC;
 
-exp: exp CARET (atom | L_BRACE expr R_BRACE) subexpr? | comp;
+exp: exp CARET (atom | L_BRC additive R_BRC) subexpr? | comp;
 
 exp_nofunc:
-	exp_nofunc CARET (atom | L_BRACE expr R_BRACE) subexpr?
+	exp_nofunc CARET (atom | L_BRC additive R_BRC) subexpr?
 	| comp_nofunc;
 
 comp:
@@ -90,17 +95,22 @@ comp_nofunc:
 	| ceil;
 
 group:
-	L_PAREN expr R_PAREN
-	| L_BRACKET expr R_BRACKET
-	| L_BRACE expr R_BRACE
-	| L_BRACE_LITERAL expr R_BRACE_LITERAL;
+	LP additive RP 
+	| L_BRK additive R_BRK
+	| L_BRC additive R_BRC
+	| L_BRACE_LITERAL additive R_BRACE_LITERAL;
 
-abs_group: BAR expr BAR;
+abs_group: BAR additive BAR;
 
-number: DIGIT+ (',' DIGIT DIGIT DIGIT)* ('.' DIGIT+)?;
+//improve
+number: INT+ (',' DIGIT DIGIT DIGIT)* ('.' DIGIT+)?;
+INT: '0' | [1-9][0-9]* ; 
 
-atom: (LETTER | SYMBOL) (subexpr? SINGLE_QUOTES? | SINGLE_QUOTES? subexpr?)
-	| number
+//review
+//(LETTER | SYMBOL) (subexpr? SINGLE_QUOTES? | SINGLE_QUOTES? subexpr?)
+
+atom: 
+	  number
 	| DIFFERENTIAL
 	| mathit
 	| frac
@@ -108,75 +118,75 @@ atom: (LETTER | SYMBOL) (subexpr? SINGLE_QUOTES? | SINGLE_QUOTES? subexpr?)
 	| bra
 	| ket;
 
-bra: L_ANGLE expr (R_BAR | BAR);
-ket: (L_BAR | BAR) expr R_ANGLE;
+bra: L_ANGLE additive (R_BAR | BAR);
+ket: (L_BAR | BAR) additive R_ANGLE;
 
-mathit: CMD_MATHIT L_BRACE mathit_text R_BRACE;
+mathit: CMD_MATHIT L_BRC mathit_text R_BRC;
 mathit_text: LETTER*;
 
-frac: CMD_FRAC (upperd = DIGIT | L_BRACE upper = expr R_BRACE)
-    (lowerd = DIGIT | L_BRACE lower = expr R_BRACE);
+frac: CMD_FRAC (upperd = DIGIT | L_BRC upper = additive R_BRC)
+    (lowerd = DIGIT | L_BRC lower = additive R_BRC);
 
 binom:
-	(CMD_BINOM | CMD_DBINOM | CMD_TBINOM) L_BRACE n = expr R_BRACE L_BRACE k = expr R_BRACE;
+	(CMD_BINOM | CMD_DBINOM | CMD_TBINOM) L_BRC n = additive R_BRC L_BRC k = additive R_BRC;
 
-floor: L_FLOOR val = expr R_FLOOR;
-ceil: L_CEIL val = expr R_CEIL;
+floor: L_FLOOR val = additive R_FLOOR;
+ceil: L_CEIL val = additive R_CEIL;
 
 func_normal:
-	FUNC_EXP # EXP 
-	| FUNC_LOG  # LOG
-	| FUNC_LG   # LG
-	| FUNC_LN   # LN
-	| FUNC_SIN  # SIN
-	| FUNC_COS  # COS
-	| FUNC_TAN  # TAN
-	| FUNC_CSC  # CSC
-	| FUNC_SEC  # SEC
-	| FUNC_COT  # COT
-	| FUNC_ARCSIN   # ARCSIN
-	| FUNC_ARCCOS   # ARCCOS
-	| FUNC_ARCTAN   # ARCTAN
-	| FUNC_ARCCSC   # ARCCSC
-	| FUNC_ARCSEC   # ARCSEC
-	| FUNC_ARCCOT   # ARCCOT
-	| FUNC_SINH # SINH
-	| FUNC_COSH # COSH
-	| FUNC_TANH # TANH
-	| FUNC_ARSINH   # ARSINH
-	| FUNC_ARCOSH   # ARCOSH
-	| FUNC_ARTANH  # ARTANH
+	EXP # EXP 
+	| LOG  # LOG
+	| LG   # LG
+	| LN   # LN
+	| SIN  # SIN
+	| COS  # COS
+	| TAN  # TAN
+	| CSC  # CSC
+	| SEC  # SEC
+	| COT  # COT
+	| ARCSIN   # ARCSIN
+	| ARCCOS   # ARCCOS
+	| ARCTAN   # ARCTAN
+	| ARCCSC   # ARCCSC
+	| ARCSEC   # ARCSEC
+	| ARCCOT   # ARCCOT
+	| SINH # SINH
+	| COSH # COSH
+	| TANH # TANH
+	| ARSINH   # ARSINH
+	| ARCOSH   # ARCOSH
+	| ARTANH  # ARTANH
     ;
 
 func:
 	func_normal (subexpr? supexpr? | supexpr? subexpr?) (
-		L_PAREN func_arg R_PAREN
+		LP func_arg RP 
 		| func_arg_noparens
 	)
 	| (LETTER | SYMBOL) (subexpr? SINGLE_QUOTES? | SINGLE_QUOTES? subexpr?) // e.g. f(x), f_1'(x)
-	L_PAREN args R_PAREN
+	LP args RP 
 	| FUNC_INT (subexpr supexpr | supexpr subexpr)? (
 		additive? DIFFERENTIAL
 		| frac
 		| additive
 	)
-	| FUNC_SQRT (L_BRACKET root = expr R_BRACKET)? L_BRACE base = expr R_BRACE
-	| FUNC_OVERLINE L_BRACE base = expr R_BRACE
+	| FUNC_SQRT (L_BRK root = additive R_BRK)? L_BRC base = additive R_BRC
+	| FUNC_OVERLINE L_BRC base = additive R_BRC
 	| (FUNC_SUM | FUNC_PROD) (subeq supexpr | supexpr subeq) mp
-	| FUNC_LIM limit_sub mp;
+	| LIM limit_sub mp;
 
-args: (expr ',' args) | expr;
+args: (additive ',' args) | additive;
 
 limit_sub:
-	UNDERSCORE L_BRACE (LETTER | SYMBOL) LIM_APPROACH_SYM expr (
-		CARET ((L_BRACE (ADD | SUB) R_BRACE) | ADD | SUB)
-	)? R_BRACE;
+	UNDERSCORE L_BRC (LETTER | SYMBOL) LIM_APPROACH_SYM additive (
+		CARET ((L_BRC (ADD | SUB) R_BRC) | ADD | SUB)
+	)? R_BRC;
 
-func_arg: expr | (expr ',' func_arg);
+func_arg: additive | (additive ',' func_arg);
 func_arg_noparens: mp_nofunc;
 
-subexpr: UNDERSCORE (atom | L_BRACE expr R_BRACE);
-supexpr: CARET (atom | L_BRACE expr R_BRACE);
+subexpr: UNDERSCORE (atom | L_BRC additive R_BRC);
+supexpr: CARET (atom | L_BRC additive R_BRC);
 
-subeq: UNDERSCORE L_BRACE equality R_BRACE;
-supeq: CARET L_BRACE equality R_BRACE;
+subeq: UNDERSCORE L_BRC equality R_BRC;
+supeq: CARET L_BRC equality R_BRC;

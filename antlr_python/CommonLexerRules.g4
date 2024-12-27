@@ -33,14 +33,15 @@ SUB: '-';
 MUL: '*';
 DIV: '/';
 
-L_PAREN: '(';
-R_PAREN: ')';
-L_BRACE: '{';
-R_BRACE: '}';
+LP: '(';
+RP: ')';
+L_BRC: '{';
+R_BRC: '}';
+L_BRK: '[';
+R_BRK: ']';
+
 L_BRACE_LITERAL: '\\{';
 R_BRACE_LITERAL: '\\}';
-L_BRACKET: '[';
-R_BRACKET: ']';
 
 BAR: '|';
 
@@ -49,7 +50,7 @@ L_BAR: '\\left|';
 
 L_ANGLE: '\\langle';
 R_ANGLE: '\\rangle';
-FUNC_LIM: '\\lim';
+LIM: '\\lim';
 LIM_APPROACH_SYM:
 	'\\to'
 	| '\\rightarrow'
@@ -62,30 +63,30 @@ FUNC_INT:
 FUNC_SUM: '\\sum';
 FUNC_PROD: '\\prod';
 
-FUNC_EXP: '\\exp';
-FUNC_LOG: '\\log';
-FUNC_LG: '\\lg';
-FUNC_LN: '\\ln';
-FUNC_SIN: '\\sin';
-FUNC_COS: '\\cos';
-FUNC_TAN: '\\tan';
-FUNC_CSC: '\\csc';
-FUNC_SEC: '\\sec';
-FUNC_COT: '\\cot';
+EXP: '\\exp';
+LOG: '\\log';
+LG: '\\lg';
+LN: '\\ln';
+SIN: '\\sin';
+COS: '\\cos';
+TAN: '\\tan';
+CSC: '\\csc';
+SEC: '\\sec';
+COT: '\\cot';
 
-FUNC_ARCSIN: '\\arcsin';
-FUNC_ARCCOS: '\\arccos';
-FUNC_ARCTAN: '\\arctan';
-FUNC_ARCCSC: '\\arccsc';
-FUNC_ARCSEC: '\\arcsec';
-FUNC_ARCCOT: '\\arccot';
+ARCSIN: '\\arcsin';
+ARCCOS: '\\arccos';
+ARCTAN: '\\arctan';
+ARCCSC: '\\arccsc';
+ARCSEC: '\\arcsec';
+ARCCOT: '\\arccot';
 
-FUNC_SINH: '\\sinh';
-FUNC_COSH: '\\cosh';
-FUNC_TANH: '\\tanh';
-FUNC_ARSINH: '\\arsinh';
-FUNC_ARCOSH: '\\arcosh';
-FUNC_ARTANH: '\\artanh';
+SINH: '\\sinh';
+COSH: '\\cosh';
+TANH: '\\tanh';
+ARSINH: '\\arsinh';
+ARCOSH: '\\arcosh';
+ARTANH: '\\artanh';
 
 L_FLOOR: '\\lfloor';
 R_FLOOR: '\\rfloor';
