@@ -20,8 +20,26 @@ class SympyEmitter(LaTeXListener):
     def exitMath(self, ctx):
         return self.setSympy("exitMath", ctx.getText())
 
-    def exitRelation(self, ctx):
-        return self.setSympy("exitRelation", ctx.getText())
+    def exitRelation_NEQ_relation(self, ctx):
+        return self.setSympy("exitRelation_NEQ_relation", ctx.getText())
+
+    def exitRelation_EQUAL_relation(self, ctx):
+        return self.setSympy("exitRelation_EQUAL_relation", ctx.getText())
+
+    def exitRelation_LT_relation(self, ctx):
+        return self.setSympy("exitRelation_LT_relation", ctx.getText())
+
+    def exitRelation_GT_relation(self, ctx):
+        return self.setSympy("exitRelation_GT_relation", ctx.getText())
+
+    def exitRelation_expr(self, ctx):
+        return self.setSympy("exitRelation_expr", ctx.getText())
+
+    def exitRelation_LTE_relation(self, ctx):
+        return self.setSympy("exitRelation_LTE_relation", ctx.getText())
+
+    def exitRelation_GTE_relation(self, ctx):
+        return self.setSympy("exitRelation_GTE_relation", ctx.getText())
 
     def exitEquality(self, ctx):
         return self.setSympy("exitEquality", ctx.getText())
@@ -29,8 +47,14 @@ class SympyEmitter(LaTeXListener):
     def exitExpr(self, ctx):
         return self.setSympy("exitExpr", ctx.getText())
 
-    def exitAdditive(self, ctx):
-        return self.setSympy("exitAdditive", ctx.getText())
+    def exitAdditive_add_additive(self, ctx):
+        return self.setSympy("exitAdditive_add_additive", ctx.getText())
+
+    def exitAdditive_sub_additive(self, ctx):
+        return self.setSympy("exitAdditive_sub_additive", ctx.getText())
+
+    def exitAdditive_mp(self, ctx):
+        return self.setSympy("exitAdditive_mp", ctx.getText())
 
     def exitMp(self, ctx):
         return self.setSympy("exitMp", ctx.getText())
