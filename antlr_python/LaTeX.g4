@@ -189,4 +189,3 @@ subexpr: UNDERSCORE (atom | L_BRC additive R_BRC);
 supexpr: CARET (atom | L_BRC additive R_BRC);
 
 subeq: UNDERSCORE L_BRC equality R_BRC;
-supeq: CARET L_BRC equality R_BRC;
