@@ -255,28 +255,29 @@ floor: L_FLOOR val = expr R_FLOOR;
 ceil: L_CEIL val = expr R_CEIL;
 
 func_normal:
-	FUNC_EXP
-	| FUNC_LOG
-	| FUNC_LG
-	| FUNC_LN
-	| FUNC_SIN
-	| FUNC_COS
-	| FUNC_TAN
-	| FUNC_CSC
-	| FUNC_SEC
-	| FUNC_COT
-	| FUNC_ARCSIN
-	| FUNC_ARCCOS
-	| FUNC_ARCTAN
-	| FUNC_ARCCSC
-	| FUNC_ARCSEC
-	| FUNC_ARCCOT
-	| FUNC_SINH
-	| FUNC_COSH
-	| FUNC_TANH
-	| FUNC_ARSINH
-	| FUNC_ARCOSH
-	| FUNC_ARTANH;
+	FUNC_EXP # EXP 
+	| FUNC_LOG  # LOG
+	| FUNC_LG   # LG
+	| FUNC_LN   # LN
+	| FUNC_SIN  # SIN
+	| FUNC_COS  # COS
+	| FUNC_TAN  # TAN
+	| FUNC_CSC  # CSC
+	| FUNC_SEC  # SEC
+	| FUNC_COT  # COT
+	| FUNC_ARCSIN   # ARCSIN
+	| FUNC_ARCCOS   # ARCCOS
+	| FUNC_ARCTAN   # ARCTAN
+	| FUNC_ARCCSC   # ARCCSC
+	| FUNC_ARCSEC   # ARCSEC
+	| FUNC_ARCCOT   # ARCCOT
+	| FUNC_SINH # SINH
+	| FUNC_COSH # COSH
+	| FUNC_TANH # TANH
+	| FUNC_ARSINH   # ARSINH
+	| FUNC_ARCOSH   # ARCOSH
+	| FUNC_ARTANH  # ARTANH
+    ;
 
 func:
 	func_normal (subexpr? supexpr? | supexpr? subexpr?) (

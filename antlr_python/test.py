@@ -110,8 +110,71 @@ class SympyEmitter(LaTeXListener):
     def exitCeil(self, ctx):
         return self.setSympy("exitCeil", ctx.getText())
 
-    def exitFunc_normal(self, ctx):
-        return self.setSympy("exitFunc_normal", ctx.getText())
+    def exitTAN(self, ctx):
+        return self.setSympy("exitTAN", ctx.getText())
+
+    def exitTANH(self, ctx):
+        return self.setSympy("exitTANH", ctx.getText())
+
+    def exitARCTAN(self, ctx):
+        return self.setSympy("exitARCTAN", ctx.getText())
+
+    def exitLN(self, ctx):
+        return self.setSympy("exitLN", ctx.getText())
+
+    def exitLOG(self, ctx):
+        return self.setSympy("exitLOG", ctx.getText())
+
+    def exitCOS(self, ctx):
+        return self.setSympy("exitCOS", ctx.getText())
+
+    def exitARCSIN(self, ctx):
+        return self.setSympy("exitARCSIN", ctx.getText())
+
+    def exitCOT(self, ctx):
+        return self.setSympy("exitCOT", ctx.getText())
+
+    def exitARTANH(self, ctx):
+        return self.setSympy("exitARTANH", ctx.getText())
+
+    def exitARCCSC(self, ctx):
+        return self.setSympy("exitARCCSC", ctx.getText())
+
+    def exitSEC(self, ctx):
+        return self.setSympy("exitSEC", ctx.getText())
+
+    def exitARCSEC(self, ctx):
+        return self.setSympy("exitARCSEC", ctx.getText())
+
+    def exitCSC(self, ctx):
+        return self.setSympy("exitCSC", ctx.getText())
+
+    def exitARSINH(self, ctx):
+        return self.setSympy("exitARSINH", ctx.getText())
+
+    def exitSINH(self, ctx):
+        return self.setSympy("exitSINH", ctx.getText())
+
+    def exitARCCOT(self, ctx):
+        return self.setSympy("exitARCCOT", ctx.getText())
+
+    def exitSIN(self, ctx):
+        return self.setSympy("exitSIN", ctx.getText())
+
+    def exitLG(self, ctx):
+        return self.setSympy("exitLG", ctx.getText())
+
+    def exitARCCOS(self, ctx):
+        return self.setSympy("exitARCCOS", ctx.getText())
+
+    def exitEXP(self, ctx):
+        return self.setSympy("exitEXP", ctx.getText())
+
+    def exitARCOSH(self, ctx):
+        return self.setSympy("exitARCOSH", ctx.getText())
+
+    def exitCOSH(self, ctx):
+        return self.setSympy("exitCOSH", ctx.getText())
 
     def exitFunc(self, ctx):
         return self.setSympy("exitFunc", ctx.getText())
