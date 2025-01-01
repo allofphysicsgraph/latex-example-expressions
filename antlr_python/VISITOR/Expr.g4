@@ -9,11 +9,13 @@ stat:  	expr NEWLINE
 	;
 
 expr: 
-	expr op=('*' | '/') expr # mul_div
+	<assoc=right> expr '^' expr # expo
+	| expr op=('*' | '/') expr # mul_div
 	| expr op=('+' | '-') expr # add_sub
 	| op=('+'|'-') expr # pm_expr
 	| INT # integer
 	| VAR # var
+	| INT VAR # integer_var
 	| '(' expr ')' # parens 
 	
 	;
