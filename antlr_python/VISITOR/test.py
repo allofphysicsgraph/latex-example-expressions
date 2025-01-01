@@ -65,6 +65,15 @@ class Calc(ExprVisitor):
         self.output.append(resp)
         return resp
 
+    def visitEquation(self, ctx):
+        print("equals")
+        lhs = self.visit(ctx.expr(0))
+        rhs = self.visit(ctx.expr(1))
+        resp = sympy.Eq(lhs, rhs, evaluate=False)
+        print(resp)
+        self.output.append(resp)
+        return resp
+
 
 input_stream = FileStream(argv[1])
 lexer = ExprLexer(input_stream)

@@ -3,7 +3,8 @@ grammar Expr;
 prog :  stat+
 	;
 
-stat:  expr NEWLINE
+stat:  	expr NEWLINE
+	| equation NEWLINE
 	| NEWLINE
 	;
 
@@ -14,8 +15,13 @@ expr:
 	| INT # integer
 	| VAR # var
 	| '(' expr ')' # parens 
+	
 	;
 
+equation: lhs=expr equals=EQUALS rhs=expr;
+
+
+EQUALS : '=' ; 
 INT : 	'0' | [1-9][0-9]*;
 VAR : 'x';
 
