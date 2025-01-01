@@ -18,8 +18,13 @@ expr:
 	
 	;
 
-equation: lhs=expr equals=EQUALS rhs=expr;
+equation: lhs=expr equals=EQUALS rhs=expr
+	| BEGIN_EQ NEWLINE? equation NEWLINE? END_EQ
+	;
 
+
+BEGIN_EQ: '\\begin{equation}' -> skip;
+END_EQ: '\\end{equation}' -> skip;
 
 EQUALS : '=' ; 
 INT : 	'0' | [1-9][0-9]*;
