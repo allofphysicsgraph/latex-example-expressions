@@ -74,6 +74,24 @@ class Calc(ExprVisitor):
         self.output.append(resp)
         return resp
 
+    def visitExpo(self, ctx):
+        print("expo")
+        lhs = self.visit(ctx.expr(0))
+        rhs = self.visit(ctx.expr(1))
+        resp = sympy.Pow(lhs, rhs, evaluate=False)
+        print(resp)
+        self.output.append(resp)
+        return resp
+
+    def visitInteger_var(self, ctx):
+        print("Integer_var")
+        lhs = int(ctx.INT().getText())
+        rhs = sympy.Symbol(ctx.VAR().getText())
+        resp = sympy.Mul(lhs, rhs, evaluate=False)
+        print(resp)
+        self.output.append(resp)
+        return resp
+
 
 input_stream = FileStream(argv[1])
 lexer = ExprLexer(input_stream)
