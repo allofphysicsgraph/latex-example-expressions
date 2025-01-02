@@ -162,6 +162,16 @@ class Calc(ExprVisitor):
         print(resp)
         return resp
 
+    def visitVar_var(self, ctx):
+        # set_trace()
+        lhs = sympy.Symbol(ctx.VAR(0).getText())
+        rhs = sympy.Symbol(ctx.VAR(1).getText())
+        resp = sympy.Mul(lhs, rhs, evaluate=False)
+
+        self.output.append(resp)
+        print(resp)
+        return resp
+
 
 input_stream = FileStream(argv[1])
 lexer = ExprLexer(input_stream)

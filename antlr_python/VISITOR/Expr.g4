@@ -17,10 +17,13 @@ expr:
 	| op=('+'|'-') expr # pm_expr
 	| INT # integer
 	| VAR # var
+    | VAR VAR # var_var
 	| INT VAR # integer_var
 	| '(' expr ')' # parens 
 	| '(' expr ')' '(' expr ')' # parens_parens
-	| fraction # frac
+    | '(' expr ')' VAR # parens_var
+    | VAR '(' expr ')' # var_parens 
+    | fraction # frac
     | '{' expr '}' # braces
     ;
 
