@@ -1,5 +1,5 @@
 # antlr4 -no-listener -visitor Expr.g4 -Dlanguage=Python3
-# python test.py test_file
+
 """
 (prog (stat (expr (expr (expr (expr (expr 1) + (expr 3)) + (expr 1)) + (expr x)) + (expr (expr 2) * (expr 3))) \n))
 add_sub
@@ -192,6 +192,47 @@ class Calc(ExprVisitor):
         var = sympy.Symbol(ctx.v.text)
         resp = sympy.Integral(expr, var)
         print(resp)
+
+    def visitLg(self, ctx: ExprParser.LgContext):
+        # set_trace()
+        expr = self.visit(ctx.e)
+        resp = sympy.log(expr, 10)
+        self.output.append(resp)
+        print(resp)
+        return resp
+
+    def visitLn(self, ctx: ExprParser.LnContext):
+        # set_trace()
+        from sympy.core.numbers import E
+
+        expr = self.visit(ctx.e)
+        resp = sympy.log(expr, E)
+        self.output.append(resp)
+        print(resp)
+        return resp
+
+    def visitExp(self, ctx: ExprParser.ExpContext):
+        # set_trace()
+        expr = self.visit(ctx.e)
+        resp = sympy.exp(expr)
+        self.output.append(resp)
+        print(resp)
+        return resp
+
+    def visitSum(self, ctx: ExprParser.SumContext):
+        if ctx.e0:
+            expr = self.visit(ctx.e0)
+
+        if ctx.eq0:
+            expr = self.visit(ctx.eq0)
+            var = expr.args[0]
+            start_index = expr.args[1]
+            # set_trace()
+        expr1 = self.visit(ctx.e1)
+        expr2 = self.visit(ctx.e2)
+        resp = sympy.Sum(expr2, (var, start_index, expr1))
+        print(resp)
+        # print(expr,expr1,expr2)
 
 
 input_stream = FileStream(argv[1])
