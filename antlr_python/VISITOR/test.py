@@ -42,10 +42,12 @@ class Calc(ExprVisitor):
         rhs = self.visit(ctx.expr(1))
         if ctx.op.text == "*":
             resp = sympy.Mul(lhs, rhs, evaluate=False)
+        if ctx.op.text == "\\cdot":
+            resp = sympy.Mul(lhs, rhs, evaluate=False)
         if ctx.op.text == "\\times":
             resp = sympy.Mul(lhs, rhs, evaluate=False)
         if ctx.op.text == "/":
-            resp = sympy.Mul(sympy.Pow(lhs, rhs, -1, evaluate=False), evaluate=False)
+            resp = sympy.Mul(lhs,sympy.Pow(rhs, -1, evaluate=False), evaluate=False)
         self.output.append(resp)
         return resp
 

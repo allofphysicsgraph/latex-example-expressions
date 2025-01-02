@@ -6,12 +6,13 @@ prog :  stat+
 stat:  	expr NEWLINE
 	| equation NEWLINE
     | factorial NEWLINE
+    | factorial factorial NEWLINE
     | NEWLINE
 	;
 
 expr: 
 	<assoc=right> expr '^' expr # expo
-	| expr op=('*' | '/'|'\\times') expr # mul_div
+	| expr op=('*' | '/'|'\\times'|'\\cdot') expr # mul_div
 	| expr op=('+' | '-') expr # add_sub
 	| op=('+'|'-') expr # pm_expr
 	| INT # integer
@@ -20,6 +21,7 @@ expr:
 	| '(' expr ')' # parens 
 	| '(' expr ')' '(' expr ')' # parens_parens
 	| fraction # frac
+    | '{' expr '}' # braces
     ;
 
 
@@ -56,14 +58,12 @@ relop:
 
 
 
-
-
 BEGIN_EQ: '\\begin{equation}' -> skip;
 END_EQ: '\\end{equation}' -> skip;
 
 EQUALS : '=' ; 
 INT : 	'0' | [1-9][0-9]*;
-VAR : 'x';
+VAR : 'x'|'a'|'b';
 
 NEWLINE : '\n';
 
