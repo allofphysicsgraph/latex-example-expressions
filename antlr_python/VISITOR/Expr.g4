@@ -12,7 +12,7 @@ stat:  	expr NEWLINE
 
 expr: 
 	<assoc=right> expr '^' expr # expo
-	| expr op=('*' | '/'|'\\times'|'\\cdot') expr # mul_div
+	| expr op=('*' | '/'|'\\times'|'\\cdot'|'\\div') expr # mul_div
 	| expr op=('+' | '-') expr # add_sub
 	| op=('+'|'-') expr # pm_expr
 	| INT # integer
@@ -63,7 +63,7 @@ END_EQ: '\\end{equation}' -> skip;
 
 EQUALS : '=' ; 
 INT : 	'0' | [1-9][0-9]*;
-VAR : 'x'|'a'|'b';
+VAR : 'x'|'y'|'z'|'a'|'b'|'c'|'\\theta';
 
 NEWLINE : '\n';
 
