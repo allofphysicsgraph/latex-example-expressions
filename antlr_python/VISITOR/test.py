@@ -66,8 +66,14 @@ class Calc(ExprVisitor):
         print(resp)
         return resp
 
-    def visitVar(self, ctx):
+    def visitSymbol(self, ctx):
         print("symbol")
+        resp = sympy.Symbol(ctx.getText())
+        self.output.append(resp)
+        return resp
+
+    def visitVar(self, ctx):
+        print("Var")
         resp = sympy.Symbol(ctx.VAR().getText())
         self.output.append(resp)
         return resp

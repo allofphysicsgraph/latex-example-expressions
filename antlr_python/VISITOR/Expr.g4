@@ -36,6 +36,7 @@ expr:
     | VAR '(' expr ')' # var_parens 
 	| VAR # var
     | VAR VAR # var_var
+    | symbol # symbl
     ;
 
 integral:
@@ -75,6 +76,10 @@ atom:
     | FLOAT
     ;
 
+FLOAT:
+    INT ('.' [0-9]+)
+    ;
+
 sum:
     '\\sum' '_' '{' (e0=expr|eq0=equation) '}' '^' '{' e1=expr '}' e2=expr;
 
@@ -111,15 +116,19 @@ relop:
     '>'
     ;    
 
-
-
-
 BEGIN_EQ: '\\begin{equation}' -> skip;
 END_EQ: '\\end{equation}' -> skip;
 
 EQUALS : '=' ; 
 INT : 	'0' | [1-9][0-9]*;
-VAR : 'x'|'y'|'z'|'a'|'b'|'c'|'k'|'\\theta';
+VAR : 'x'|'y'|'z'|'a'|'b'|'c'|'h'|'k'|'\\theta';
+
+symbol:
+    VAR '_' '{' VAR '}'
+    | VAR '_' INT
+    | VAR '_' '{' INT '}'
+    | VAR '_' VAR
+    ;
 
 NEWLINE : '\n';
 
