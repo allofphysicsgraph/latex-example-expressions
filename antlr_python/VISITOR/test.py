@@ -124,6 +124,14 @@ class Calc(ExprVisitor):
         self.output.append(resp)
         return resp
 
+    def visitBinom(self, ctx):
+        lhs = self.visit(ctx.binomial().numerator())
+        rhs = self.visit(ctx.binomial().denominator())
+        resp = sympy.binomial(lhs, rhs, evaluate=False)
+        self.output.append(resp)
+        print(resp)
+        return resp
+
     def visitFrac(self, ctx):
         lhs = self.visit(ctx.fraction().numerator())
         rhs = self.visit(ctx.fraction().denominator())
@@ -178,6 +186,12 @@ class Calc(ExprVisitor):
         self.output.append(resp)
         print(resp)
         return resp
+
+    def visitIntegral(self, ctx):
+        expr = self.visit(ctx.expr())
+        var = sympy.Symbol(ctx.v.text)
+        resp = sympy.Integral(expr, var)
+        print(resp)
 
 
 input_stream = FileStream(argv[1])
