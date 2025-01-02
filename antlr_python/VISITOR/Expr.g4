@@ -10,7 +10,7 @@ stat:  	expr NEWLINE
 
 expr: 
 	<assoc=right> expr '^' expr # expo
-	| expr op=('*' | '/') expr # mul_div
+	| expr op=('*' | '/'|'\\times') expr # mul_div
 	| expr op=('+' | '-') expr # add_sub
 	| op=('+'|'-') expr # pm_expr
 	| INT # integer
