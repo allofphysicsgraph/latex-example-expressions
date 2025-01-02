@@ -14,6 +14,8 @@ stat:  	expr NEWLINE
     | exp NEWLINE
     | sum NEWLINE
     | sin NEWLINE
+    | floor NEWLINE
+    | ceiling NEWLINE
     | NEWLINE
 	;
 
@@ -70,6 +72,7 @@ sin:
 atom:
     VAR
     | INT
+    | FLOAT
     ;
 
 sum:

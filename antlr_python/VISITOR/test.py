@@ -258,7 +258,21 @@ class Calc(ExprVisitor):
             e1 = self.visit(ctx.e1)
         e2 = self.visit(ctx.e2)
         resp = sympy.log(e2, e1)
+        self.output.append(resp)
         print(resp)
+        return resp
+
+    def visitFloor(self, ctx: ExprParser.FloorContext):
+        resp = self.visit(ctx.expr())
+        self.output.append(resp)
+        print(resp)
+        return sympy.floor(resp, evaluate=False)
+
+    def visitCeiling(self, ctx: ExprParser.CeilingContext):
+        resp = self.visit(ctx.expr())
+        self.output.append(resp)
+        print(resp)
+        return sympy.ceiling(resp, evaluate=False)
 
 
 input_stream = FileStream(argv[1])
