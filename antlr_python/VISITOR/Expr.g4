@@ -18,7 +18,8 @@ expr:
 	| INT # integer
 	| VAR # var
     | VAR VAR # var_var
-	| INT VAR # integer_var
+	| '|' expr '|' # abs_expr
+    | INT VAR # integer_var
 	| '(' expr ')' # parens 
 	| '(' expr ')' '(' expr ')' # parens_parens
     | '(' expr ')' VAR # parens_var
