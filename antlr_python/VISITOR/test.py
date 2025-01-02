@@ -47,7 +47,9 @@ class Calc(ExprVisitor):
         if ctx.op.text == "\\times":
             resp = sympy.Mul(lhs, rhs, evaluate=False)
         if ctx.op.text == "/":
-            resp = sympy.Mul(lhs,sympy.Pow(rhs, -1, evaluate=False), evaluate=False)
+            resp = sympy.Mul(lhs, sympy.Pow(rhs, -1, evaluate=False), evaluate=False)
+        if ctx.op.text == "\\div":
+            resp = sympy.Mul(lhs, sympy.Pow(rhs, -1, evaluate=False), evaluate=False)
         self.output.append(resp)
         return resp
 
@@ -131,20 +133,35 @@ class Calc(ExprVisitor):
         return resp
 
     def visitParens_parens(self, ctx):
+        # set_trace()
         lhs = self.visit(ctx.expr(0))
         rhs = self.visit(ctx.expr(1))
-        resp = sympy.Mul(lhs,rhs,evaluate=False)
+        resp = sympy.Mul(lhs, rhs, evaluate=False)
         self.output.append(resp)
         print(resp)
         return resp
+
+    def visitParens(self, ctx):
+        resp = self.visit(ctx.expr())
+        self.output.append(resp)
+        print(resp)
+        return resp
+
+    def visitBraces(self, ctx):
+        resp = self.visit(ctx.expr())
+        self.output.append(resp)
+        print(resp)
+        return resp
+
     def visitFactorial(self, ctx):
-        #set_trace()
+        # set_trace()
         resp = self.visit(ctx.expr())
         print(resp)
-        resp = sympy.factorial(resp,evaluate=False)
+        resp = sympy.factorial(resp, evaluate=False)
         self.output.append(resp)
         print(resp)
         return resp
+
 
 input_stream = FileStream(argv[1])
 lexer = ExprLexer(input_stream)
