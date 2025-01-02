@@ -8,6 +8,7 @@ stat:  	expr NEWLINE
     | factorial NEWLINE
     | factorial factorial NEWLINE
     | integral NEWLINE
+    | lg NEWLINE
     | NEWLINE
 	;
 
@@ -37,6 +38,9 @@ factorial:
     expr '!'
     ;
 
+lg:
+    '\\lg' e=expr ;
+
 
 binomial:
     '\\binom' numerator denominator
@@ -46,6 +50,8 @@ binomial:
 
 fraction:
     '\\frac' numerator denominator
+    |'\\dfrac' numerator denominator
+    |'\\tfrac' numerator denominator
     ;
 
 numerator:
