@@ -15,17 +15,18 @@ expr:
 	| expr op=('*' | '/'|'\\times'|'\\cdot'|'\\div') expr # mul_div
 	| expr op=('+' | '-') expr # add_sub
 	| op=('+'|'-') expr # pm_expr
+	| '|' expr '|' # abs_expr
+    | '{' expr '}' # braces
+	| '(' expr ')' '(' expr ')' # parens_parens
+	| '(' expr ')' # parens 
+    | '(' expr ')' VAR # parens_var
+    | binomial # binom
+    | fraction # frac
 	| INT # integer
+    | INT VAR # integer_var
+    | VAR '(' expr ')' # var_parens 
 	| VAR # var
     | VAR VAR # var_var
-	| '|' expr '|' # abs_expr
-    | INT VAR # integer_var
-	| '(' expr ')' # parens 
-	| '(' expr ')' '(' expr ')' # parens_parens
-    | '(' expr ')' VAR # parens_var
-    | VAR '(' expr ')' # var_parens 
-    | fraction # frac
-    | '{' expr '}' # braces
     ;
 
 
@@ -33,6 +34,12 @@ factorial:
     expr '!'
     ;
 
+
+binomial:
+    '\\binom' numerator denominator
+    |'\\tbinom' numerator denominator
+    |'\\dbinom' numerator denominator
+    ;
 
 fraction:
     '\\frac' numerator denominator
