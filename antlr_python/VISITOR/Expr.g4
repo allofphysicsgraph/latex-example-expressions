@@ -8,6 +8,7 @@ stat:  	expr NEWLINE
     | factorial NEWLINE
     | factorial factorial NEWLINE
     | integral NEWLINE
+    | log NEWLINE
     | lg NEWLINE
     | ln NEWLINE
     | exp NEWLINE
@@ -42,6 +43,10 @@ factorial:
     expr '!'
     ;
 
+log:
+    '\\log' '_' '{' e1=expr '}' e2=expr
+    | '\\log' '_' a1=atom e2=expr
+    ;
 lg:
     '\\lg' e=expr ;
 

@@ -247,6 +247,19 @@ class Calc(ExprVisitor):
         print(resp)
         # print(expr,expr1,expr2)
 
+    def visitLog(self, ctx: ExprParser.LogContext):
+
+        if ctx.atom():
+            if ctx.atom().INT():
+                e1 = int(ctx.atom().INT().getText())
+            if ctx.atom().VAR():
+                e1 = sympy.Symbol(ctx.atom().VAR().getText())
+        else:
+            e1 = self.visit(ctx.e1)
+        e2 = self.visit(ctx.e2)
+        resp = sympy.log(e2, e1)
+        print(resp)
+
 
 input_stream = FileStream(argv[1])
 lexer = ExprLexer(input_stream)
