@@ -11,6 +11,7 @@ stat:  	expr NEWLINE
     | lg NEWLINE
     | ln NEWLINE
     | exp NEWLINE
+    | sum NEWLINE
     | NEWLINE
 	;
 
@@ -49,7 +50,8 @@ exp:
 ln:
     '\\ln' e=expr;
 
-
+sum:
+    '\\sum' '_' '{' (e0=expr|eq0=equation) '}' '^' '{' e1=expr '}' e2=expr;
 
 binomial:
     '\\binom' numerator denominator
@@ -92,7 +94,7 @@ END_EQ: '\\end{equation}' -> skip;
 
 EQUALS : '=' ; 
 INT : 	'0' | [1-9][0-9]*;
-VAR : 'x'|'y'|'z'|'a'|'b'|'c'|'\\theta';
+VAR : 'x'|'y'|'z'|'a'|'b'|'c'|'k'|'\\theta';
 
 NEWLINE : '\n';
 
