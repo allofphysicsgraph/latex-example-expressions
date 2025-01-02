@@ -12,6 +12,7 @@ stat:  	expr NEWLINE
     | ln NEWLINE
     | exp NEWLINE
     | sum NEWLINE
+    | sin NEWLINE
     | NEWLINE
 	;
 
@@ -49,6 +50,22 @@ exp:
 
 ln:
     '\\ln' e=expr;
+
+floor:
+    '\\lfloor' e=expr '\\rfloor';
+
+ceiling:
+    '\\lceil' e=expr '\\rceil';
+
+sin:
+    '\\sin' atom 
+    | '\\sin' '(' expr ')' 
+    ;
+
+atom:
+    VAR
+    | INT
+    ;
 
 sum:
     '\\sum' '_' '{' (e0=expr|eq0=equation) '}' '^' '{' e1=expr '}' e2=expr;

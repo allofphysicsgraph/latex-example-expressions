@@ -211,6 +211,19 @@ class Calc(ExprVisitor):
         print(resp)
         return resp
 
+    def visitSin(self, ctx: ExprParser.SinContext):
+        if ctx.atom():
+            var = ctx.atom().VAR().getText()
+            symbol = sympy.Symbol(var)
+            resp = sympy.sin(symbol)
+        if ctx.expr():
+            expr = self.visit(ctx.expr())
+            resp = sympy.sin(expr)
+
+        self.output.append(resp)
+        print(resp)
+        return resp
+
     def visitExp(self, ctx: ExprParser.ExpContext):
         # set_trace()
         expr = self.visit(ctx.e)
