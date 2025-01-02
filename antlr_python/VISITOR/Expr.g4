@@ -9,6 +9,8 @@ stat:  	expr NEWLINE
     | factorial factorial NEWLINE
     | integral NEWLINE
     | lg NEWLINE
+    | ln NEWLINE
+    | exp NEWLINE
     | NEWLINE
 	;
 
@@ -40,6 +42,13 @@ factorial:
 
 lg:
     '\\lg' e=expr ;
+
+exp:
+    '\\exp' e=expr;
+
+ln:
+    '\\ln' e=expr;
+
 
 
 binomial:
