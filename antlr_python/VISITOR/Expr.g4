@@ -37,7 +37,13 @@ expr:
 	| VAR # var
     | VAR VAR # var_var
     | symbol # symbl
-    ;
+    | function # fnctn
+;
+
+
+function:
+    'f' '(' VAR (',' VAR)* ')';
+
 
 integral:
     '\\int' e=expr 'd' v=VAR;
