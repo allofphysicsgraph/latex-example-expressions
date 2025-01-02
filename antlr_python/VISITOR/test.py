@@ -59,6 +59,7 @@ class Calc(ExprVisitor):
         if ctx.op.text == "-":
             resp = sympy.Add(lhs, -1 * rhs, evaluate=False)
         self.output.append(resp)
+        print(resp)
         return resp
 
     def visitVar(self, ctx):
@@ -127,6 +128,21 @@ class Calc(ExprVisitor):
         print(resp)
         return resp
 
+    def visitParens_parens(self, ctx):
+        lhs = self.visit(ctx.expr(0))
+        rhs = self.visit(ctx.expr(1))
+        resp = sympy.Mul(lhs,rhs,evaluate=False)
+        self.output.append(resp)
+        print(resp)
+        return resp
+    def visitFactorial(self, ctx):
+        #set_trace()
+        resp = self.visit(ctx.expr())
+        print(resp)
+        resp = sympy.factorial(resp,evaluate=False)
+        self.output.append(resp)
+        print(resp)
+        return resp
 
 input_stream = FileStream(argv[1])
 lexer = ExprLexer(input_stream)

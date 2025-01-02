@@ -5,7 +5,8 @@ prog :  stat+
 
 stat:  	expr NEWLINE
 	| equation NEWLINE
-	| NEWLINE
+    | factorial NEWLINE
+    | NEWLINE
 	;
 
 expr: 
@@ -17,8 +18,15 @@ expr:
 	| VAR # var
 	| INT VAR # integer_var
 	| '(' expr ')' # parens 
+	| '(' expr ')' '(' expr ')' # parens_parens
 	| fraction # frac
-	;
+    ;
+
+
+factorial:
+    expr '!'
+    ;
+
 
 fraction:
     '\\frac' numerator denominator
@@ -36,6 +44,18 @@ denominator:
 equation: lhs=expr equals=EQUALS rhs=expr
 	| BEGIN_EQ NEWLINE? equation NEWLINE? END_EQ
 	;
+
+relational:
+    expr relop expr
+    ;
+
+relop:
+    '>'
+    ;    
+
+
+
+
 
 
 BEGIN_EQ: '\\begin{equation}' -> skip;
