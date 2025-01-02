@@ -98,6 +98,18 @@ class Calc(ExprVisitor):
         self.output.append(resp)
         return resp
 
+    def visitNumerator_expr(self, ctx):
+        print("Numerator Expr")
+        resp = self.visit(ctx.expr())
+        self.output.append(resp)
+        return resp
+
+    def visitDenominator_expr(self, ctx):
+        print("Denominator Expr")
+        resp = self.visit(ctx.expr())
+        self.output.append(resp)
+        return resp
+
     def visitDenominator_integer(self, ctx):
         # set_trace()
         print("Denominator Int")
