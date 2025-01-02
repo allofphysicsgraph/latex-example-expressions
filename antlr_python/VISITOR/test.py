@@ -92,6 +92,27 @@ class Calc(ExprVisitor):
         self.output.append(resp)
         return resp
 
+    def visitNumerator_integer(self, ctx):
+        print("Numerator Int")
+        resp = int(ctx.getText())
+        self.output.append(resp)
+        return resp
+
+    def visitDenominator_integer(self, ctx):
+        # set_trace()
+        print("Denominator Int")
+        resp = int(ctx.getText())
+        self.output.append(resp)
+        return resp
+
+    def visitFrac(self, ctx):
+        lhs = self.visit(ctx.fraction().numerator())
+        rhs = self.visit(ctx.fraction().denominator())
+        resp = sympy.Mul(lhs, sympy.Pow(rhs, -1, evaluate=False), evaluate=False)
+        self.output.append(resp)
+        print(resp)
+        return resp
+
 
 input_stream = FileStream(argv[1])
 lexer = ExprLexer(input_stream)

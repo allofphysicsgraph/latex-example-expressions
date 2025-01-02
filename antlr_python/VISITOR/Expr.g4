@@ -17,8 +17,21 @@ expr:
 	| VAR # var
 	| INT VAR # integer_var
 	| '(' expr ')' # parens 
-	
+	| fraction # frac
 	;
+
+fraction:
+    '\\frac' numerator denominator
+    ;
+
+numerator:
+    INT # numerator_integer
+    |  '{' expr '}' # numerator_expr
+    ;
+denominator:
+    INT # denominator_integer
+    |  '{' expr '}' # denominator_expr
+    ;
 
 equation: lhs=expr equals=EQUALS rhs=expr
 	| BEGIN_EQ NEWLINE? equation NEWLINE? END_EQ
