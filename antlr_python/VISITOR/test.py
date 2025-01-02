@@ -141,6 +141,13 @@ class Calc(ExprVisitor):
         print(resp)
         return resp
 
+    def visitAbs_expr(self, ctx):
+        resp = self.visit(ctx.expr())
+        resp = sympy.Abs(resp, evaluate=False)
+        self.output.append(resp)
+        print(resp)
+        return resp
+
     def visitParens(self, ctx):
         resp = self.visit(ctx.expr())
         self.output.append(resp)
