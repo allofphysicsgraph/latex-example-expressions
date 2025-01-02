@@ -7,6 +7,7 @@ stat:  	expr NEWLINE
 	| equation NEWLINE
     | factorial NEWLINE
     | factorial factorial NEWLINE
+    | integral NEWLINE
     | NEWLINE
 	;
 
@@ -29,6 +30,8 @@ expr:
     | VAR VAR # var_var
     ;
 
+integral:
+    '\\int' e=expr 'd' v=VAR;
 
 factorial:
     expr '!'
