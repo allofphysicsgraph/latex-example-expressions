@@ -36,6 +36,28 @@ class Calc(ExprVisitor):
         self.output.append(resp)
         return resp
 
+    def visitExpr_relop_expr(self, ctx):
+        print("expr_relop_expr")
+        lhs = self.visit(ctx.expr(0))
+        rhs = self.visit(ctx.expr(1))
+        if ctx.op.text == "\\neq":
+            resp = sympy.Ne(lhs, rhs, evaluate=False)
+        if ctx.op.text == "<":
+            resp = sympy.Lt(lhs, rhs, evaluate=False)
+        if ctx.op.text == ">":
+            resp = sympy.Gt(lhs, rhs, evaluate=False)
+        if ctx.op.text == "\\le":
+            resp = sympy.Le(lhs, rhs, evaluate=False)
+        if ctx.op.text == "\\ge":
+            resp = sympy.Ge(lhs, rhs, evaluate=False)
+        if ctx.op.text == "\\leq":
+            resp = sympy.Le(lhs, rhs, evaluate=False)
+        if ctx.op.text == "\\geq":
+            resp = sympy.Ge(lhs, rhs, evaluate=False)
+        self.output.append(resp)
+        print(resp)
+        return resp
+
     def visitMul_div(self, ctx):
         print("mul_div")
         lhs = self.visit(ctx.expr(0))
@@ -219,6 +241,7 @@ class Calc(ExprVisitor):
 
     def visitSin(self, ctx: ExprParser.SinContext):
         if ctx.atom():
+            print(ctx.atom().getType())
             var = ctx.atom().VAR().getText()
             symbol = sympy.Symbol(var)
             resp = sympy.sin(symbol)
@@ -279,6 +302,13 @@ class Calc(ExprVisitor):
         self.output.append(resp)
         print(resp)
         return sympy.ceiling(resp, evaluate=False)
+
+    def visitFnctn(self, ctx: ExprParser.FunctionContext):
+
+        resp = ctx.getText()
+        self.output.append(resp)
+        print(resp)
+        return sympy.Function(resp, evaluate=False)
 
 
 input_stream = FileStream(argv[1])

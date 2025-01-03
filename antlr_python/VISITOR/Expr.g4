@@ -23,7 +23,8 @@ expr:
 	<assoc=right> expr '^' expr # expo
 	| expr op=('*' | '/'|'\\times'|'\\cdot'|'\\div') expr # mul_div
 	| expr op=('+' | '-') expr # add_sub
-	| op=('+'|'-') expr # pm_expr
+	| expr op=('>'|'<'|'\neq'|'\\leq'|'\\geq'|'\\le'|'\\ge')  expr # expr_relop_expr
+    | op=('+'|'-') expr # pm_expr
 	| '|' expr '|' # abs_expr
     | '{' expr '}' # braces
 	| '(' expr ')' '(' expr ')' # parens_parens
