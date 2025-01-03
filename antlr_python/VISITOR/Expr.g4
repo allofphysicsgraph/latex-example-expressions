@@ -16,6 +16,7 @@ stat:  	expr NEWLINE
     | sin NEWLINE
     | floor NEWLINE
     | ceiling NEWLINE
+    | vec NEWLINE
     | NEWLINE
 	;
 
@@ -41,6 +42,21 @@ expr:
     | function # fnctn
 ;
 
+hbar:
+    '\\hbar';
+
+langle:
+    '\\langle';
+
+psi:
+    '\\psi';
+vec: 
+    '\\vec' '{' expr '}';
+hat: 
+    '\\hat' '{' expr '}';
+
+IGNORE:
+    ('\\displaystyle'|'\\left'|'\\right'|'\\begin{align}'|'\\end{align}') -> skip;
 
 function:
     'f' '(' VAR (',' VAR)* ')';
@@ -128,7 +144,7 @@ END_EQ: '\\end{equation}' -> skip;
 
 EQUALS : '=' ; 
 INT : 	'0' | [1-9][0-9]*;
-VAR : 'x'|'y'|'z'|'a'|'b'|'c'|'h'|'k'|'\\theta';
+VAR : 'K'|'G'|'x'|'y'|'z'|'a'|'b'|'c'|'n'|'h'|'k'|'u'|'v'|'w'|'\\theta';
 
 symbol:
     VAR '_' '{' VAR '}'
