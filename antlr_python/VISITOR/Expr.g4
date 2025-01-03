@@ -144,7 +144,7 @@ END_EQ: '\\end{equation}' -> skip;
 
 EQUALS : '=' ; 
 INT : 	'0' | [1-9][0-9]*;
-VAR : 'K'|'G'|'x'|'y'|'z'|'a'|'b'|'c'|'n'|'h'|'k'|'u'|'v'|'w'|'\\theta';
+VAR : 'K'|'G'|'x'|'y'|'z'|'a'|'b'|'c'|'n'|'h'|'k'|'u'|'v'|'w'|'\\theta'| '\\alpha' | '\\beta';
 
 symbol:
     VAR '_' '{' VAR '}'

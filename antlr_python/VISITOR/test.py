@@ -24,6 +24,76 @@ import sympy
 from sys import argv
 from pudb import set_trace
 
+from sympy.testing.pytest import XFAIL
+from sympy.parsing.latex.lark import parse_latex_lark
+from sympy.external import import_module
+
+from sympy.concrete.products import Product
+from sympy.concrete.summations import Sum
+from sympy.core.function import Derivative, Function
+from sympy.core.numbers import E, oo, Rational
+from sympy.core.power import Pow
+from sympy.core.parameters import evaluate
+from sympy.core.relational import (
+    GreaterThan,
+    LessThan,
+    StrictGreaterThan,
+    StrictLessThan,
+    Unequality,
+)
+from sympy.core.symbol import Symbol
+from sympy.functions.combinatorial.factorials import binomial, factorial
+from sympy.functions.elementary.complexes import Abs, conjugate
+from sympy.functions.elementary.exponential import exp, log
+from sympy.functions.elementary.integers import ceiling, floor
+from sympy.functions.elementary.miscellaneous import root, sqrt, Min, Max
+from sympy.functions.elementary.trigonometric import asin, cos, csc, sec, sin, tan
+from sympy.integrals.integrals import Integral
+from sympy.series.limits import Limit
+from sympy import Matrix, MatAdd, MatMul, Transpose, Trace
+from sympy import I
+
+from sympy.core.relational import Eq, Ne, Lt, Le, Gt, Ge
+from sympy.physics.quantum import Bra, Ket, InnerProduct
+from sympy.abc import x, y, z, a, b, c, d, t, k, n
+
+
+def run_test(k):
+    print(k)
+    input_stream = InputStream(k)
+    lexer = ExprLexer(input_stream)
+    token_stream = CommonTokenStream(lexer)
+    token_stream.fill()
+    parser = ExprParser(token_stream)
+    tree = parser.prog()
+    print(tree.toStringTree(recog=parser))
+    calc = Calc()
+    calc.visit(tree)
+    print(calc.output)
+
+
+def _Min(*args):
+    return Min(*args, evaluate=False)
+
+
+def _Max(*args):
+    return Max(*args, evaluate=False)
+
+
+def _log(a, b=E):
+    if b == E:
+        return log(a, evaluate=False)
+    else:
+        return log(a, b, evaluate=False)
+
+
+def _MatAdd(a, b):
+    return MatAdd(a, b, evaluate=False)
+
+
+def _MatMul(a, b):
+    return MatMul(a, b, evaluate=False)
+
 
 class Calc(ExprVisitor):
     def __init__(self):
@@ -311,13 +381,133 @@ class Calc(ExprVisitor):
         return sympy.Function(resp, evaluate=False)
 
 
-input_stream = FileStream(argv[1])
-lexer = ExprLexer(input_stream)
-token_stream = CommonTokenStream(lexer)
-token_stream.fill()
-parser = ExprParser(token_stream)
-tree = parser.prog()
-print(tree.toStringTree(recog=parser))
-calc = Calc()
-calc.visit(tree)
-print(calc.output)
+# These LaTeX strings should parse to the corresponding SymPy expression
+SYMBOL_EXPRESSION_PAIRS = [
+    (r"x_0", Symbol("x_{0}")),
+    (r"x_{1}", Symbol("x_{1}")),
+    (r"x_a", Symbol("x_{a}")),
+    (r"x_{b}", Symbol("x_{b}")),
+    (r"h_\theta", Symbol("h_{theta}")),
+    (r"h_{\theta}", Symbol("h_{theta}")),
+    (r"y''_1", Symbol("y''_{1}")),
+    (r"y_1''", Symbol("y_{1}''")),
+    (r"\mathit{x}", Symbol("x")),
+    (r"\mathit{test}", Symbol("test")),
+    (r"\mathit{TEST}", Symbol("TEST")),
+    (r"\mathit{HELLO world}", Symbol("HELLO world")),
+    (r"a'", Symbol("a'")),
+    (r"a''", Symbol("a''")),
+    (r"\alpha'", Symbol("alpha'")),
+    (r"\alpha''", Symbol("alpha''")),
+    (r"a_b", Symbol("a_{b}")),
+    (r"a_b'", Symbol("a_{b}'")),
+    (r"a'_b", Symbol("a'_{b}")),
+    (r"a'_b'", Symbol("a'_{b}'")),
+    (r"a_{b'}", Symbol("a_{b'}")),
+    (r"a_{b'}'", Symbol("a_{b'}'")),
+    (r"a'_{b'}", Symbol("a'_{b'}")),
+    (r"a'_{b'}'", Symbol("a'_{b'}'")),
+    (r"\mathit{foo}'", Symbol("foo'")),
+    (r"\mathit{foo'}", Symbol("foo'")),
+    (r"\mathit{foo'}'", Symbol("foo''")),
+    (r"a_b''", Symbol("a_{b}''")),
+    (r"a''_b", Symbol("a''_{b}")),
+    (r"a''_b'''", Symbol("a''_{b}'''")),
+    (r"a_{b''}", Symbol("a_{b''}")),
+    (r"a_{b''}''", Symbol("a_{b''}''")),
+    (r"a''_{b''}", Symbol("a''_{b''}")),
+    (r"a''_{b''}'''", Symbol("a''_{b''}'''")),
+    (r"\mathit{foo}''", Symbol("foo''")),
+    (r"\mathit{foo''}", Symbol("foo''")),
+    (r"\mathit{foo''}'''", Symbol("foo'''''")),
+    (r"a_\alpha", Symbol("a_{alpha}")),
+    (r"a_\alpha'", Symbol("a_{alpha}'")),
+    (r"a'_\alpha", Symbol("a'_{alpha}")),
+    (r"a'_\alpha'", Symbol("a'_{alpha}'")),
+    (r"a_{\alpha'}", Symbol("a_{alpha'}")),
+    (r"a_{\alpha'}'", Symbol("a_{alpha'}'")),
+    (r"a'_{\alpha'}", Symbol("a'_{alpha'}")),
+    (r"a'_{\alpha'}'", Symbol("a'_{alpha'}'")),
+    (r"a_\alpha''", Symbol("a_{alpha}''")),
+    (r"a''_\alpha", Symbol("a''_{alpha}")),
+    (r"a''_\alpha'''", Symbol("a''_{alpha}'''")),
+    (r"a_{\alpha''}", Symbol("a_{alpha''}")),
+    (r"a_{\alpha''}''", Symbol("a_{alpha''}''")),
+    (r"a''_{\alpha''}", Symbol("a''_{alpha''}")),
+    (r"a''_{\alpha''}'''", Symbol("a''_{alpha''}'''")),
+    (r"\alpha_b", Symbol("alpha_{b}")),
+    (r"\alpha_b'", Symbol("alpha_{b}'")),
+    (r"\alpha'_b", Symbol("alpha'_{b}")),
+    (r"\alpha'_b'", Symbol("alpha'_{b}'")),
+    (r"\alpha_{b'}", Symbol("alpha_{b'}")),
+    (r"\alpha_{b'}'", Symbol("alpha_{b'}'")),
+    (r"\alpha'_{b'}", Symbol("alpha'_{b'}")),
+    (r"\alpha'_{b'}'", Symbol("alpha'_{b'}'")),
+    (r"\alpha_b''", Symbol("alpha_{b}''")),
+    (r"\alpha''_b", Symbol("alpha''_{b}")),
+    (r"\alpha''_b'''", Symbol("alpha''_{b}'''")),
+    (r"\alpha_{b''}", Symbol("alpha_{b''}")),
+    (r"\alpha_{b''}''", Symbol("alpha_{b''}''")),
+    (r"\alpha''_{b''}", Symbol("alpha''_{b''}")),
+    (r"\alpha''_{b''}'''", Symbol("alpha''_{b''}'''")),
+    (r"\alpha_\beta", Symbol("alpha_{beta}")),
+    (r"\alpha_{\beta}", Symbol("alpha_{beta}")),
+    (r"\alpha_{\beta'}", Symbol("alpha_{beta'}")),
+    (r"\alpha_{\beta''}", Symbol("alpha_{beta''}")),
+    (r"\alpha'_\beta", Symbol("alpha'_{beta}")),
+    (r"\alpha'_{\beta}", Symbol("alpha'_{beta}")),
+    (r"\alpha'_{\beta'}", Symbol("alpha'_{beta'}")),
+    (r"\alpha'_{\beta''}", Symbol("alpha'_{beta''}")),
+    (r"\alpha''_\beta", Symbol("alpha''_{beta}")),
+    (r"\alpha''_{\beta}", Symbol("alpha''_{beta}")),
+    (r"\alpha''_{\beta'}", Symbol("alpha''_{beta'}")),
+    (r"\alpha''_{\beta''}", Symbol("alpha''_{beta''}")),
+    (r"\alpha_\beta'", Symbol("alpha_{beta}'")),
+    (r"\alpha_{\beta}'", Symbol("alpha_{beta}'")),
+    (r"\alpha_{\beta'}'", Symbol("alpha_{beta'}'")),
+    (r"\alpha_{\beta''}'", Symbol("alpha_{beta''}'")),
+    (r"\alpha'_\beta'", Symbol("alpha'_{beta}'")),
+    (r"\alpha'_{\beta}'", Symbol("alpha'_{beta}'")),
+    (r"\alpha'_{\beta'}'", Symbol("alpha'_{beta'}'")),
+    (r"\alpha'_{\beta''}'", Symbol("alpha'_{beta''}'")),
+    (r"\alpha''_\beta'", Symbol("alpha''_{beta}'")),
+    (r"\alpha''_{\beta}'", Symbol("alpha''_{beta}'")),
+    (r"\alpha''_{\beta'}'", Symbol("alpha''_{beta'}'")),
+    (r"\alpha''_{\beta''}'", Symbol("alpha''_{beta''}'")),
+    (r"\alpha_\beta''", Symbol("alpha_{beta}''")),
+    (r"\alpha_{\beta}''", Symbol("alpha_{beta}''")),
+    (r"\alpha_{\beta'}''", Symbol("alpha_{beta'}''")),
+    (r"\alpha_{\beta''}''", Symbol("alpha_{beta''}''")),
+    (r"\alpha'_\beta''", Symbol("alpha'_{beta}''")),
+    (r"\alpha'_{\beta}''", Symbol("alpha'_{beta}''")),
+    (r"\alpha'_{\beta'}''", Symbol("alpha'_{beta'}''")),
+    (r"\alpha'_{\beta''}''", Symbol("alpha'_{beta''}''")),
+    (r"\alpha''_\beta''", Symbol("alpha''_{beta}''")),
+    (r"\alpha''_{\beta}''", Symbol("alpha''_{beta}''")),
+    (r"\alpha''_{\beta'}''", Symbol("alpha''_{beta'}''")),
+    (r"\alpha''_{\beta''}''", Symbol("alpha''_{beta''}''")),
+]
+
+
+def run_test():
+    input_stream = FileStream("test_file")
+    lexer = ExprLexer(input_stream)
+    token_stream = CommonTokenStream(lexer)
+    token_stream.fill()
+    parser = ExprParser(token_stream)
+    tree = parser.prog()
+    print(tree.toStringTree(recog=parser))
+    calc = Calc()
+    calc.visit(tree)
+    print(calc.output)
+
+
+for tpl in SYMBOL_EXPRESSION_PAIRS:
+    k, v = tpl
+    print(k)
+    f = open("test_file", "w")
+    f.write(k)
+    f.write("\n")
+    f.close()
+    run_test()
+    inp = input()
