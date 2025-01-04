@@ -23,7 +23,7 @@ from ExprVisitor import ExprVisitor
 import sympy
 from sys import argv
 from pudb import set_trace
-
+import re
 from sympy.testing.pytest import XFAIL
 from sympy.parsing.latex.lark import parse_latex_lark
 from sympy.external import import_module
@@ -100,8 +100,27 @@ class Calc(ExprVisitor):
         self.id_memory = {}
         self.output = []
 
+    def visitMathit_text(self, ctx: ExprParser.Mathit_textContext):
+        match = re.findall(r"\\mathit{(.*?)}", ctx.getText())
+        if match:
+            resp = match[0]
+            resp = sympy.Symbol(resp)
+            self.output.append(resp)
+            print(resp)
+            return resp
+        print("mathit_text no match")
+        return resp
+
     def visitVariable(self, ctx: ExprParser.VariableContext):
-        pass
+        match = re.findall("\\mathit{(.*?)}", ctx.getText())
+        if match:
+            resp = match[0]
+            print(match)
+        else:
+            resp = sympy.Symbol(ctx.getText())
+        self.output.append(resp)
+        print(resp)
+        return resp
 
     def visitVar_K(self, ctx: ExprParser.Var_KContext):
         pass
@@ -469,6 +488,10 @@ class Calc(ExprVisitor):
 
 # These LaTeX strings should parse to the corresponding SymPy expression
 SYMBOL_EXPRESSION_PAIRS = [
+    (r"\mathit{x}", Symbol("x")),
+    (r"\mathit{test}", Symbol("test")),
+    (r"\mathit{TEST}", Symbol("TEST")),
+    (r"\mathit{HELLO world}", Symbol("HELLO world")),
     (r"x_0", Symbol("x_{0}")),
     (r"x_{1}", Symbol("x_{1}")),
     (r"x_a", Symbol("x_{a}")),
@@ -477,10 +500,6 @@ SYMBOL_EXPRESSION_PAIRS = [
     (r"h_{\theta}", Symbol("h_{theta}")),
     (r"y''_1", Symbol("y''_{1}")),
     (r"y_1''", Symbol("y_{1}''")),
-    (r"\mathit{x}", Symbol("x")),
-    (r"\mathit{test}", Symbol("test")),
-    (r"\mathit{TEST}", Symbol("TEST")),
-    (r"\mathit{HELLO world}", Symbol("HELLO world")),
     (r"a'", Symbol("a'")),
     (r"a''", Symbol("a''")),
     (r"\alpha'", Symbol("alpha'")),
@@ -590,6 +609,7 @@ def run_test():
 
 ok = []
 failed = []
+SYMBOL_EXPRESSION_PAIRS = SYMBOL_EXPRESSION_PAIRS
 for ix, tpl in enumerate(SYMBOL_EXPRESSION_PAIRS):
     k, v = tpl
     print(k)
@@ -612,5 +632,12 @@ for ix, tpl in enumerate(SYMBOL_EXPRESSION_PAIRS):
         failed.append((k, v))
     # inp = input()
 
-print("ok", len(ok), "failed", len(failed), "percentage", 100 * len(ok) / len(failed))
+print(
+    "ok",
+    len(ok),
+    "failed",
+    len(failed),
+    "percentage",
+    100 * len(ok) / (len(ok) + len(failed)),
+)
 print(failed)

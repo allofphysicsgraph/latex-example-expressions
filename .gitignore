@@ -14,3 +14,6 @@ expr_visitor.bkf
 antlr-4.13.1-complete.jar
 ExprLexer.interp
 test_file
+antlr_python/VISITOR/test_file
+*.java
+java_gen

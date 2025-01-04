@@ -176,6 +176,8 @@ INT
    | [1-9] [0-9]*
    ;
 
+TEXT:	[a-zA-Z ]+;
+
 var
    : 'K' # var_K
    | 'G' # var_G
@@ -201,6 +203,7 @@ symbol
    | var '_' INT # var_underscore_int
    | var '_' '{' INT '}' # var_underscore_braces_int
    | var '_' var # var_underscore_var
+   | '\\mathit' '{' TEXT '}' # mathit_text
    ;
 
 NEWLINE
