@@ -24,38 +24,7 @@ import sympy
 from sys import argv
 from pudb import set_trace
 import re
-from sympy.testing.pytest import XFAIL
-from sympy.parsing.latex.lark import parse_latex_lark
-from sympy.external import import_module
-
-from sympy.concrete.products import Product
-from sympy.concrete.summations import Sum
-from sympy.core.function import Derivative, Function
-from sympy.core.numbers import E, oo, Rational
-from sympy.core.power import Pow
-from sympy.core.parameters import evaluate
-from sympy.core.relational import (
-    GreaterThan,
-    LessThan,
-    StrictGreaterThan,
-    StrictLessThan,
-    Unequality,
-)
-from sympy.core.symbol import Symbol
-from sympy.functions.combinatorial.factorials import binomial, factorial
-from sympy.functions.elementary.complexes import Abs, conjugate
-from sympy.functions.elementary.exponential import exp, log
-from sympy.functions.elementary.integers import ceiling, floor
-from sympy.functions.elementary.miscellaneous import root, sqrt, Min, Max
-from sympy.functions.elementary.trigonometric import asin, cos, csc, sec, sin, tan
-from sympy.integrals.integrals import Integral
-from sympy.series.limits import Limit
-from sympy import Matrix, MatAdd, MatMul, Transpose, Trace
-from sympy import I
-
-from sympy.core.relational import Eq, Ne, Lt, Le, Gt, Ge
-from sympy.physics.quantum import Bra, Ket, InnerProduct
-from sympy.abc import x, y, z, a, b, c, d, t, k, n
+from test_cases import *
 
 
 def run_test(k):
@@ -486,114 +455,6 @@ class Calc(ExprVisitor):
         return sympy.Function(resp, evaluate=False)
 
 
-# These LaTeX strings should parse to the corresponding SymPy expression
-SYMBOL_EXPRESSION_PAIRS = [
-    (r"\mathit{x}", Symbol("x")),
-    (r"\mathit{test}", Symbol("test")),
-    (r"\mathit{TEST}", Symbol("TEST")),
-    (r"\mathit{HELLO world}", Symbol("HELLO world")),
-    (r"x_0", Symbol("x_{0}")),
-    (r"x_{1}", Symbol("x_{1}")),
-    (r"x_a", Symbol("x_{a}")),
-    (r"x_{b}", Symbol("x_{b}")),
-    (r"h_\theta", Symbol("h_{theta}")),
-    (r"h_{\theta}", Symbol("h_{theta}")),
-    (r"y''_1", Symbol("y''_{1}")),
-    (r"y_1''", Symbol("y_{1}''")),
-    (r"a'", Symbol("a'")),
-    (r"a''", Symbol("a''")),
-    (r"\alpha'", Symbol("alpha'")),
-    (r"\alpha''", Symbol("alpha''")),
-    (r"a_b", Symbol("a_{b}")),
-    (r"a_b'", Symbol("a_{b}'")),
-    (r"a'_b", Symbol("a'_{b}")),
-    (r"a'_b'", Symbol("a'_{b}'")),
-    (r"a_{b'}", Symbol("a_{b'}")),
-    (r"a_{b'}'", Symbol("a_{b'}'")),
-    (r"a'_{b'}", Symbol("a'_{b'}")),
-    (r"a'_{b'}'", Symbol("a'_{b'}'")),
-    (r"\mathit{foo}'", Symbol("foo'")),
-    (r"\mathit{foo'}", Symbol("foo'")),
-    (r"\mathit{foo'}'", Symbol("foo''")),
-    (r"a_b''", Symbol("a_{b}''")),
-    (r"a''_b", Symbol("a''_{b}")),
-    (r"a''_b'''", Symbol("a''_{b}'''")),
-    (r"a_{b''}", Symbol("a_{b''}")),
-    (r"a_{b''}''", Symbol("a_{b''}''")),
-    (r"a''_{b''}", Symbol("a''_{b''}")),
-    (r"a''_{b''}'''", Symbol("a''_{b''}'''")),
-    (r"\mathit{foo}''", Symbol("foo''")),
-    (r"\mathit{foo''}", Symbol("foo''")),
-    (r"\mathit{foo''}'''", Symbol("foo'''''")),
-    (r"a_\alpha", Symbol("a_{alpha}")),
-    (r"a_\alpha'", Symbol("a_{alpha}'")),
-    (r"a'_\alpha", Symbol("a'_{alpha}")),
-    (r"a'_\alpha'", Symbol("a'_{alpha}'")),
-    (r"a_{\alpha'}", Symbol("a_{alpha'}")),
-    (r"a_{\alpha'}'", Symbol("a_{alpha'}'")),
-    (r"a'_{\alpha'}", Symbol("a'_{alpha'}")),
-    (r"a'_{\alpha'}'", Symbol("a'_{alpha'}'")),
-    (r"a_\alpha''", Symbol("a_{alpha}''")),
-    (r"a''_\alpha", Symbol("a''_{alpha}")),
-    (r"a''_\alpha'''", Symbol("a''_{alpha}'''")),
-    (r"a_{\alpha''}", Symbol("a_{alpha''}")),
-    (r"a_{\alpha''}''", Symbol("a_{alpha''}''")),
-    (r"a''_{\alpha''}", Symbol("a''_{alpha''}")),
-    (r"a''_{\alpha''}'''", Symbol("a''_{alpha''}'''")),
-    (r"\alpha_b", Symbol("alpha_{b}")),
-    (r"\alpha_b'", Symbol("alpha_{b}'")),
-    (r"\alpha'_b", Symbol("alpha'_{b}")),
-    (r"\alpha'_b'", Symbol("alpha'_{b}'")),
-    (r"\alpha_{b'}", Symbol("alpha_{b'}")),
-    (r"\alpha_{b'}'", Symbol("alpha_{b'}'")),
-    (r"\alpha'_{b'}", Symbol("alpha'_{b'}")),
-    (r"\alpha'_{b'}'", Symbol("alpha'_{b'}'")),
-    (r"\alpha_b''", Symbol("alpha_{b}''")),
-    (r"\alpha''_b", Symbol("alpha''_{b}")),
-    (r"\alpha''_b'''", Symbol("alpha''_{b}'''")),
-    (r"\alpha_{b''}", Symbol("alpha_{b''}")),
-    (r"\alpha_{b''}''", Symbol("alpha_{b''}''")),
-    (r"\alpha''_{b''}", Symbol("alpha''_{b''}")),
-    (r"\alpha''_{b''}'''", Symbol("alpha''_{b''}'''")),
-    (r"\alpha_\beta", Symbol("alpha_{beta}")),
-    (r"\alpha_{\beta}", Symbol("alpha_{beta}")),
-    (r"\alpha_{\beta'}", Symbol("alpha_{beta'}")),
-    (r"\alpha_{\beta''}", Symbol("alpha_{beta''}")),
-    (r"\alpha'_\beta", Symbol("alpha'_{beta}")),
-    (r"\alpha'_{\beta}", Symbol("alpha'_{beta}")),
-    (r"\alpha'_{\beta'}", Symbol("alpha'_{beta'}")),
-    (r"\alpha'_{\beta''}", Symbol("alpha'_{beta''}")),
-    (r"\alpha''_\beta", Symbol("alpha''_{beta}")),
-    (r"\alpha''_{\beta}", Symbol("alpha''_{beta}")),
-    (r"\alpha''_{\beta'}", Symbol("alpha''_{beta'}")),
-    (r"\alpha''_{\beta''}", Symbol("alpha''_{beta''}")),
-    (r"\alpha_\beta'", Symbol("alpha_{beta}'")),
-    (r"\alpha_{\beta}'", Symbol("alpha_{beta}'")),
-    (r"\alpha_{\beta'}'", Symbol("alpha_{beta'}'")),
-    (r"\alpha_{\beta''}'", Symbol("alpha_{beta''}'")),
-    (r"\alpha'_\beta'", Symbol("alpha'_{beta}'")),
-    (r"\alpha'_{\beta}'", Symbol("alpha'_{beta}'")),
-    (r"\alpha'_{\beta'}'", Symbol("alpha'_{beta'}'")),
-    (r"\alpha'_{\beta''}'", Symbol("alpha'_{beta''}'")),
-    (r"\alpha''_\beta'", Symbol("alpha''_{beta}'")),
-    (r"\alpha''_{\beta}'", Symbol("alpha''_{beta}'")),
-    (r"\alpha''_{\beta'}'", Symbol("alpha''_{beta'}'")),
-    (r"\alpha''_{\beta''}'", Symbol("alpha''_{beta''}'")),
-    (r"\alpha_\beta''", Symbol("alpha_{beta}''")),
-    (r"\alpha_{\beta}''", Symbol("alpha_{beta}''")),
-    (r"\alpha_{\beta'}''", Symbol("alpha_{beta'}''")),
-    (r"\alpha_{\beta''}''", Symbol("alpha_{beta''}''")),
-    (r"\alpha'_\beta''", Symbol("alpha'_{beta}''")),
-    (r"\alpha'_{\beta}''", Symbol("alpha'_{beta}''")),
-    (r"\alpha'_{\beta'}''", Symbol("alpha'_{beta'}''")),
-    (r"\alpha'_{\beta''}''", Symbol("alpha'_{beta''}''")),
-    (r"\alpha''_\beta''", Symbol("alpha''_{beta}''")),
-    (r"\alpha''_{\beta}''", Symbol("alpha''_{beta}''")),
-    (r"\alpha''_{\beta'}''", Symbol("alpha''_{beta'}''")),
-    (r"\alpha''_{\beta''}''", Symbol("alpha''_{beta''}''")),
-]
-
-
 def run_test():
     input_stream = FileStream("test_file")
     lexer = ExprLexer(input_stream)
@@ -609,8 +470,7 @@ def run_test():
 
 ok = []
 failed = []
-SYMBOL_EXPRESSION_PAIRS = SYMBOL_EXPRESSION_PAIRS
-for ix, tpl in enumerate(SYMBOL_EXPRESSION_PAIRS):
+for ix, tpl in enumerate(GOOD_PAIRS):
     k, v = tpl
     print(k)
     f = open("test_file", "w")
@@ -641,3 +501,20 @@ print(
     100 * len(ok) / (len(ok) + len(failed)),
 )
 print(failed)
+#     def visitArccos(self, ctx:ExprParser.ArccosContext): resp = ctx.getText()
+#     def visitArccot(self, ctx:ExprParser.ArccotContext): resp = ctx.getText()
+#     def visitArccsc(self, ctx:ExprParser.ArccscContext): resp = ctx.getText()
+#     def visitArcosh(self, ctx:ExprParser.ArcoshContext): resp = ctx.getText()
+#     def visitArcsec(self, ctx:ExprParser.ArcsecContext): resp = ctx.getText()
+#     def visitArcsin(self, ctx:ExprParser.ArcsinContext): resp = ctx.getText()
+#     def visitArctan(self, ctx:ExprParser.ArctanContext): resp = ctx.getText()
+#     def visitArsinh(self, ctx:ExprParser.ArsinhContext): resp = ctx.getText()
+#     def visitArtanh(self, ctx:ExprParser.ArtanhContext): resp = ctx.getText()
+#     def visitCos(self, ctx:ExprParser.CosContext): resp = ctx.getText()
+#     def visitCosh(self, ctx:ExprParser.CoshContext): resp = ctx.getText()
+#     def visitCot(self, ctx:ExprParser.CotContext): resp = ctx.getText()
+#     def visitCsc(self, ctx:ExprParser.CscContext): resp = ctx.getText()
+#     def visitSec(self, ctx:ExprParser.SecContext): resp = ctx.getText()
+#     def visitSinh(self, ctx:ExprParser.SinhContext): resp = ctx.getText()
+#     def visitTanh(self, ctx:ExprParser.TanhContext): resp = ctx.getText()
+#     def visitTan(self, ctx:ExprParser.TanContext): resp = ctx.getText()

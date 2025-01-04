@@ -16,6 +16,23 @@ stat
    | exp NEWLINE
    | sum NEWLINE
    | sin NEWLINE
+   | cos NEWLINE
+   | tan NEWLINE
+   | csc NEWLINE
+   | sec NEWLINE
+   | cot NEWLINE
+   | arcsin NEWLINE
+   | arccos NEWLINE
+   | arctan NEWLINE
+   | arccsc NEWLINE
+   | arcsec NEWLINE
+   | arccot NEWLINE
+   | sinh NEWLINE
+   | cosh NEWLINE
+   | tanh NEWLINE
+   | arsinh NEWLINE
+   | arcosh NEWLINE
+   | artanh NEWLINE
    | floor NEWLINE
    | ceiling NEWLINE
    | vec NEWLINE
@@ -110,6 +127,91 @@ sin
    | '\\sin' '(' expr ')'
    ;
 
+arccos
+   : '\\arccos'
+   | '\\arccos' '(' expr ')'
+   ;
+
+arccot
+   : '\\arccot'
+   | '\\arccot' '(' expr ')'
+   ;
+
+arccsc
+   : '\\arccsc'
+   | '\\arccsc' '(' expr ')'
+   ;
+
+arcosh
+   : '\\arcosh'
+   | '\\arcosh' '(' expr ')'
+   ;
+
+arcsec
+   : '\\arcsec'
+   | '\\arcsec' '(' expr ')'
+   ;
+
+arcsin
+   : '\\arcsin'
+   | '\\arcsin' '(' expr ')'
+   ;
+
+arctan
+   : '\\arctan'
+   | '\\arctan' '(' expr ')'
+   ;
+
+arsinh
+   : '\\arsinh'
+   | '\\arsinh' '(' expr ')'
+   ;
+
+artanh
+   : '\\artanh'
+   | '\\artanh' '(' expr ')'
+   ;
+
+cos
+   : '\\cos'
+   | '\\cos' '(' expr ')'
+   ;
+
+cosh
+   : '\\cosh'
+   | '\\cosh' '(' expr ')'
+   ;
+
+cot
+   : '\\cot'
+   | '\\cot' '(' expr ')'
+   ;
+
+csc
+   : '\\csc'
+   | '\\csc' '(' expr ')'
+   ;
+
+sec
+   : '\\sec'
+   | '\\sec' '(' expr ')'
+   ;
+
+sinh
+   : '\\sinh'
+   | '\\sinh' '(' expr ')'
+   ;
+
+tanh
+   : '\\tanh'
+   | '\\tanh' '(' expr ')'
+   ;
+
+tan
+   : '\\tan'
+   | '\\tan' '(' expr ')'
+   ;
+
 atom
    : var
    | INT
@@ -176,7 +278,9 @@ INT
    | [1-9] [0-9]*
    ;
 
-TEXT:	[a-zA-Z ]+;
+TEXT
+   : [a-zA-Z ]+
+   ;
 
 var
    : 'K' # var_K
@@ -204,6 +308,10 @@ symbol
    | var '_' '{' INT '}' # var_underscore_braces_int
    | var '_' var # var_underscore_var
    | '\\mathit' '{' TEXT '}' # mathit_text
+   ;
+
+PRIMES
+   : '\''
    ;
 
 NEWLINE
