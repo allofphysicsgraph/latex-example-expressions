@@ -100,6 +100,27 @@ class Calc(ExprVisitor):
         self.id_memory = {}
         self.output = []
 
+    def visitVar_underscore_braces_var(
+        self, ctx: ExprParser.Var_underscore_braces_varContext
+    ):
+        pass
+
+    def visitVar_underscore_int(self, ctx: ExprParser.Var_underscore_intContext):
+        lhs = ctx.getChild(0).getText() + ctx.getChild(1).getText()
+        rhs = "{" + ctx.getChild(2).getText() + "}"
+        resp = sympy.Symbol(lhs + rhs)
+        self.output.append(resp)
+        print(resp)
+        return resp
+
+    def visitVar_underscore_braces_int(
+        self, ctx: ExprParser.Var_underscore_braces_intContext
+    ):
+        pass
+
+    def visitVar_underscore_var(self, ctx: ExprParser.Var_underscore_varContext):
+        pass
+
     def visitInteger(self, ctx):
         print("visitInteger")
         resp = int(ctx.INT().getText())
@@ -496,18 +517,30 @@ def run_test():
     token_stream.fill()
     parser = ExprParser(token_stream)
     tree = parser.prog()
-    print(tree.toStringTree(recog=parser))
+    # print(tree.toStringTree(recog=parser))
     calc = Calc()
     calc.visit(tree)
-    print(calc.output)
+    return calc.output
 
 
-for tpl in SYMBOL_EXPRESSION_PAIRS:
+ok = []
+failed = []
+for ix, tpl in enumerate(SYMBOL_EXPRESSION_PAIRS):
     k, v = tpl
     print(k)
     f = open("test_file", "w")
     f.write(k)
     f.write("\n")
     f.close()
-    run_test()
-    inp = input()
+    output = run_test()
+    print(output)
+    if output:
+        print(output[-1], v)
+        result = output[-1] == v
+        if result:
+            ok.append(ix)
+    else:
+        failed.append(ix)
+    # inp = input()
+
+print("ok", len(ok), "failed", len(failed), "percentage", 100 * len(ok) / len(failed))
