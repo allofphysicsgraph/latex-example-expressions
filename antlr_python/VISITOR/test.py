@@ -100,10 +100,67 @@ class Calc(ExprVisitor):
         self.id_memory = {}
         self.output = []
 
+    def visitVariable(self, ctx: ExprParser.VariableContext):
+        pass
+
+    def visitVar_K(self, ctx: ExprParser.Var_KContext):
+        pass
+
+    def visitVar_G(self, ctx: ExprParser.Var_GContext):
+        pass
+
+    def visitVar_x(self, ctx: ExprParser.Var_xContext):
+        pass
+
+    def visitVar_y(self, ctx: ExprParser.Var_yContext):
+        pass
+
+    def visitVar_z(self, ctx: ExprParser.Var_zContext):
+        pass
+
+    def visitVar_a(self, ctx: ExprParser.Var_aContext):
+        pass
+
+    def visitVar_b(self, ctx: ExprParser.Var_bContext):
+        pass
+
+    def visitVar_c(self, ctx: ExprParser.Var_cContext):
+        pass
+
+    def visitVar_n(self, ctx: ExprParser.Var_nContext):
+        pass
+
+    def visitVar_h(self, ctx: ExprParser.Var_hContext):
+        pass
+
+    def visitVar_k(self, ctx: ExprParser.Var_kContext):
+        pass
+
+    def visitVar_u(self, ctx: ExprParser.Var_uContext):
+        pass
+
+    def visitVar_v(self, ctx: ExprParser.Var_vContext):
+        pass
+
+    def visitVar_w(self, ctx: ExprParser.Var_wContext):
+        pass
+
+    def visitVar_theta(self, ctx: ExprParser.Var_thetaContext):
+        pass
+
+    def visitVar_alpha(self, ctx: ExprParser.Var_alphaContext):
+        pass
+
+    def visitVar_beta(self, ctx: ExprParser.Var_betaContext):
+        pass
+
     def visitVar_underscore_braces_var(
         self, ctx: ExprParser.Var_underscore_braces_varContext
     ):
-        pass
+        resp = sympy.Symbol(ctx.getText())
+        self.output.append(resp)
+        print(resp)
+        return resp
 
     def visitVar_underscore_int(self, ctx: ExprParser.Var_underscore_intContext):
         lhs = ctx.getChild(0).getText() + ctx.getChild(1).getText()
@@ -116,10 +173,18 @@ class Calc(ExprVisitor):
     def visitVar_underscore_braces_int(
         self, ctx: ExprParser.Var_underscore_braces_intContext
     ):
-        pass
+        resp = sympy.Symbol(ctx.getText())
+        self.output.append(resp)
+        print(resp)
+        return resp
 
     def visitVar_underscore_var(self, ctx: ExprParser.Var_underscore_varContext):
-        pass
+        lhs = ctx.getChild(0).getText() + ctx.getChild(1).getText()
+        rhs = "{" + ctx.getChild(2).getText() + "}"
+        resp = sympy.Symbol(lhs + rhs)
+        self.output.append(resp)
+        print(resp)
+        return resp
 
     def visitInteger(self, ctx):
         print("visitInteger")
@@ -532,7 +597,11 @@ for ix, tpl in enumerate(SYMBOL_EXPRESSION_PAIRS):
     f.write(k)
     f.write("\n")
     f.close()
-    output = run_test()
+    try:
+        output = run_test()
+    except:
+        failed.append((k, v))
+        continue
     print(output)
     if output:
         print(output[-1], v)
@@ -540,7 +609,8 @@ for ix, tpl in enumerate(SYMBOL_EXPRESSION_PAIRS):
         if result:
             ok.append(ix)
     else:
-        failed.append(ix)
+        failed.append((k, v))
     # inp = input()
 
 print("ok", len(ok), "failed", len(failed), "percentage", 100 * len(ok) / len(failed))
+print(failed)

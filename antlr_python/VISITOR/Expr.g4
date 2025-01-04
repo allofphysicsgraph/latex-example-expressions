@@ -30,14 +30,14 @@ expr:
     | '{' expr '}' # braces
 	| '(' expr ')' '(' expr ')' # parens_parens
 	| '(' expr ')' # parens 
-    | '(' expr ')' VAR # parens_var
+    | '(' expr ')' var # parens_var
     | binomial # binom
     | fraction # frac
 	| INT # integer
-    | INT VAR # integer_var
-    | VAR '(' expr ')' # var_parens 
-	| VAR # var
-    | VAR VAR # var_var
+    | INT var # integer_var
+    | var '(' expr ')' # var_parens 
+	| var # variable
+    | var var # var_var
     | symbol # symbl
     | function # fnctn
 ;
@@ -59,11 +59,11 @@ IGNORE:
     ('\\displaystyle'|'\\left'|'\\right'|'\\begin{align}'|'\\end{align}') -> skip;
 
 function:
-    'f' '(' VAR (',' VAR)* ')';
+    'f' '(' var (',' var)* ')';
 
 
 integral:
-    '\\int' e=expr 'd' v=VAR;
+    '\\int' e=expr 'd' v=var;
 
 factorial:
     expr '!'
@@ -94,7 +94,7 @@ sin:
     ;
 
 atom:
-    VAR
+    var
     | INT
     | FLOAT
     ;
@@ -141,16 +141,34 @@ relop:
 
 BEGIN_EQ: '\\begin{equation}' -> skip;
 END_EQ: '\\end{equation}' -> skip;
-
 EQUALS : '=' ; 
 INT : 	'0' | [1-9][0-9]*;
-VAR : 'K'|'G'|'x'|'y'|'z'|'a'|'b'|'c'|'n'|'h'|'k'|'u'|'v'|'w'|'\\theta'| '\\alpha' | '\\beta';
+var : 'K' # var_K
+|'G' # var_G
+|'x' # var_x
+|'y' # var_y
+|'z' # var_z
+|'a' # var_a
+|'b' # var_b
+|'c' # var_c
+|'n' # var_n
+|'h' # var_h
+|'k' # var_k
+|'u' # var_u
+|'v' # var_v
+|'w' # var_w
+|'\\theta' # var_theta
+| '\\alpha'  # var_alpha
+| '\\beta' # var_beta
+;
+
+
 
 symbol:
-    VAR '_' '{' VAR '}'   # var_underscore_braces_var
-    | VAR '_' INT             # var_underscore_int
-    | VAR '_' '{' INT '}'	# var_underscore_braces_int
-    | VAR '_' VAR		# var_underscore_var
+    var '_' '{' var '}'   # var_underscore_braces_var
+    | var '_' INT             # var_underscore_int
+    | var '_' '{' INT '}'	# var_underscore_braces_int
+    | var '_' var		# var_underscore_var
     ;
 
 NEWLINE : '\n';
