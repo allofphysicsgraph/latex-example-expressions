@@ -147,10 +147,10 @@ INT : 	'0' | [1-9][0-9]*;
 VAR : 'K'|'G'|'x'|'y'|'z'|'a'|'b'|'c'|'n'|'h'|'k'|'u'|'v'|'w'|'\\theta'| '\\alpha' | '\\beta';
 
 symbol:
-    VAR '_' '{' VAR '}'
-    | VAR '_' INT
-    | VAR '_' '{' INT '}'
-    | VAR '_' VAR
+    VAR '_' '{' VAR '}'   # var_underscore_braces_var
+    | VAR '_' INT             # var_underscore_int
+    | VAR '_' '{' INT '}'	# var_underscore_braces_int
+    | VAR '_' VAR		# var_underscore_var
     ;
 
 NEWLINE : '\n';
