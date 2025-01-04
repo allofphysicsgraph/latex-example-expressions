@@ -41,29 +41,6 @@ def run_test(k):
     print(calc.output)
 
 
-def _Min(*args):
-    return Min(*args, evaluate=False)
-
-
-def _Max(*args):
-    return Max(*args, evaluate=False)
-
-
-def _log(a, b=E):
-    if b == E:
-        return log(a, evaluate=False)
-    else:
-        return log(a, b, evaluate=False)
-
-
-def _MatAdd(a, b):
-    return MatAdd(a, b, evaluate=False)
-
-
-def _MatMul(a, b):
-    return MatMul(a, b, evaluate=False)
-
-
 class Calc(ExprVisitor):
     def __init__(self):
         self.id_memory = {}
@@ -81,12 +58,7 @@ class Calc(ExprVisitor):
         return resp
 
     def visitVariable(self, ctx: ExprParser.VariableContext):
-        match = re.findall("\\mathit{(.*?)}", ctx.getText())
-        if match:
-            resp = match[0]
-            print(match)
-        else:
-            resp = sympy.Symbol(ctx.getText())
+        resp = sympy.Symbol(ctx.getText())
         self.output.append(resp)
         print(resp)
         return resp
@@ -240,7 +212,7 @@ class Calc(ExprVisitor):
 
     def visitVar(self, ctx):
         print("Var")
-        resp = sympy.Symbol(ctx.VAR().getText())
+        resp = sympy.Symbol(ctx.var().getText())
         self.output.append(resp)
         return resp
 
@@ -265,7 +237,7 @@ class Calc(ExprVisitor):
     def visitInteger_var(self, ctx):
         print("Integer_var")
         lhs = int(ctx.INT().getText())
-        rhs = sympy.Symbol(ctx.VAR().getText())
+        rhs = sympy.Symbol(ctx.var().getText())
         resp = sympy.Mul(lhs, rhs, evaluate=False)
         print(resp)
         self.output.append(resp)
@@ -351,8 +323,8 @@ class Calc(ExprVisitor):
 
     def visitVar_var(self, ctx):
         # set_trace()
-        lhs = sympy.Symbol(ctx.VAR(0).getText())
-        rhs = sympy.Symbol(ctx.VAR(1).getText())
+        lhs = sympy.Symbol(ctx.var(0).getText())
+        rhs = sympy.Symbol(ctx.var(1).getText())
         resp = sympy.Mul(lhs, rhs, evaluate=False)
 
         self.output.append(resp)
@@ -386,7 +358,7 @@ class Calc(ExprVisitor):
     def visitSin(self, ctx: ExprParser.SinContext):
         if ctx.atom():
             print(ctx.atom().getType())
-            var = ctx.atom().VAR().getText()
+            var = ctx.atom().var().getText()
             symbol = sympy.Symbol(var)
             resp = sympy.sin(symbol)
         if ctx.expr():
@@ -425,8 +397,8 @@ class Calc(ExprVisitor):
         if ctx.atom():
             if ctx.atom().INT():
                 e1 = int(ctx.atom().INT().getText())
-            if ctx.atom().VAR():
-                e1 = sympy.Symbol(ctx.atom().VAR().getText())
+            if ctx.atom().var():
+                e1 = sympy.Symbol(ctx.atom().var().getText())
         else:
             e1 = self.visit(ctx.e1)
         e2 = self.visit(ctx.e2)
@@ -470,6 +442,7 @@ def run_test():
 
 ok = []
 failed = []
+exceptions = []
 for ix, tpl in enumerate(GOOD_PAIRS):
     k, v = tpl
     print(k)
@@ -477,19 +450,21 @@ for ix, tpl in enumerate(GOOD_PAIRS):
     f.write(k)
     f.write("\n")
     f.close()
+    output = False
     try:
         output = run_test()
-    except:
-        failed.append((k, v))
+    except Exception as e:
+        # set_trace()
+        exceptions.append((e, k, v))
         continue
-    print(output)
     if output:
         print(output[-1], v)
-        result = output[-1] == v
+        # review types
+        result = str(output[-1]) == str(v)
         if result:
             ok.append(ix)
     else:
-        failed.append((k, v))
+        failed.append((output, k, v))
     # inp = input()
 
 print(
