@@ -5,38 +5,37 @@ prog
    ;
 
 stat
-   : expr NEWLINE
-   | equation NEWLINE
-   | factorial NEWLINE
-   | factorial factorial NEWLINE
-   | integral NEWLINE
-   | log NEWLINE
-   | lg NEWLINE
-   | ln NEWLINE
-   | exp NEWLINE
-   | sum NEWLINE
-   | sin NEWLINE
-   | cos NEWLINE
-   | tan NEWLINE
-   | csc NEWLINE
-   | sec NEWLINE
-   | cot NEWLINE
-   | arcsin NEWLINE
-   | arccos NEWLINE
-   | arctan NEWLINE
-   | arccsc NEWLINE
-   | arcsec NEWLINE
-   | arccot NEWLINE
-   | sinh NEWLINE
-   | cosh NEWLINE
-   | tanh NEWLINE
-   | arsinh NEWLINE
-   | arcosh NEWLINE
-   | artanh NEWLINE
-   | floor NEWLINE
-   | ceiling NEWLINE
-   | vec NEWLINE
+   : expr
+   | arccos
+   | arccot
+   | arccsc
+   | arcosh
+   | arcsec
+   | arcsin
+   | arctan
+   | arsinh
+   | artanh
+   | ceiling
+   | cos
+   | cosh
+   | cot
+   | csc
+   | equation
+   | exp
+   | factorial
+   | floor
+   | integral
+   | lg
+   | ln
+   | log
    | NEWLINE
+   | sec
+   | sin
+   | sinh
+   | sum
+   | tan
+   | tanh
+   | vec
    ;
 
 expr

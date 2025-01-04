@@ -364,7 +364,6 @@ class Calc(ExprVisitor):
         if ctx.expr():
             expr = self.visit(ctx.expr())
             resp = sympy.sin(expr)
-
         self.output.append(resp)
         print(resp)
         return resp
@@ -389,8 +388,9 @@ class Calc(ExprVisitor):
         expr1 = self.visit(ctx.e1)
         expr2 = self.visit(ctx.e2)
         resp = sympy.Sum(expr2, (var, start_index, expr1))
+        self.output.append(resp)
         print(resp)
-        # print(expr,expr1,expr2)
+        return resp
 
     def visitLog(self, ctx: ExprParser.LogContext):
 
@@ -409,26 +409,28 @@ class Calc(ExprVisitor):
 
     def visitFloor(self, ctx: ExprParser.FloorContext):
         resp = self.visit(ctx.expr())
+        resp = sympy.floor(resp, evaluate=False)
         self.output.append(resp)
         print(resp)
-        return sympy.floor(resp, evaluate=False)
+        return resp
 
     def visitCeiling(self, ctx: ExprParser.CeilingContext):
         resp = self.visit(ctx.expr())
+        resp = sympy.ceiling(resp, evaluate=False)
         self.output.append(resp)
         print(resp)
-        return sympy.ceiling(resp, evaluate=False)
+        return resp
 
     def visitFnctn(self, ctx: ExprParser.FunctionContext):
-
         resp = ctx.getText()
+        resp = sympy.Function(resp, evaluate=False)
         self.output.append(resp)
         print(resp)
-        return sympy.Function(resp, evaluate=False)
+        return resp
 
 
-def run_test():
-    input_stream = FileStream("test_file")
+def run_test(k):
+    input_stream = InputStream(k)
     lexer = ExprLexer(input_stream)
     token_stream = CommonTokenStream(lexer)
     token_stream.fill()
@@ -445,14 +447,15 @@ failed = []
 exceptions = []
 for ix, tpl in enumerate(GOOD_PAIRS):
     k, v = tpl
-    print(k)
-    f = open("test_file", "w")
-    f.write(k)
-    f.write("\n")
-    f.close()
+    #print(k)
+    #f = open("test_file", "w")
+    #f.write(k)
+    #f.write("\n")
+    #f.close()
     output = False
+
     try:
-        output = run_test()
+        output = run_test(k)
     except Exception as e:
         # set_trace()
         exceptions.append((e, k, v))
