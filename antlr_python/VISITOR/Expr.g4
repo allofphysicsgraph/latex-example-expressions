@@ -1,176 +1,213 @@
 grammar Expr;
 
-prog :  stat+
-	;
+prog
+   : stat+
+   ;
 
-stat:  	expr NEWLINE
-	| equation NEWLINE
-    | factorial NEWLINE
-    | factorial factorial NEWLINE
-    | integral NEWLINE
-    | log NEWLINE
-    | lg NEWLINE
-    | ln NEWLINE
-    | exp NEWLINE
-    | sum NEWLINE
-    | sin NEWLINE
-    | floor NEWLINE
-    | ceiling NEWLINE
-    | vec NEWLINE
-    | NEWLINE
-	;
+stat
+   : expr NEWLINE
+   | equation NEWLINE
+   | factorial NEWLINE
+   | factorial factorial NEWLINE
+   | integral NEWLINE
+   | log NEWLINE
+   | lg NEWLINE
+   | ln NEWLINE
+   | exp NEWLINE
+   | sum NEWLINE
+   | sin NEWLINE
+   | floor NEWLINE
+   | ceiling NEWLINE
+   | vec NEWLINE
+   | NEWLINE
+   ;
 
-expr: 
-	<assoc=right> expr '^' expr # expo
-	| expr op=('*' | '/'|'\\times'|'\\cdot'|'\\div') expr # mul_div
-	| expr op=('+' | '-') expr # add_sub
-	| expr op=('>'|'<'|'\neq'|'\\leq'|'\\geq'|'\\le'|'\\ge')  expr # expr_relop_expr
-    | op=('+'|'-') expr # pm_expr
-	| '|' expr '|' # abs_expr
-    | '{' expr '}' # braces
-	| '(' expr ')' '(' expr ')' # parens_parens
-	| '(' expr ')' # parens 
-    | '(' expr ')' var # parens_var
-    | binomial # binom
-    | fraction # frac
-	| INT # integer
-    | INT var # integer_var
-    | var '(' expr ')' # var_parens 
-	| var # variable
-    | var var # var_var
-    | symbol # symbl
-    | function # fnctn
-;
+expr
+   : < assoc = right > expr '^' expr # expo
+   | expr op = ('*' | '/' | '\\times' | '\\cdot' | '\\div') expr # mul_div
+   | expr op = ('+' | '-') expr # add_sub
+   | expr op = ('>' | '<' | '\neq' | '\\leq' | '\\geq' | '\\le' | '\\ge') expr # expr_relop_expr
+   | op = ('+' | '-') expr # pm_expr
+   | '|' expr '|' # abs_expr
+   | '{' expr '}' # braces
+   | '(' expr ')' '(' expr ')' # parens_parens
+   | '(' expr ')' # parens
+   | '(' expr ')' var # parens_var
+   | binomial # binom
+   | fraction # frac
+   | INT # integer
+   | INT var # integer_var
+   | var '(' expr ')' # var_parens
+   | var # variable
+   | var var # var_var
+   | symbol # symbl
+   | function # fnctn
+   ;
 
-hbar:
-    '\\hbar';
+hbar
+   : '\\hbar'
+   ;
 
-langle:
-    '\\langle';
+langle
+   : '\\langle'
+   ;
 
-psi:
-    '\\psi';
-vec: 
-    '\\vec' '{' expr '}';
-hat: 
-    '\\hat' '{' expr '}';
+psi
+   : '\\psi'
+   ;
 
-IGNORE:
-    ('\\displaystyle'|'\\left'|'\\right'|'\\begin{align}'|'\\end{align}') -> skip;
+vec
+   : '\\vec' '{' expr '}'
+   ;
 
-function:
-    'f' '(' var (',' var)* ')';
+hat
+   : '\\hat' '{' expr '}'
+   ;
 
+IGNORE
+   : ('\\displaystyle' | '\\left' | '\\right' | '\\begin{align}' | '\\end{align}') -> skip
+   ;
 
-integral:
-    '\\int' e=expr 'd' v=var;
+function
+   : 'f' '(' var (',' var)* ')'
+   ;
 
-factorial:
-    expr '!'
-    ;
+integral
+   : '\\int' e = expr 'd' v = var
+   ;
 
-log:
-    '\\log' '_' '{' e1=expr '}' e2=expr
-    | '\\log' '_' a1=atom e2=expr
-    ;
-lg:
-    '\\lg' e=expr ;
+factorial
+   : expr '!'
+   ;
 
-exp:
-    '\\exp' e=expr;
+log
+   : '\\log' '_' '{' e1 = expr '}' e2 = expr
+   | '\\log' '_' a1 = atom e2 = expr
+   ;
 
-ln:
-    '\\ln' e=expr;
+lg
+   : '\\lg' e = expr
+   ;
 
-floor:
-    '\\lfloor' e=expr '\\rfloor';
+exp
+   : '\\exp' e = expr
+   ;
 
-ceiling:
-    '\\lceil' e=expr '\\rceil';
+ln
+   : '\\ln' e = expr
+   ;
 
-sin:
-    '\\sin' atom 
-    | '\\sin' '(' expr ')' 
-    ;
+floor
+   : '\\lfloor' e = expr '\\rfloor'
+   ;
 
-atom:
-    var
-    | INT
-    | FLOAT
-    ;
+ceiling
+   : '\\lceil' e = expr '\\rceil'
+   ;
 
-FLOAT:
-    INT ('.' [0-9]+)
-    ;
+sin
+   : '\\sin' atom
+   | '\\sin' '(' expr ')'
+   ;
 
-sum:
-    '\\sum' '_' '{' (e0=expr|eq0=equation) '}' '^' '{' e1=expr '}' e2=expr;
+atom
+   : var
+   | INT
+   | FLOAT
+   ;
 
-binomial:
-    '\\binom' numerator denominator
-    |'\\tbinom' numerator denominator
-    |'\\dbinom' numerator denominator
-    ;
+FLOAT
+   : INT ('.' [0-9]+)
+   ;
 
-fraction:
-    '\\frac' numerator denominator
-    |'\\dfrac' numerator denominator
-    |'\\tfrac' numerator denominator
-    ;
+sum
+   : '\\sum' '_' '{' (e0 = expr | eq0 = equation) '}' '^' '{' e1 = expr '}' e2 = expr
+   ;
 
-numerator:
-    INT # numerator_integer
-    |  '{' expr '}' # numerator_expr
-    ;
-denominator:
-    INT # denominator_integer
-    |  '{' expr '}' # denominator_expr
-    ;
+binomial
+   : '\\binom' numerator denominator
+   | '\\tbinom' numerator denominator
+   | '\\dbinom' numerator denominator
+   ;
 
-equation: lhs=expr equals=EQUALS rhs=expr
-	| BEGIN_EQ NEWLINE? equation NEWLINE? END_EQ
-	;
+fraction
+   : '\\frac' numerator denominator
+   | '\\dfrac' numerator denominator
+   | '\\tfrac' numerator denominator
+   ;
 
-relational:
-    expr relop expr
-    ;
+numerator
+   : INT # numerator_integer
+   | '{' expr '}' # numerator_expr
+   ;
 
-relop:
-    '>'
-    ;    
+denominator
+   : INT # denominator_integer
+   | '{' expr '}' # denominator_expr
+   ;
 
-BEGIN_EQ: '\\begin{equation}' -> skip;
-END_EQ: '\\end{equation}' -> skip;
-EQUALS : '=' ; 
-INT : 	'0' | [1-9][0-9]*;
-var : 'K' # var_K
-|'G' # var_G
-|'x' # var_x
-|'y' # var_y
-|'z' # var_z
-|'a' # var_a
-|'b' # var_b
-|'c' # var_c
-|'n' # var_n
-|'h' # var_h
-|'k' # var_k
-|'u' # var_u
-|'v' # var_v
-|'w' # var_w
-|'\\theta' # var_theta
-| '\\alpha'  # var_alpha
-| '\\beta' # var_beta
-;
+equation
+   : lhs = expr equals = EQUALS rhs = expr
+   | BEGIN_EQ NEWLINE? equation NEWLINE? END_EQ
+   ;
 
+relational
+   : expr relop expr
+   ;
 
+relop
+   : '>'
+   ;
 
-symbol:
-    var '_' '{' var '}'   # var_underscore_braces_var
-    | var '_' INT             # var_underscore_int
-    | var '_' '{' INT '}'	# var_underscore_braces_int
-    | var '_' var		# var_underscore_var
-    ;
+BEGIN_EQ
+   : '\\begin{equation}' -> skip
+   ;
 
-NEWLINE : '\n';
+END_EQ
+   : '\\end{equation}' -> skip
+   ;
 
-WS : [ \t]+ -> skip;
+EQUALS
+   : '='
+   ;
+
+INT
+   : '0'
+   | [1-9] [0-9]*
+   ;
+
+var
+   : 'K' # var_K
+   | 'G' # var_G
+   | 'x' # var_x
+   | 'y' # var_y
+   | 'z' # var_z
+   | 'a' # var_a
+   | 'b' # var_b
+   | 'c' # var_c
+   | 'n' # var_n
+   | 'h' # var_h
+   | 'k' # var_k
+   | 'u' # var_u
+   | 'v' # var_v
+   | 'w' # var_w
+   | '\\theta' # var_theta
+   | '\\alpha' # var_alpha
+   | '\\beta' # var_beta
+   ;
+
+symbol
+   : var '_' '{' var '}' # var_underscore_braces_var
+   | var '_' INT # var_underscore_int
+   | var '_' '{' INT '}' # var_underscore_braces_int
+   | var '_' var # var_underscore_var
+   ;
+
+NEWLINE
+   : '\n'
+   ;
+
+WS
+   : [ \t]+ -> skip
+   ;
+
