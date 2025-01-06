@@ -43,7 +43,6 @@ expr
    | expr op = ('*' | '/' | '\\times' | '\\cdot' | '\\div') expr # mul_div
    | expr op = ('+' | '-') expr # add_sub
    | expr op = ('>' | '<' | '\neq' | '\\leq' | '\\geq' | '\\le' | '\\ge') expr # expr_relop_expr
-   | op = ('+' | '-') expr # pm_expr
    | '|' expr '|' # abs_expr
    | '{' expr '}' # braces
    | '(' expr ')' '(' expr ')' # parens_parens
@@ -51,15 +50,16 @@ expr
    | '(' expr ')' var # parens_var
    | binomial # binom
    | fraction # frac
-   | INT # integer
    | INT var # integer_var
-   | FLOAT # Flt
+   | INT # integer
    | FLOAT # Flt_var 
+   | FLOAT # Flt
    | var '(' expr ')' # var_parens
    | var # variable
    | var var # var_var
    | symbol # symbl
    | function # fnctn
+   | op = ('+'|'-') expr # pm_expr
    ;
 
 hbar
@@ -83,7 +83,7 @@ hat
    ;
 
 IGNORE
-   : ('\\displaystyle' | '\\left' | '\\right' | '\\begin{align}' | '\\end{align}') -> skip
+   : ('\\negthickspace'|'\\displaystyle' | '\\left' | '\\right' | '\\begin{align}' | '\\end{align}'|'\\negmedspace'|'\\negthinspace') -> skip
    ;
 
 function
