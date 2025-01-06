@@ -148,13 +148,14 @@ class Calc(ExprVisitor):
             return resp
 
     def visitParens_var(self, ctx: ExprParser.Parens_varContext):
-        pass
-
-    def visitPm_expr(self, ctx: ExprParser.Pm_exprContext):
-        print("visitPm_expr")
-        resp = sympy.Symbol(ctx.getText())
+        print("visitParens_var")
+        lhs = self.visit(ctx.exp())
+        rhs = sympy.Symbol(ctx.var().getText())
+        resp = sympy.Mul(lhs, rhs, evaluate=False)
         self.output.append(resp)
+        print(resp)
         return resp
+        pass
 
     def visitBinom(self, ctx: ExprParser.BinomContext):
         print("visitBinom")

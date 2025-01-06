@@ -85,7 +85,6 @@ GOOD_PAIRS = [
     (r"x^2", x**2),
     (r"x^\frac{1}{2}", _Pow(x, _Pow(2, -1))),
     (r"x^{3 + 1}", x ** _Add(3, 1)),
-    (r"-c", -c),
     (r"a \cdot b", a * b),
     (r"a / b", a / b),
     (r"a \div b", a / b),

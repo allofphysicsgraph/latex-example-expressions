@@ -46,8 +46,8 @@ expr
    | '|' expr '|' # abs_expr
    | '{' expr '}' # braces
    | '(' expr ')' '(' expr ')' # parens_parens
-   | '(' expr ')' # parens
    | '(' expr ')' var # parens_var
+   | '(' expr ')' # parens
    | binomial # binom
    | fraction # frac
    | INT var # integer_var
@@ -59,7 +59,6 @@ expr
    | var var # var_var
    | symbol # symbl
    | function # fnctn
-   | op = ('+'|'-') expr # pm_expr
    ;
 
 hbar
@@ -251,7 +250,6 @@ denominator
 
 equation
    : lhs = expr equals = EQUALS rhs = expr
-   | BEGIN_EQ NEWLINE? equation NEWLINE? END_EQ
    ;
 
 relational
