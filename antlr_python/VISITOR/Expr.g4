@@ -53,6 +53,8 @@ expr
    | fraction # frac
    | INT # integer
    | INT var # integer_var
+   | FLOAT # Flt
+   | FLOAT # Flt_var 
    | var '(' expr ')' # var_parens
    | var # variable
    | var var # var_var
@@ -306,7 +308,6 @@ symbol
    | var '_' INT # var_underscore_int
    | var '_' '{' INT '}' # var_underscore_braces_int
    | var '_' var # var_underscore_var
-   | '\\mathit' '{' TEXT '}' # mathit_text
    ;
 
 PRIMES

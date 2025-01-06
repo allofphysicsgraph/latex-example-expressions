@@ -46,15 +46,122 @@ class Calc(ExprVisitor):
         self.id_memory = {}
         self.output = []
 
-    def visitMathit_text(self, ctx: ExprParser.Mathit_textContext):
-        match = re.findall(r"\\mathit{(.*?)}", ctx.getText())
-        if match:
-            resp = match[0]
-            resp = sympy.Symbol(resp)
+    def visitExpr_relop_expr(self, ctx: ExprParser.Expr_relop_exprContext):
+        print("expr_relop_expr")
+        lhs = self.visit(ctx.expr(0))
+        rhs = self.visit(ctx.expr(1))
+        if ctx.op.text == "\\neq":
+            resp = sympy.Ne(lhs, rhs, evaluate=False)
+        if ctx.op.text == "<":
+            resp = sympy.Lt(lhs, rhs, evaluate=False)
+        if ctx.op.text == ">":
+            resp = sympy.Gt(lhs, rhs, evaluate=False)
+        if ctx.op.text == "\\le":
+            resp = sympy.Le(lhs, rhs, evaluate=False)
+        if ctx.op.text == "\\ge":
+            resp = sympy.Ge(lhs, rhs, evaluate=False)
+        if ctx.op.text == "\\leq":
+            resp = sympy.Le(lhs, rhs, evaluate=False)
+        if ctx.op.text == "\\geq":
+            resp = sympy.Ge(lhs, rhs, evaluate=False)
+        self.output.append(resp)
+        print(resp)
+        return resp
+
+    def visitParens_parens(self, ctx: ExprParser.Parens_parensContext):
+        lhs = self.visit(ctx.expr(0))
+        rhs = self.visit(ctx.expr(1))
+        resp = sympy.Mul(lhs, rhs, evaluate=False)
+        self.output.append(resp)
+        print(resp)
+        return resp
+
+    def visitParens(self, ctx: ExprParser.ParensContext):
+        resp = self.visit(ctx.expr())
+        self.output.append(resp)
+        print(resp)
+        return resp
+
+    def visitInteger_var(self, ctx: ExprParser.Integer_varContext):
+        print("Integer_var")
+        lhs = int(ctx.INT().getText())
+        rhs = sympy.Symbol(ctx.var().getText())
+        resp = sympy.Mul(lhs, rhs, evaluate=False)
+        print(resp)
+        self.output.append(resp)
+        return resp
+
+    def visitFnctn(self, ctx: ExprParser.FnctnContext):
+        resp = ctx.getText()
+        resp = sympy.Function(resp, evaluate=False)
+        self.output.append(resp)
+        print(resp)
+        return resp
+
+    def visitVar_parens(self, ctx: ExprParser.Var_parensContext):
+        pass
+
+    def visitInteger(self, ctx: ExprParser.IntegerContext):
+        print("visitInteger")
+        resp = int(ctx.INT().getText())
+        self.output.append(resp)
+        return resp
+
+    def visitAdd_sub(self, ctx: ExprParser.Add_subContext):
+        print("add_sub")
+        lhs = self.visit(ctx.expr(0))
+        rhs = self.visit(ctx.expr(1))
+        if ctx.op.text == "+":
+            resp = sympy.Add(lhs, rhs, evaluate=False)
+
+        if ctx.op.text == "-":
+            resp = sympy.Add(lhs, -1 * rhs, evaluate=False)
+        self.output.append(resp)
+        print(resp)
+        return resp
+
+    def visitBraces(self, ctx: ExprParser.BracesContext):
+        resp = self.visit(ctx.expr())
+        self.output.append(resp)
+        print(resp)
+        return resp
+
+    def visitFlt(self, ctx: ExprParser.FltContext):
+        print("visitFloat")
+        resp = ctx.FLOAT().getText()
+        l = re.findall("(\..*)", resp)
+        if l:
+            rnd = len(list(l[0]))
+            resp = sympy.Float(resp, rnd)
             self.output.append(resp)
-            print(resp)
+            print(self.output)
             return resp
-        print("mathit_text no match")
+
+    def visitParens_var(self, ctx: ExprParser.Parens_varContext):
+        pass
+
+    def visitPm_expr(self, ctx: ExprParser.Pm_exprContext):
+        print("symbol")
+        resp = sympy.Symbol(ctx.getText())
+        self.output.append(resp)
+        return resp
+
+    def visitBinom(self, ctx: ExprParser.BinomContext):
+        lhs = self.visit(ctx.binomial().numerator())
+        rhs = self.visit(ctx.binomial().denominator())
+        resp = sympy.binomial(lhs, rhs, evaluate=False)
+        self.output.append(resp)
+        print(resp)
+        return resp
+
+    def visitVar_var(self, ctx: ExprParser.Var_varContext):
+        # set_trace()
+        lhs = sympy.Symbol(ctx.var(0).getText())
+        rhs = sympy.Symbol(ctx.var(1).getText())
+        resp = sympy.Mul(lhs, rhs, evaluate=False)
+
+        self.output.append(resp)
+        print(resp)
         return resp
 
     def visitVariable(self, ctx: ExprParser.VariableContext):
@@ -62,6 +169,312 @@ class Calc(ExprVisitor):
         self.output.append(resp)
         print(resp)
         return resp
+
+    def visitFlt_var(self, ctx: ExprParser.Flt_varContext):
+        pass
+
+    def visitMul_div(self, ctx: ExprParser.Mul_divContext):
+        print("mul_div")
+        lhs = self.visit(ctx.expr(0))
+        rhs = self.visit(ctx.expr(1))
+        if ctx.op.text == "*":
+            resp = sympy.Mul(lhs, rhs, evaluate=False)
+        if ctx.op.text == "\\cdot":
+            resp = sympy.Mul(lhs, rhs, evaluate=False)
+        if ctx.op.text == "\\times":
+            resp = sympy.Mul(lhs, rhs, evaluate=False)
+        if ctx.op.text == "/":
+            resp = sympy.Mul(lhs, sympy.Pow(rhs, -1, evaluate=False), evaluate=False)
+        if ctx.op.text == "\\div":
+            resp = sympy.Mul(lhs, sympy.Pow(rhs, -1, evaluate=False), evaluate=False)
+        self.output.append(resp)
+        return resp
+
+    def visitSymbl(self, ctx: ExprParser.SymblContext):
+        pass
+
+    def visitExpo(self, ctx: ExprParser.ExpoContext):
+        print("expo")
+        lhs = self.visit(ctx.expr(0))
+        rhs = self.visit(ctx.expr(1))
+        resp = sympy.Pow(lhs, rhs, evaluate=False)
+        print(resp)
+        self.output.append(resp)
+        return resp
+
+    def visitAbs_expr(self, ctx: ExprParser.Abs_exprContext):
+        resp = self.visit(ctx.expr())
+        resp = sympy.Abs(resp, evaluate=False)
+        self.output.append(resp)
+        print(resp)
+        return resp
+
+    def visitFrac(self, ctx: ExprParser.FracContext):
+        lhs = self.visit(ctx.fraction().numerator())
+        rhs = self.visit(ctx.fraction().denominator())
+        resp = sympy.Mul(lhs, sympy.Pow(rhs, -1, evaluate=False), evaluate=False)
+        self.output.append(resp)
+        print(resp)
+        return resp
+
+    def visitHbar(self, ctx: ExprParser.HbarContext):
+        pass
+
+    def visitLangle(self, ctx: ExprParser.LangleContext):
+        pass
+
+    def visitPsi(self, ctx: ExprParser.PsiContext):
+        pass
+
+    def visitVec(self, ctx: ExprParser.VecContext):
+        pass
+
+    def visitHat(self, ctx: ExprParser.HatContext):
+        pass
+
+    def visitFunction(self, ctx: ExprParser.FunctionContext):
+        pass
+
+    def visitIntegral(self, ctx: ExprParser.IntegralContext):
+        expr = self.visit(ctx.expr())
+        var = sympy.Symbol(ctx.v.text)
+        resp = sympy.Integral(expr, var)
+        print(resp)
+
+    def visitFactorial(self, ctx: ExprParser.FactorialContext):
+        resp = self.visit(ctx.expr())
+        print(resp)
+        resp = sympy.factorial(resp, evaluate=False)
+        self.output.append(resp)
+        print(resp)
+        return resp
+
+    def visitLog(self, ctx: ExprParser.LogContext):
+        if ctx.atom():
+            if ctx.atom().INT():
+                e1 = int(ctx.atom().INT().getText())
+            if ctx.atom().var():
+                e1 = sympy.Symbol(ctx.atom().var().getText())
+        else:
+            e1 = self.visit(ctx.e1)
+        e2 = self.visit(ctx.e2)
+        resp = sympy.log(e2, e1)
+        self.output.append(resp)
+        print(resp)
+        return resp
+
+    def visitLg(self, ctx: ExprParser.LgContext):
+        expr = self.visit(ctx.e)
+        resp = sympy.log(expr, 10)
+        self.output.append(resp)
+        print(resp)
+        return resp
+
+    def visitExp(self, ctx: ExprParser.ExpContext):
+        expr = self.visit(ctx.e)
+        resp = sympy.exp(expr)
+        self.output.append(resp)
+        print(resp)
+        return resp
+
+    def visitLn(self, ctx: ExprParser.LnContext):
+        from sympy.core.numbers import E
+
+        expr = self.visit(ctx.e)
+        resp = sympy.log(expr, E)
+        self.output.append(resp)
+        print(resp)
+        return resp
+
+    def visitFloor(self, ctx: ExprParser.FloorContext):
+        resp = self.visit(ctx.expr())
+        resp = sympy.floor(resp, evaluate=False)
+        self.output.append(resp)
+        print(resp)
+        return resp
+
+    def visitCeiling(self, ctx: ExprParser.CeilingContext):
+        resp = self.visit(ctx.expr())
+        resp = sympy.ceiling(resp, evaluate=False)
+        self.output.append(resp)
+        print(resp)
+        return resp
+
+    def visitSin(self, ctx: ExprParser.SinContext):
+        if ctx.atom():
+            print(ctx.atom().getType())
+            var = ctx.atom().var().getText()
+            symbol = sympy.Symbol(var)
+            resp = sympy.sin(symbol)
+        if ctx.expr():
+            expr = self.visit(ctx.expr())
+            resp = sympy.sin(expr)
+        self.output.append(resp)
+        print(resp)
+        return resp
+
+    def visitArccos(self, ctx: ExprParser.ArccosContext):
+        pass
+
+    def visitArccot(self, ctx: ExprParser.ArccotContext):
+        pass
+
+    def visitArccsc(self, ctx: ExprParser.ArccscContext):
+        pass
+
+    def visitArcosh(self, ctx: ExprParser.ArcoshContext):
+        pass
+
+    def visitArcsec(self, ctx: ExprParser.ArcsecContext):
+        pass
+
+    def visitArcsin(self, ctx: ExprParser.ArcsinContext):
+        pass
+
+    def visitArctan(self, ctx: ExprParser.ArctanContext):
+        pass
+
+    def visitArsinh(self, ctx: ExprParser.ArsinhContext):
+        pass
+
+    def visitArtanh(self, ctx: ExprParser.ArtanhContext):
+        pass
+
+    def visitCos(self, ctx: ExprParser.CosContext):
+        pass
+
+    def visitCosh(self, ctx: ExprParser.CoshContext):
+        pass
+
+    def visitCot(self, ctx: ExprParser.CotContext):
+        pass
+
+    def visitCsc(self, ctx: ExprParser.CscContext):
+        pass
+
+    def visitSec(self, ctx: ExprParser.SecContext):
+        pass
+
+    def visitSinh(self, ctx: ExprParser.SinhContext):
+        pass
+
+    def visitTanh(self, ctx: ExprParser.TanhContext):
+        pass
+
+    def visitTan(self, ctx: ExprParser.TanContext):
+        pass
+
+    def visitAtom(self, ctx: ExprParser.AtomContext):
+        pass
+
+    def visitSum(self, ctx: ExprParser.SumContext):
+        if ctx.e0:
+            expr = self.visit(ctx.e0)
+
+        if ctx.eq0:
+            expr = self.visit(ctx.eq0)
+            var = expr.args[0]
+            start_index = expr.args[1]
+        expr1 = self.visit(ctx.e1)
+        expr2 = self.visit(ctx.e2)
+        resp = sympy.Sum(expr2, (var, start_index, expr1))
+        self.output.append(resp)
+        print(resp)
+        return resp
+
+    def visitBinomial(self, ctx: ExprParser.BinomialContext):
+        pass
+
+    def visitFraction(self, ctx: ExprParser.FractionContext):
+        pass
+
+    def visitNumerator_integer(self, ctx: ExprParser.Numerator_integerContext):
+        pass
+
+    def visitNumerator_expr(self, ctx: ExprParser.Numerator_exprContext):
+        pass
+
+    def visitDenominator_integer(self, ctx: ExprParser.Denominator_integerContext):
+        pass
+
+    def visitDenominator_expr(self, ctx: ExprParser.Denominator_exprContext):
+        pass
+
+    def visitEquation(self, ctx: ExprParser.EquationContext):
+        pass
+
+    def visitRelational(self, ctx: ExprParser.RelationalContext):
+        pass
+
+    def visitRelop(self, ctx: ExprParser.RelopContext):
+        pass
+
+    def visitVar_K(self, ctx: ExprParser.Var_KContext):
+        pass
+
+    def visitVar_G(self, ctx: ExprParser.Var_GContext):
+        pass
+
+    def visitVar_x(self, ctx: ExprParser.Var_xContext):
+        pass
+
+    def visitVar_y(self, ctx: ExprParser.Var_yContext):
+        pass
+
+    def visitVar_z(self, ctx: ExprParser.Var_zContext):
+        pass
+
+    def visitVar_a(self, ctx: ExprParser.Var_aContext):
+        pass
+
+    def visitVar_b(self, ctx: ExprParser.Var_bContext):
+        pass
+
+    def visitVar_c(self, ctx: ExprParser.Var_cContext):
+        pass
+
+    def visitVar_n(self, ctx: ExprParser.Var_nContext):
+        pass
+
+    def visitVar_h(self, ctx: ExprParser.Var_hContext):
+        pass
+
+    def visitVar_k(self, ctx: ExprParser.Var_kContext):
+        pass
+
+    def visitVar_u(self, ctx: ExprParser.Var_uContext):
+        pass
+
+    def visitVar_v(self, ctx: ExprParser.Var_vContext):
+        pass
+
+    def visitVar_w(self, ctx: ExprParser.Var_wContext):
+        pass
+
+    def visitVar_theta(self, ctx: ExprParser.Var_thetaContext):
+        pass
+
+    def visitVar_alpha(self, ctx: ExprParser.Var_alphaContext):
+        pass
+
+    def visitVar_beta(self, ctx: ExprParser.Var_betaContext):
+        pass
+
+    def visitVar_underscore_braces_var(
+        self, ctx: ExprParser.Var_underscore_braces_varContext
+    ):
+        pass
+
+    def visitVar_underscore_int(self, ctx: ExprParser.Var_underscore_intContext):
+        pass
+
+    def visitVar_underscore_braces_int(
+        self, ctx: ExprParser.Var_underscore_braces_intContext
+    ):
+        pass
+
+    def visitVar_underscore_var(self, ctx: ExprParser.Var_underscore_varContext):
+        pass
 
     def visitVar_K(self, ctx: ExprParser.Var_KContext):
         pass
@@ -146,64 +559,6 @@ class Calc(ExprVisitor):
         print(resp)
         return resp
 
-    def visitInteger(self, ctx):
-        print("visitInteger")
-        resp = int(ctx.INT().getText())
-        self.output.append(resp)
-        return resp
-
-    def visitExpr_relop_expr(self, ctx):
-        print("expr_relop_expr")
-        lhs = self.visit(ctx.expr(0))
-        rhs = self.visit(ctx.expr(1))
-        if ctx.op.text == "\\neq":
-            resp = sympy.Ne(lhs, rhs, evaluate=False)
-        if ctx.op.text == "<":
-            resp = sympy.Lt(lhs, rhs, evaluate=False)
-        if ctx.op.text == ">":
-            resp = sympy.Gt(lhs, rhs, evaluate=False)
-        if ctx.op.text == "\\le":
-            resp = sympy.Le(lhs, rhs, evaluate=False)
-        if ctx.op.text == "\\ge":
-            resp = sympy.Ge(lhs, rhs, evaluate=False)
-        if ctx.op.text == "\\leq":
-            resp = sympy.Le(lhs, rhs, evaluate=False)
-        if ctx.op.text == "\\geq":
-            resp = sympy.Ge(lhs, rhs, evaluate=False)
-        self.output.append(resp)
-        print(resp)
-        return resp
-
-    def visitMul_div(self, ctx):
-        print("mul_div")
-        lhs = self.visit(ctx.expr(0))
-        rhs = self.visit(ctx.expr(1))
-        if ctx.op.text == "*":
-            resp = sympy.Mul(lhs, rhs, evaluate=False)
-        if ctx.op.text == "\\cdot":
-            resp = sympy.Mul(lhs, rhs, evaluate=False)
-        if ctx.op.text == "\\times":
-            resp = sympy.Mul(lhs, rhs, evaluate=False)
-        if ctx.op.text == "/":
-            resp = sympy.Mul(lhs, sympy.Pow(rhs, -1, evaluate=False), evaluate=False)
-        if ctx.op.text == "\\div":
-            resp = sympy.Mul(lhs, sympy.Pow(rhs, -1, evaluate=False), evaluate=False)
-        self.output.append(resp)
-        return resp
-
-    def visitAdd_sub(self, ctx):
-        print("add_sub")
-        lhs = self.visit(ctx.expr(0))
-        rhs = self.visit(ctx.expr(1))
-        if ctx.op.text == "+":
-            resp = sympy.Add(lhs, rhs, evaluate=False)
-
-        if ctx.op.text == "-":
-            resp = sympy.Add(lhs, -1 * rhs, evaluate=False)
-        self.output.append(resp)
-        print(resp)
-        return resp
-
     def visitSymbol(self, ctx):
         print("symbol")
         resp = sympy.Symbol(ctx.getText())
@@ -221,24 +576,6 @@ class Calc(ExprVisitor):
         lhs = self.visit(ctx.expr(0))
         rhs = self.visit(ctx.expr(1))
         resp = sympy.Eq(lhs, rhs, evaluate=False)
-        print(resp)
-        self.output.append(resp)
-        return resp
-
-    def visitExpo(self, ctx):
-        print("expo")
-        lhs = self.visit(ctx.expr(0))
-        rhs = self.visit(ctx.expr(1))
-        resp = sympy.Pow(lhs, rhs, evaluate=False)
-        print(resp)
-        self.output.append(resp)
-        return resp
-
-    def visitInteger_var(self, ctx):
-        print("Integer_var")
-        lhs = int(ctx.INT().getText())
-        rhs = sympy.Symbol(ctx.var().getText())
-        resp = sympy.Mul(lhs, rhs, evaluate=False)
         print(resp)
         self.output.append(resp)
         return resp
@@ -262,170 +599,9 @@ class Calc(ExprVisitor):
         return resp
 
     def visitDenominator_integer(self, ctx):
-        # set_trace()
         print("Denominator Int")
         resp = int(ctx.getText())
         self.output.append(resp)
-        return resp
-
-    def visitBinom(self, ctx):
-        lhs = self.visit(ctx.binomial().numerator())
-        rhs = self.visit(ctx.binomial().denominator())
-        resp = sympy.binomial(lhs, rhs, evaluate=False)
-        self.output.append(resp)
-        print(resp)
-        return resp
-
-    def visitFrac(self, ctx):
-        lhs = self.visit(ctx.fraction().numerator())
-        rhs = self.visit(ctx.fraction().denominator())
-        resp = sympy.Mul(lhs, sympy.Pow(rhs, -1, evaluate=False), evaluate=False)
-        self.output.append(resp)
-        print(resp)
-        return resp
-
-    def visitParens_parens(self, ctx):
-        # set_trace()
-        lhs = self.visit(ctx.expr(0))
-        rhs = self.visit(ctx.expr(1))
-        resp = sympy.Mul(lhs, rhs, evaluate=False)
-        self.output.append(resp)
-        print(resp)
-        return resp
-
-    def visitAbs_expr(self, ctx):
-        resp = self.visit(ctx.expr())
-        resp = sympy.Abs(resp, evaluate=False)
-        self.output.append(resp)
-        print(resp)
-        return resp
-
-    def visitParens(self, ctx):
-        resp = self.visit(ctx.expr())
-        self.output.append(resp)
-        print(resp)
-        return resp
-
-    def visitBraces(self, ctx):
-        resp = self.visit(ctx.expr())
-        self.output.append(resp)
-        print(resp)
-        return resp
-
-    def visitFactorial(self, ctx):
-        # set_trace()
-        resp = self.visit(ctx.expr())
-        print(resp)
-        resp = sympy.factorial(resp, evaluate=False)
-        self.output.append(resp)
-        print(resp)
-        return resp
-
-    def visitVar_var(self, ctx):
-        # set_trace()
-        lhs = sympy.Symbol(ctx.var(0).getText())
-        rhs = sympy.Symbol(ctx.var(1).getText())
-        resp = sympy.Mul(lhs, rhs, evaluate=False)
-
-        self.output.append(resp)
-        print(resp)
-        return resp
-
-    def visitIntegral(self, ctx):
-        expr = self.visit(ctx.expr())
-        var = sympy.Symbol(ctx.v.text)
-        resp = sympy.Integral(expr, var)
-        print(resp)
-
-    def visitLg(self, ctx: ExprParser.LgContext):
-        # set_trace()
-        expr = self.visit(ctx.e)
-        resp = sympy.log(expr, 10)
-        self.output.append(resp)
-        print(resp)
-        return resp
-
-    def visitLn(self, ctx: ExprParser.LnContext):
-        # set_trace()
-        from sympy.core.numbers import E
-
-        expr = self.visit(ctx.e)
-        resp = sympy.log(expr, E)
-        self.output.append(resp)
-        print(resp)
-        return resp
-
-    def visitSin(self, ctx: ExprParser.SinContext):
-        if ctx.atom():
-            print(ctx.atom().getType())
-            var = ctx.atom().var().getText()
-            symbol = sympy.Symbol(var)
-            resp = sympy.sin(symbol)
-        if ctx.expr():
-            expr = self.visit(ctx.expr())
-            resp = sympy.sin(expr)
-        self.output.append(resp)
-        print(resp)
-        return resp
-
-    def visitExp(self, ctx: ExprParser.ExpContext):
-        # set_trace()
-        expr = self.visit(ctx.e)
-        resp = sympy.exp(expr)
-        self.output.append(resp)
-        print(resp)
-        return resp
-
-    def visitSum(self, ctx: ExprParser.SumContext):
-        if ctx.e0:
-            expr = self.visit(ctx.e0)
-
-        if ctx.eq0:
-            expr = self.visit(ctx.eq0)
-            var = expr.args[0]
-            start_index = expr.args[1]
-            # set_trace()
-        expr1 = self.visit(ctx.e1)
-        expr2 = self.visit(ctx.e2)
-        resp = sympy.Sum(expr2, (var, start_index, expr1))
-        self.output.append(resp)
-        print(resp)
-        return resp
-
-    def visitLog(self, ctx: ExprParser.LogContext):
-
-        if ctx.atom():
-            if ctx.atom().INT():
-                e1 = int(ctx.atom().INT().getText())
-            if ctx.atom().var():
-                e1 = sympy.Symbol(ctx.atom().var().getText())
-        else:
-            e1 = self.visit(ctx.e1)
-        e2 = self.visit(ctx.e2)
-        resp = sympy.log(e2, e1)
-        self.output.append(resp)
-        print(resp)
-        return resp
-
-    def visitFloor(self, ctx: ExprParser.FloorContext):
-        resp = self.visit(ctx.expr())
-        resp = sympy.floor(resp, evaluate=False)
-        self.output.append(resp)
-        print(resp)
-        return resp
-
-    def visitCeiling(self, ctx: ExprParser.CeilingContext):
-        resp = self.visit(ctx.expr())
-        resp = sympy.ceiling(resp, evaluate=False)
-        self.output.append(resp)
-        print(resp)
-        return resp
-
-    def visitFnctn(self, ctx: ExprParser.FunctionContext):
-        resp = ctx.getText()
-        resp = sympy.Function(resp, evaluate=False)
-        self.output.append(resp)
-        print(resp)
         return resp
 
 
@@ -445,17 +621,16 @@ def run_test(k):
 ok = []
 failed = []
 exceptions = []
+no_output = []
 for ix, tpl in enumerate(GOOD_PAIRS):
     k, v = tpl
-    #print(k)
-    #f = open("test_file", "w")
-    #f.write(k)
-    #f.write("\n")
-    #f.close()
     output = False
 
     try:
         output = run_test(k)
+        if not output:
+            no_ouput.append(k)
+            # set_trace()
     except Exception as e:
         # set_trace()
         exceptions.append((e, k, v))
@@ -476,23 +651,8 @@ print(
     "failed",
     len(failed),
     "percentage",
-    100 * len(ok) / (len(ok) + len(failed)),
+    100 * len(ok) / ix,
 )
 print(failed)
-#     def visitArccos(self, ctx:ExprParser.ArccosContext): resp = ctx.getText()
-#     def visitArccot(self, ctx:ExprParser.ArccotContext): resp = ctx.getText()
-#     def visitArccsc(self, ctx:ExprParser.ArccscContext): resp = ctx.getText()
-#     def visitArcosh(self, ctx:ExprParser.ArcoshContext): resp = ctx.getText()
-#     def visitArcsec(self, ctx:ExprParser.ArcsecContext): resp = ctx.getText()
-#     def visitArcsin(self, ctx:ExprParser.ArcsinContext): resp = ctx.getText()
-#     def visitArctan(self, ctx:ExprParser.ArctanContext): resp = ctx.getText()
-#     def visitArsinh(self, ctx:ExprParser.ArsinhContext): resp = ctx.getText()
-#     def visitArtanh(self, ctx:ExprParser.ArtanhContext): resp = ctx.getText()
-#     def visitCos(self, ctx:ExprParser.CosContext): resp = ctx.getText()
-#     def visitCosh(self, ctx:ExprParser.CoshContext): resp = ctx.getText()
-#     def visitCot(self, ctx:ExprParser.CotContext): resp = ctx.getText()
-#     def visitCsc(self, ctx:ExprParser.CscContext): resp = ctx.getText()
-#     def visitSec(self, ctx:ExprParser.SecContext): resp = ctx.getText()
-#     def visitSinh(self, ctx:ExprParser.SinhContext): resp = ctx.getText()
-#     def visitTanh(self, ctx:ExprParser.TanhContext): resp = ctx.getText()
-#     def visitTan(self, ctx:ExprParser.TanContext): resp = ctx.getText()
+# def visitProg(self, ctx:ExprParser.ProgContext):
+# def visitStat(self, ctx:ExprParser.StatContext):
