@@ -63,7 +63,6 @@ class Calc(ExprVisitor):
         lhs = self.visit(ctx.expr(0))
         rhs = self.visit(ctx.expr(1))
         resp = sympy.Mul(lhs, rhs, evaluate=False)
-        logger(ctx)
         self.logger(ctx, resp)
         return resp
 
@@ -74,7 +73,7 @@ class Calc(ExprVisitor):
 
     def visitInteger_var(self, ctx: ExprParser.Integer_varContext):
         lhs = int(ctx.INT().getText())
-        rhs = sympy.Symbol(ctx.var().getText())
+        rhs = self.visit(ctx.var())
         resp = sympy.Mul(lhs, rhs, evaluate=False)
         self.logger(ctx, resp)
         return resp
@@ -86,16 +85,100 @@ class Calc(ExprVisitor):
         return resp
 
     def visitVar_prime(self, ctx: ExprParser.Var_primeContext):
-        lhs = ctx.var().getText()
+        lhs = self.visit(ctx.var())
         rhs = ctx.PRIME().getText()
         resp = sympy.Symbol(lhs + rhs)
         self.logger(ctx, resp)
         return resp
 
     def visitVar_parens(self, ctx: ExprParser.Var_parensContext):
-        lhs = sympy.Symbol(ctx.var().getText())
+        lhs = self.visit(ctx.var())
         rhs = self.visit(ctx.expr())
         resp = sympy.Mul(lhs, rhs, evaluate=False)
+        self.logger(ctx, resp)
+        return resp
+
+    def visitVar_G(self, ctx: ExprParser.Var_GContext):
+        resp = ctx.var().getText()
+        lhs = sympy.Symbol(resp)
+        self.logger(ctx, resp)
+        return resp
+
+    def visitVar_a(self, ctx: ExprParser.Var_aContext):
+        resp = ctx.var().getText()
+        lhs = sympy.Symbol(resp)
+        self.logger(ctx, resp)
+        return resp
+
+    def visitVar_b(self, ctx: ExprParser.Var_bContext):
+        resp = ctx.var().getText()
+        lhs = sympy.Symbol(resp)
+        self.logger(ctx, resp)
+        return resp
+
+    def visitVar_c(self, ctx: ExprParser.Var_cContext):
+        resp = ctx.var().getText()
+        lhs = sympy.Symbol(resp)
+        self.logger(ctx, resp)
+        return resp
+
+    def visitVar_x(self, ctx: ExprParser.Var_xContext):
+        resp = ctx.var().getText()
+        lhs = sympy.Symbol(resp)
+        self.logger(ctx, resp)
+        return resp
+
+    def visitVar_y(self, ctx: ExprParser.Var_yContext):
+        resp = ctx.var().getText()
+        lhs = sympy.Symbol(resp)
+        self.logger(ctx, resp)
+        return resp
+
+    def visitVar_z(self, ctx: ExprParser.Var_zContext):
+        resp = ctx.var().getText()
+        lhs = sympy.Symbol(resp)
+        self.logger(ctx, resp)
+        return resp
+
+    def visitVar_u(self, ctx: ExprParser.Var_uContext):
+        resp = ctx.var().getText()
+        lhs = sympy.Symbol(resp)
+        self.logger(ctx, resp)
+        return resp
+
+    def visitVar_v(self, ctx: ExprParser.Var_vContext):
+        resp = ctx.var().getText()
+        lhs = sympy.Symbol(resp)
+        self.logger(ctx, resp)
+        return resp
+
+    def visitVar_w(self, ctx: ExprParser.Var_wContext):
+        resp = ctx.var().getText()
+        lhs = sympy.Symbol(resp)
+        self.logger(ctx, resp)
+        return resp
+
+    def visitVar_n(self, ctx: ExprParser.Var_nContext):
+        resp = ctx.var().getText()
+        lhs = sympy.Symbol(resp)
+        self.logger(ctx, resp)
+        return resp
+
+    def visitVar_h(self, ctx: ExprParser.Var_hContext):
+        resp = ctx.var().getText()
+        lhs = sympy.Symbol(resp)
+        self.logger(ctx, resp)
+        return resp
+
+    def visitVar_K(self, ctx: ExprParser.Var_KContext):
+        resp = ctx.var().getText()
+        lhs = sympy.Symbol(resp)
+        self.logger(ctx, resp)
+        return resp
+
+    def visitVar_k(self, ctx: ExprParser.Var_kContext):
+        resp = ctx.var().getText()
+        lhs = sympy.Symbol(resp)
         self.logger(ctx, resp)
         return resp
 
@@ -176,9 +259,8 @@ class Calc(ExprVisitor):
         return resp
 
     def visitVar_var(self, ctx: ExprParser.Var_varContext):
-        # set_trace()
-        lhs = sympy.Symbol(ctx.var(0).getText())
-        rhs = sympy.Symbol(ctx.var(1).getText())
+        lhs = self.visit(ctx.var(0))
+        rhs = self.visit(ctx.var(0))
         resp = sympy.Mul(lhs, rhs, evaluate=False)
         self.logger(ctx, resp)
         return resp
@@ -577,7 +659,11 @@ class Calc(ExprVisitor):
         return resp
 
     def visitVar(self, ctx):
-        resp = sympy.Symbol(ctx.var().getText())
+        set_trace()
+        text = ctx.var().getText()
+        if re.findall("alpha|beta|theta", text):
+            text = self.visit(ctx.var())
+        resp = sympy.Symbol(text)
         self.logger(ctx, resp)
         return resp
 
@@ -623,7 +709,7 @@ ok = []
 failed = []
 exceptions = []
 no_output = []
-debug = False
+debug = True
 for ix, tpl in enumerate(GOOD_PAIRS):
     k, v = tpl
     if re.findall(r"angle|sqrt|\\lim|\\infty|mathit|product", k):
