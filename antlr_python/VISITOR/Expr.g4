@@ -6,6 +6,7 @@ prog
 
 stat
    : expr
+   | relational
    | arccos
    | arccot
    | arccsc
@@ -42,7 +43,7 @@ expr
    : < assoc = right > expr '^' expr # expo
    | expr op = ('*' | '/' | '\\times' | '\\cdot' | '\\div') expr # mul_div
    | expr op = ('+' | '-') expr # add_sub
-   | expr op = ('>' | '<' | '\neq' | '\\leq' | '\\geq' | '\\le' | '\\ge') expr # expr_relop_expr
+   | expr op = ('>' | '<' | '\\neq' | '\\leq' | '\\geq' | '\\le' | '\\ge') expr # expr_relop_expr
    | '|' expr '|' # abs_expr
    | var '{' expr '}' # var_braces
    | '{' expr '}' var # braces_var
@@ -90,7 +91,7 @@ hat
    ;
 
 IGNORE
-   : ('\\!'|'\\;'|'\\:'| '\\quad'| '\\qquad' |'\\thickspace'|'\\,' | '\\negthickspace'|'\\displaystyle' | '\\left' | '\\right' | '\\begin{align}' | '\\end{align}'|'\\negmedspace'|'\\medspace'|'\\negthinspace'|'\\thinspace') -> skip
+   : ('\\left\\'|'\\right\\'|'\\!'|'\\;'|'\\:'| '\\quad'| '\\qquad' |'\\thickspace'|'\\,' | '\\negthickspace'|'\\displaystyle' | '\\left' | '\\right' | '\\begin{align}' | '\\end{align}'|'\\negmedspace'|'\\medspace'|'\\negthinspace'|'\\thinspace') -> skip
    ;
 
 function

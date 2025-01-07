@@ -39,7 +39,7 @@ class Calc(ExprVisitor):
         text = ctx.getText()
         self.parse_tree[(name, start, stop)] = (text, resp)
 
-    def visitExpr_relop_expr(self, ctx: ExprParser.Expr_relop_exprContext):
+    def visitExpr_relop_expr(self, ctx:ExprParser.Expr_relop_exprContext):
         lhs = self.visit(ctx.expr(0))
         rhs = self.visit(ctx.expr(1))
         if ctx.op.text == "\\neq":
@@ -86,7 +86,6 @@ class Calc(ExprVisitor):
         return resp
 
     def visitVar_prime(self, ctx: ExprParser.Var_primeContext):
-        set_trace()
         lhs = ctx.var().getText()
         rhs = ctx.PRIME().getText()
         resp = sympy.Symbol(lhs + rhs)
@@ -135,6 +134,13 @@ class Calc(ExprVisitor):
             return resp
 
     def visitParens_var(self, ctx: ExprParser.Parens_varContext):
+        lhs = self.visit(ctx.expr())
+        rhs = sympy.Symbol(ctx.var().getText())
+        resp = sympy.Mul(lhs, rhs, evaluate=False)
+        self.logger(ctx, resp)
+        return resp
+
+    def visitBraces_var(self, ctx:ExprParser.Braces_varContext):
         lhs = self.visit(ctx.expr())
         rhs = sympy.Symbol(ctx.var().getText())
         resp = sympy.Mul(lhs, rhs, evaluate=False)
@@ -440,7 +446,6 @@ class Calc(ExprVisitor):
         resp = int(ctx.getText())
         self.logger(ctx, resp)
         return resp
-        pass
 
     def visitNumerator_expr(self, ctx: ExprParser.Numerator_exprContext):
         pass
@@ -460,56 +465,6 @@ class Calc(ExprVisitor):
     def visitRelop(self, ctx: ExprParser.RelopContext):
         pass
 
-    def visitVar_K(self, ctx: ExprParser.Var_KContext):
-        pass
-
-    def visitVar_G(self, ctx: ExprParser.Var_GContext):
-        pass
-
-    def visitVar_x(self, ctx: ExprParser.Var_xContext):
-        pass
-
-    def visitVar_y(self, ctx: ExprParser.Var_yContext):
-        pass
-
-    def visitVar_z(self, ctx: ExprParser.Var_zContext):
-        pass
-
-    def visitVar_a(self, ctx: ExprParser.Var_aContext):
-        pass
-
-    def visitVar_b(self, ctx: ExprParser.Var_bContext):
-        pass
-
-    def visitVar_c(self, ctx: ExprParser.Var_cContext):
-        pass
-
-    def visitVar_n(self, ctx: ExprParser.Var_nContext):
-        pass
-
-    def visitVar_h(self, ctx: ExprParser.Var_hContext):
-        pass
-
-    def visitVar_k(self, ctx: ExprParser.Var_kContext):
-        pass
-
-    def visitVar_u(self, ctx: ExprParser.Var_uContext):
-        pass
-
-    def visitVar_v(self, ctx: ExprParser.Var_vContext):
-        pass
-
-    def visitVar_w(self, ctx: ExprParser.Var_wContext):
-        pass
-
-    def visitVar_theta(self, ctx: ExprParser.Var_thetaContext):
-        pass
-
-    def visitVar_alpha(self, ctx: ExprParser.Var_alphaContext):
-        pass
-
-    def visitVar_beta(self, ctx: ExprParser.Var_betaContext):
-        pass
 
     def visitVar_underscore_braces_var(
         self, ctx: ExprParser.Var_underscore_braces_varContext
@@ -525,57 +480,6 @@ class Calc(ExprVisitor):
         pass
 
     def visitVar_underscore_var(self, ctx: ExprParser.Var_underscore_varContext):
-        pass
-
-    def visitVar_K(self, ctx: ExprParser.Var_KContext):
-        pass
-
-    def visitVar_G(self, ctx: ExprParser.Var_GContext):
-        pass
-
-    def visitVar_x(self, ctx: ExprParser.Var_xContext):
-        pass
-
-    def visitVar_y(self, ctx: ExprParser.Var_yContext):
-        pass
-
-    def visitVar_z(self, ctx: ExprParser.Var_zContext):
-        pass
-
-    def visitVar_a(self, ctx: ExprParser.Var_aContext):
-        pass
-
-    def visitVar_b(self, ctx: ExprParser.Var_bContext):
-        pass
-
-    def visitVar_c(self, ctx: ExprParser.Var_cContext):
-        pass
-
-    def visitVar_n(self, ctx: ExprParser.Var_nContext):
-        pass
-
-    def visitVar_h(self, ctx: ExprParser.Var_hContext):
-        pass
-
-    def visitVar_k(self, ctx: ExprParser.Var_kContext):
-        pass
-
-    def visitVar_u(self, ctx: ExprParser.Var_uContext):
-        pass
-
-    def visitVar_v(self, ctx: ExprParser.Var_vContext):
-        pass
-
-    def visitVar_w(self, ctx: ExprParser.Var_wContext):
-        pass
-
-    def visitVar_theta(self, ctx: ExprParser.Var_thetaContext):
-        pass
-
-    def visitVar_alpha(self, ctx: ExprParser.Var_alphaContext):
-        pass
-
-    def visitVar_beta(self, ctx: ExprParser.Var_betaContext):
         pass
 
     def visitVar_underscore_braces_var(
@@ -669,9 +573,10 @@ for ix, tpl in enumerate(GOOD_PAIRS):
         d = run_test(k)
         if d:
             resp = d[list(d)[-1]][-1]
-            if resp == v:
+            if repr(resp) == repr(v):
                 ok.append((k, v))
             else:
+                set_trace()
                 failed.append(k)
         else:
             failed.append(k)
