@@ -263,13 +263,13 @@ class Calc(ExprVisitor):
         else:
             e1 = self.visit(ctx.e1)
         e2 = self.visit(ctx.e2)
-        resp = sympy.log(e2, e1)
+        resp = sympy.log(e2, e1, evaluate=False)
         self.logger(ctx, resp)
         return resp
 
     def visitLg(self, ctx: ExprParser.LgContext):
         expr = self.visit(ctx.e)
-        resp = sympy.log(expr, 10)
+        resp = sympy.log(expr, 10, evaluate=False)
         self.logger(ctx, resp)
         return resp
 
@@ -283,7 +283,7 @@ class Calc(ExprVisitor):
         from sympy.core.numbers import E
 
         expr = self.visit(ctx.e)
-        resp = sympy.log(expr, E)
+        resp = sympy.log(expr, E, evaluate=False)
         self.logger(ctx, resp)
         return resp
 
@@ -621,9 +621,9 @@ for ix, tpl in enumerate(GOOD_PAIRS):
                 ok.append((k, v))
             else:
                 print(k, resp, v)
-                inp = input("trace?")
-                if inp != "":
-                    set_trace()
+                # inp = input("trace?")
+                # if inp != "":
+                #    set_trace()
                 failed.append(k)
         else:
             failed.append(k)
