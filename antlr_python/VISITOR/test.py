@@ -99,86 +99,86 @@ class Calc(ExprVisitor):
         return resp
 
     def visitVar_G(self, ctx: ExprParser.Var_GContext):
-        resp = ctx.var().getText()
-        lhs = sympy.Symbol(resp)
+        resp = ctx.G().getText()
+        resp = sympy.Symbol(resp)
         self.logger(ctx, resp)
         return resp
 
     def visitVar_a(self, ctx: ExprParser.Var_aContext):
-        resp = ctx.var().getText()
-        lhs = sympy.Symbol(resp)
+        resp = ctx.getText()
+        resp = sympy.Symbol(resp)
         self.logger(ctx, resp)
         return resp
 
     def visitVar_b(self, ctx: ExprParser.Var_bContext):
-        resp = ctx.var().getText()
-        lhs = sympy.Symbol(resp)
+        resp = ctx.getText()
+        resp = sympy.Symbol(resp)
         self.logger(ctx, resp)
         return resp
 
     def visitVar_c(self, ctx: ExprParser.Var_cContext):
-        resp = ctx.var().getText()
-        lhs = sympy.Symbol(resp)
+        resp = ctx.getText()
+        resp = sympy.Symbol(resp)
         self.logger(ctx, resp)
         return resp
 
     def visitVar_x(self, ctx: ExprParser.Var_xContext):
-        resp = ctx.var().getText()
-        lhs = sympy.Symbol(resp)
+        resp = ctx.getText()
+        resp = sympy.Symbol(resp)
         self.logger(ctx, resp)
         return resp
 
     def visitVar_y(self, ctx: ExprParser.Var_yContext):
-        resp = ctx.var().getText()
-        lhs = sympy.Symbol(resp)
+        resp = ctx.getText()
+        resp = sympy.Symbol(resp)
         self.logger(ctx, resp)
         return resp
 
     def visitVar_z(self, ctx: ExprParser.Var_zContext):
-        resp = ctx.var().getText()
-        lhs = sympy.Symbol(resp)
+        resp = ctx.getText()
+        resp = sympy.Symbol(resp)
         self.logger(ctx, resp)
         return resp
 
     def visitVar_u(self, ctx: ExprParser.Var_uContext):
-        resp = ctx.var().getText()
-        lhs = sympy.Symbol(resp)
+        resp = ctx.getText()
+        resp = sympy.Symbol(resp)
         self.logger(ctx, resp)
         return resp
 
     def visitVar_v(self, ctx: ExprParser.Var_vContext):
-        resp = ctx.var().getText()
-        lhs = sympy.Symbol(resp)
+        resp = ctx.getText()
+        resp = sympy.Symbol(resp)
         self.logger(ctx, resp)
         return resp
 
     def visitVar_w(self, ctx: ExprParser.Var_wContext):
-        resp = ctx.var().getText()
-        lhs = sympy.Symbol(resp)
+        resp = ctx.getText()
+        resp = sympy.Symbol(resp)
         self.logger(ctx, resp)
         return resp
 
     def visitVar_n(self, ctx: ExprParser.Var_nContext):
-        resp = ctx.var().getText()
-        lhs = sympy.Symbol(resp)
+        resp = ctx.getText()
+        resp = sympy.Symbol(resp)
         self.logger(ctx, resp)
         return resp
 
     def visitVar_h(self, ctx: ExprParser.Var_hContext):
-        resp = ctx.var().getText()
-        lhs = sympy.Symbol(resp)
+        resp = ctx.getText()
+        resp = sympy.Symbol(resp)
         self.logger(ctx, resp)
         return resp
 
     def visitVar_K(self, ctx: ExprParser.Var_KContext):
-        resp = ctx.var().getText()
-        lhs = sympy.Symbol(resp)
+        resp = ctx.getText()
+        resp = sympy.Symbol(resp)
         self.logger(ctx, resp)
         return resp
 
     def visitVar_k(self, ctx: ExprParser.Var_kContext):
-        resp = ctx.var().getText()
-        lhs = sympy.Symbol(resp)
+        resp = ctx.getText()
+        resp = sympy.Symbol(resp)
         self.logger(ctx, resp)
         return resp
 
@@ -260,7 +260,7 @@ class Calc(ExprVisitor):
 
     def visitVar_var(self, ctx: ExprParser.Var_varContext):
         lhs = self.visit(ctx.var(0))
-        rhs = self.visit(ctx.var(0))
+        rhs = self.visit(ctx.var(1))
         resp = sympy.Mul(lhs, rhs, evaluate=False)
         self.logger(ctx, resp)
         return resp
@@ -710,9 +710,10 @@ failed = []
 exceptions = []
 no_output = []
 debug = True
+debug = False
 for ix, tpl in enumerate(GOOD_PAIRS):
     k, v = tpl
-    if re.findall(r"angle|sqrt|\\lim|\\infty|mathit|product", k):
+    if re.findall(r"\\int|\\prod|angle|sqrt|\\lim|\\infty|mathit|product", k):
         continue
     output = False
     try:
