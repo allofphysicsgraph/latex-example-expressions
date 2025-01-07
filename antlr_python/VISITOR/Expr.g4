@@ -26,6 +26,7 @@ stat
    | factorial
    | floor
    | integral
+   | limit
    | lg
    | ln
    | log
@@ -69,9 +70,22 @@ expr
    | function # fnctn
    ;
 
-
-
-
+// TODO Check
+limit
+    : '\\lim' '_' '{' var '\\to' e1=expr '}' e2 = expr
+	| '\\lim' '_' '{' var '\\rightarrow' e1=expr '}' e2 = expr
+	| '\\lim' '_' '{' var '\\Rightarrow' e1=expr '}' e2 = expr
+	| '\\lim' '_' '{' var '\\longrightarrow' e1=expr '}' e2 = expr
+	| '\\lim' '_' '{' var '\\Longrightarrow' e1=expr '}' e2 = expr
+	| '\\lim' '_' '{' var '\\to' e1=expr  sup= (PLUS | MINUS)? '}' e2 = expr
+	| '\\lim' '_' '{' var '\\rightarrow' e1=expr  sup= (PLUS | MINUS)? '}' e2 = expr
+    ;
+PLUS:
+    '+'
+    ;
+MINUS:
+    '-'
+    ;
 hbar
    : '\\hbar'
    ;
@@ -142,87 +156,87 @@ sin
    ;
 
 arccos
-   : '\\arccos'
+   : '\\arccos' atom
    | '\\arccos' '(' expr ')'
    ;
 
 arccot
-   : '\\arccot'
+   : '\\arccot' atom
    | '\\arccot' '(' expr ')'
    ;
 
 arccsc
-   : '\\arccsc'
+   : '\\arccsc' atom
    | '\\arccsc' '(' expr ')'
    ;
 
 arcosh
-   : '\\arcosh'
+   : '\\arcosh' atom
    | '\\arcosh' '(' expr ')'
    ;
 
 arcsec
-   : '\\arcsec'
+   : '\\arcsec' atom
    | '\\arcsec' '(' expr ')'
    ;
 
 arcsin
-   : '\\arcsin'
+   : '\\arcsin' atom
    | '\\arcsin' '(' expr ')'
    ;
 
 arctan
-   : '\\arctan'
+   : '\\arctan' atom
    | '\\arctan' '(' expr ')'
    ;
 
 arsinh
-   : '\\arsinh'
+   : '\\arsinh' atom
    | '\\arsinh' '(' expr ')'
    ;
 
 artanh
-   : '\\artanh'
+   : '\\artanh' atom
    | '\\artanh' '(' expr ')'
    ;
 
 cos
-   : '\\cos'
+   : '\\cos' atom
    | '\\cos' '(' expr ')'
    ;
 
 cosh
-   : '\\cosh'
+   : '\\cosh' atom
    | '\\cosh' '(' expr ')'
    ;
 
 cot
-   : '\\cot'
+   : '\\cot' atom
    | '\\cot' '(' expr ')'
    ;
 
 csc
-   : '\\csc'
+   : '\\csc' atom
    | '\\csc' '(' expr ')'
    ;
 
 sec
-   : '\\sec'
+   : '\\sec' atom
    | '\\sec' '(' expr ')'
    ;
 
 sinh
-   : '\\sinh'
+   : '\\sinh' atom
    | '\\sinh' '(' expr ')'
    ;
 
 tanh
-   : '\\tanh'
+   : '\\tanh' atom
    | '\\tanh' '(' expr ')'
    ;
 
 tan
-   : '\\tan'
+   : '\\tan' atom
    | '\\tan' '(' expr ')'
    ;
 
@@ -242,7 +256,7 @@ sum
    ;
 
 product
-   : '\\product' '_' '{' (e0 = expr | eq0 = equation) '}' '^' '{' e1 = expr '}' e2 = expr
+   : '\\prod' '_' '{' (e0 = expr | eq0 = equation) '}' '^' '{' e1 = expr '}' e2 = expr
    ;
 
 binomial
@@ -295,6 +309,9 @@ INT
    : '0'
    | [1-9] [0-9]*
    ;
+sqrt
+    : '\\sqrt' '{' expr '}'
+    ;
 
 fragment TEXT
    : [a-zA-Z ]+

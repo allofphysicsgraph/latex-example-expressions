@@ -1,4 +1,4 @@
-# antlr4 -no-listener -visitor Expr.g4 -Dlanguage=Python3
+# antlr4 -no-listener -visitor Expr.g4 -Dlanguage=Python3tom
 
 """
 (prog (stat (expr (expr (expr (expr (expr 1) + (expr 3)) + (expr 1)) + (expr x)) + (expr (expr 2) * (expr 3))) \n))
@@ -184,15 +184,16 @@ class Calc(ExprVisitor):
 
     def visitVar_alpha(self, ctx: ExprParser.Var_alphaContext):
         resp = ctx.getText()
-        resp = resp.replace("\\\\", "")
-        lhs = sympy.Symbol(resp)
+        resp = re.sub(r"\\+", "", resp)
+        resp = sympy.Symbol(resp)
         self.logger(ctx, resp)
         return resp
 
     def visitVar_theta(self, ctx: ExprParser.Var_thetaContext):
+        # set_trace()
         resp = ctx.getText()
-        resp = resp.replace("\\\\", "")
-        lhs = sympy.Symbol(resp)
+        resp = re.sub(r"\\+", "", resp)
+        resp = sympy.Symbol(resp)
         self.logger(ctx, resp)
         return resp
 
@@ -271,7 +272,7 @@ class Calc(ExprVisitor):
         return resp
 
     def visitFlt_var(self, ctx: ExprParser.Flt_varContext):
-        set_trace()
+        # set_trace()
         lhs = ctx.FLOAT().getText()
         rhs = sympy.Symbol(ctx.var().getText())
         l = re.findall("(\..*)", lhs)
@@ -336,6 +337,18 @@ class Calc(ExprVisitor):
     def visitHat(self, ctx: ExprParser.HatContext):
         pass
 
+    def visitBra(self, ctx: ExprParser.BraContext):
+        resp = self.visit(ctx.expr())
+        resp = sympy.Bra(resp, evaluate=False)
+        self.logger(ctx, resp)
+        return resp
+
+    def visitKet(self, ctx: ExprParser.KetContext):
+        resp = self.visit(ctx.expr())
+        resp = sympy.Ket(resp, evaluate=False)
+        self.logger(ctx, resp)
+        return resp
+
     def visitFunction(self, ctx: ExprParser.FunctionContext):
         pass
 
@@ -361,6 +374,19 @@ class Calc(ExprVisitor):
             e1 = self.visit(ctx.e1)
         e2 = self.visit(ctx.e2)
         resp = sympy.log(e2, e1, evaluate=False)
+        self.logger(ctx, resp)
+        return resp
+
+    def visitLimit(self, ctx: ExprParser.LimitContext):
+        var = sympy.Symbol(ctx.var().getText())
+        expr1 = self.visit(ctx.e1)
+        expr2 = self.visit(ctx.e2)
+        direction = "+-"
+        if ctx.PLUS():
+            direction = "+"
+        if ctx.MINUS():
+            direction = "-"
+        resp = sympy.Limit(expr2, var, expr1, dir=direction)
         self.logger(ctx, resp)
         return resp
 
@@ -397,9 +423,9 @@ class Calc(ExprVisitor):
         return resp
 
     def visitSin(self, ctx: ExprParser.SinContext):
+        # set_trace()
         if ctx.atom():
-            var = ctx.atom().var().getText()
-            symbol = sympy.Symbol(var)
+            symbol = self.visit(ctx.atom())
             resp = sympy.sin(symbol)
         if ctx.expr():
             expr = self.visit(ctx.expr())
@@ -409,9 +435,8 @@ class Calc(ExprVisitor):
 
     def visitArccos(self, ctx: ExprParser.ArccosContext):
         if ctx.atom():
-            var = ctx.atom().var().getText()
-            symbol = sympy.Symbol(var)
-            resp = sympy.acos(symbol)
+            var = self.visit(ctx.atom())
+            resp = sympy.acos(var)
         if ctx.expr():
             expr = self.visit(ctx.expr())
             resp = sympy.acos(expr)
@@ -421,9 +446,8 @@ class Calc(ExprVisitor):
 
     def visitArccot(self, ctx: ExprParser.ArccotContext):
         if ctx.atom():
-            var = ctx.atom().var().getText()
-            symbol = sympy.Symbol(var)
-            resp = sympy.acot(symbol)
+            var = self.visit(ctx.atom())
+            resp = sympy.acot(var)
         if ctx.expr():
             expr = self.visit(ctx.expr())
             resp = sympy.acot(expr)
@@ -432,9 +456,8 @@ class Calc(ExprVisitor):
 
     def visitArccsc(self, ctx: ExprParser.ArccscContext):
         if ctx.atom():
-            var = ctx.atom().var().getText()
-            symbol = sympy.Symbol(var)
-            resp = sympy.acsc(symbol)
+            var = self.visit(ctx.atom())
+            resp = sympy.acsc(var)
         if ctx.expr():
             expr = self.visit(ctx.expr())
             resp = sympy.acsc(expr)
@@ -443,9 +466,8 @@ class Calc(ExprVisitor):
 
     def visitArcosh(self, ctx: ExprParser.ArcoshContext):
         if ctx.atom():
-            var = ctx.atom().var().getText()
-            symbol = sympy.Symbol(var)
-            resp = sympy.acosh(symbol)
+            var = self.visit(ctx.atom())
+            resp = sympy.acosh(var)
         if ctx.expr():
             expr = self.visit(ctx.expr())
             resp = sympy.acosh(expr)
@@ -554,7 +576,7 @@ class Calc(ExprVisitor):
 
     def visitTan(self, ctx: ExprParser.TanContext):
         if ctx.atom():
-            var = ctx.atom().var().getText()
+            var = self.visit(ctx.atom())
             symbol = sympy.Symbol(var)
             resp = sympy.tan(symbol)
         if ctx.expr():
@@ -564,12 +586,19 @@ class Calc(ExprVisitor):
         return resp
 
     def visitAtom(self, ctx: ExprParser.AtomContext):
-        pass
+        # set_trace()
+        if ctx.var():
+            resp = self.visit(ctx.var())
+        if ctx.INT():
+            resp = self.visit(ctx.INT())
+        if ctx.FLOAT():
+            resp = self.visit(ctx.FLOAT())
+        self.logger(ctx, resp)
+        return resp
 
     def visitSum(self, ctx: ExprParser.SumContext):
         if ctx.e0:
             expr = self.visit(ctx.e0)
-
         if ctx.eq0:
             expr = self.visit(ctx.eq0)
             var = expr.args[0]
@@ -659,10 +688,7 @@ class Calc(ExprVisitor):
         return resp
 
     def visitVar(self, ctx):
-        set_trace()
-        text = ctx.var().getText()
-        if re.findall("alpha|beta|theta", text):
-            text = self.visit(ctx.var())
+        text = self.visit(ctx.var())
         resp = sympy.Symbol(text)
         self.logger(ctx, resp)
         return resp
@@ -709,7 +735,7 @@ ok = []
 failed = []
 exceptions = []
 no_output = []
-debug = True
+# debug = True
 debug = False
 for ix, tpl in enumerate(GOOD_PAIRS):
     k, v = tpl
@@ -720,12 +746,14 @@ for ix, tpl in enumerate(GOOD_PAIRS):
         d = run_test(k)
         if d:
             resp = d[list(d)[-1]][-1]
+            print(d)
             if repr(resp) == repr(v):
                 ok.append((k, v))
             else:
                 print(k, resp, v)
                 if debug:
                     inp = input("trace?")
+                    print(d)
                     if inp != "":
                         set_trace()
                 failed.append(k)
@@ -750,3 +778,5 @@ print(failed)
 # <     def visitPi(self, ctx:ExprParser.PiContext): resp = ctx.getText()
 # <     def visitInfty(self, ctx:ExprParser.InftyContext): resp = ctx.getText()
 # <     def visitOverline(self, ctx:ExprParser.OverlineContext): resp = ctx.getText()
+# <     def visitLimit(self, ctx:ExprParser.LimitContext): resp = ctx.getText()
+# <     def visitSqrt(self, ctx:ExprParser.SqrtContext): resp = ctx.getText()
