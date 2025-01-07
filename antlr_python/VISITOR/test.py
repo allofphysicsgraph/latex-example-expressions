@@ -189,8 +189,9 @@ class Calc(ExprVisitor):
         return resp
 
     def visitFlt_var(self, ctx: ExprParser.Flt_varContext):
+        set_trace()
         lhs = ctx.FLOAT().getText()
-        rhs = sympy.Symbol(ctx.var(1).getText())
+        rhs = sympy.Symbol(ctx.var().getText())
         l = re.findall("(\..*)", lhs)
         if l:
             rnd = len(list(l[0]))
@@ -656,5 +657,9 @@ print(
     "percentage",
     100 * len(ok) / ix,
 )
-# set_trace()
+set_trace()
 print(failed)
+# <     def visitProduct(self, ctx:ExprParser.ProductContext): resp = ctx.getText()
+# <     def visitPi(self, ctx:ExprParser.PiContext): resp = ctx.getText()
+# <     def visitInfty(self, ctx:ExprParser.InftyContext): resp = ctx.getText()
+# <     def visitOverline(self, ctx:ExprParser.OverlineContext): resp = ctx.getText()

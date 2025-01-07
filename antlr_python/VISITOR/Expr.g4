@@ -34,9 +34,11 @@ stat
    | sin
    | sinh
    | sum
-   | tan
+   | product
+	| tan
    | tanh
    | vec
+   | overline
    ;
 
 expr
@@ -59,7 +61,7 @@ expr
    | fraction # frac
    | INT var # integer_var
    | INT # integer
-   | FLOAT # Flt_var 
+   | FLOAT var # Flt_var 
    | FLOAT # Flt
    | var var # var_var
    | var # variable
@@ -81,6 +83,9 @@ langle
 psi
    : '\\psi'
    ;
+
+overline:
+	'\\overline' '{' expr '}' ;
 
 vec
    : '\\vec' '{' expr '}'
@@ -228,11 +233,16 @@ atom
    ;
 
 FLOAT
-   : INT ('.' [0-9]+)
-   ;
+   : INT? ('.' [0-9]+)
+   | '-' INT? ('.' [0-9]+)
+ ;
 
 sum
    : '\\sum' '_' '{' (e0 = expr | eq0 = equation) '}' '^' '{' e1 = expr '}' e2 = expr
+   ;
+
+product
+   : '\\product' '_' '{' (e0 = expr | eq0 = equation) '}' '^' '{' e1 = expr '}' e2 = expr
    ;
 
 binomial
