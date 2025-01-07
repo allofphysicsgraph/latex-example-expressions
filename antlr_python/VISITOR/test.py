@@ -337,18 +337,6 @@ class Calc(ExprVisitor):
     def visitHat(self, ctx: ExprParser.HatContext):
         pass
 
-    def visitBra(self, ctx: ExprParser.BraContext):
-        resp = self.visit(ctx.expr())
-        resp = sympy.Bra(resp, evaluate=False)
-        self.logger(ctx, resp)
-        return resp
-
-    def visitKet(self, ctx: ExprParser.KetContext):
-        resp = self.visit(ctx.expr())
-        resp = sympy.Ket(resp, evaluate=False)
-        self.logger(ctx, resp)
-        return resp
-
     def visitFunction(self, ctx: ExprParser.FunctionContext):
         pass
 
@@ -774,9 +762,3 @@ print(
 )
 set_trace()
 print(failed)
-# <     def visitProduct(self, ctx:ExprParser.ProductContext): resp = ctx.getText()
-# <     def visitPi(self, ctx:ExprParser.PiContext): resp = ctx.getText()
-# <     def visitInfty(self, ctx:ExprParser.InftyContext): resp = ctx.getText()
-# <     def visitOverline(self, ctx:ExprParser.OverlineContext): resp = ctx.getText()
-# <     def visitLimit(self, ctx:ExprParser.LimitContext): resp = ctx.getText()
-# <     def visitSqrt(self, ctx:ExprParser.SqrtContext): resp = ctx.getText()

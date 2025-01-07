@@ -94,9 +94,6 @@ langle
    : '\\langle'
    ;
 
-psi
-   : '\\psi'
-   ;
 
 overline:
 	'\\overline' '{' expr '}' ;
@@ -347,7 +344,28 @@ symbol
    | var '_' var # var_underscore_var
    | '\\pi' # pi 
    | '\\infty'  # infty
-   ; 
+   | '\\gamma' # gamma
+   | '\\delta' # delta
+   | '\\epsilon' # epsilon
+   | '\\zeta' # zeta
+   | '\\eta' # eta
+   | '\\iota' # iota
+   | '\\kappa' # kappa
+   | '\\lambda' # lambda
+   | '\\mu' # mu
+   | '\\nu' # nu
+   | '\\xi' # xi
+   | '\\omicron' # omicron
+   | '\\rho' # rho
+   | '\\sigma' # sigma
+   | '\\tau' # tau
+   | '\\upsilon' # upsilon
+   | '\\phi' # phi
+   | '\\chi' # chi
+   | '\\psi' # psi
+   | '\\omega' # omega
+   | '\\ell' # ell
+   ;
 
 PRIME
    : '\''
