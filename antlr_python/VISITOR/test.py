@@ -565,7 +565,7 @@ no_output = []
 for ix, tpl in enumerate(GOOD_PAIRS):
     k, v = tpl
 
-    if re.findall(r"angle|sqrt|\\limit|mathit|product", k):
+    if re.findall(r"angle|sqrt|\\lim|\\infty|mathit|product", k):
         continue
     output = False
 
