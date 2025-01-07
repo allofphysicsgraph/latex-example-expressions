@@ -44,22 +44,30 @@ expr
    | expr op = ('+' | '-') expr # add_sub
    | expr op = ('>' | '<' | '\neq' | '\\leq' | '\\geq' | '\\le' | '\\ge') expr # expr_relop_expr
    | '|' expr '|' # abs_expr
+   | var '{' expr '}' # var_braces
+   | '{' expr '}' var # braces_var
    | '{' expr '}' # braces
    | '(' expr ')' '(' expr ')' # parens_parens
    | '(' expr ')' var # parens_var
+   | var '(' expr ')' # var_parens
    | '(' expr ')' # parens
+   | '[' expr ']' var  # brackets_var
+   | var '[' expr ']'  # brackets_var
+   | '[' expr ']'  # brackets
    | binomial # binom
    | fraction # frac
    | INT var # integer_var
    | INT # integer
    | FLOAT # Flt_var 
    | FLOAT # Flt
-   | var '(' expr ')' # var_parens
-   | var # variable
    | var var # var_var
+   | var # variable
    | symbol # symbl
    | function # fnctn
    ;
+
+
+
 
 hbar
    : '\\hbar'
@@ -82,7 +90,7 @@ hat
    ;
 
 IGNORE
-   : ('\\negthickspace'|'\\displaystyle' | '\\left' | '\\right' | '\\begin{align}' | '\\end{align}'|'\\negmedspace'|'\\negthinspace') -> skip
+   : ('\\!'|'\\;'|'\\:'| '\\quad'| '\\qquad' |'\\thickspace'|'\\,' | '\\negthickspace'|'\\displaystyle' | '\\left' | '\\right' | '\\begin{align}' | '\\end{align}'|'\\negmedspace'|'\\medspace'|'\\negthinspace'|'\\thinspace') -> skip
    ;
 
 function
@@ -299,7 +307,10 @@ var
    | '\\theta' # var_theta
    | '\\alpha' # var_alpha
    | '\\beta' # var_beta
+   | var PRIME # var_prime   
    ;
+
+
 
 symbol
    : var '_' '{' var '}' # var_underscore_braces_var
@@ -308,7 +319,7 @@ symbol
    | var '_' var # var_underscore_var
    ;
 
-PRIMES
+PRIME
    : '\''
    ;
 

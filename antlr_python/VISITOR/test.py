@@ -101,6 +101,15 @@ class Calc(ExprVisitor):
         print(resp)
         return resp
 
+    def visitVar_prime(self, ctx: ExprParser.Var_primeContext):
+        set_trace()
+        lhs = ctx.var().getText()
+        rhs = ctx.PRIME().getText()
+        resp = sympy.Symbol(lhs + rhs)
+        self.output.append(resp)
+        print(resp)
+        return resp
+
     def visitVar_parens(self, ctx: ExprParser.Var_parensContext):
         print("visitVar_parens")
         lhs = sympy.Symbol(ctx.var().getText())
@@ -136,6 +145,13 @@ class Calc(ExprVisitor):
         print(resp)
         return resp
 
+    def visitBrackets(self, ctx: ExprParser.BracketsContext):
+        print("visitBrackets")
+        resp = self.visit(ctx.expr())
+        self.output.append(resp)
+        print(resp)
+        return resp
+
     def visitFlt(self, ctx: ExprParser.FltContext):
         print("visitFlt")
         resp = ctx.FLOAT().getText()
@@ -155,7 +171,15 @@ class Calc(ExprVisitor):
         self.output.append(resp)
         print(resp)
         return resp
-        pass
+
+    def visitBrackets_var(self, ctx: ExprParser.Brackets_varContext):
+        print("visitBrackets_var")
+        lhs = self.visit(ctx.exp())
+        rhs = sympy.Symbol(ctx.var().getText())
+        resp = sympy.Mul(lhs, rhs, evaluate=False)
+        self.output.append(resp)
+        print(resp)
+        return resp
 
     def visitBinom(self, ctx: ExprParser.BinomContext):
         print("visitBinom")
@@ -732,7 +756,7 @@ for ix, tpl in enumerate(GOOD_PAIRS):
         if result:
             ok.append(ix)
         else:
-            set_trace()
+            # set_trace()
             failed.append((output, k, v))
     # inp = input()
 
@@ -745,7 +769,5 @@ print(
     100 * len(ok) / ix,
 )
 print(failed)
-# def visitProg(self, ctx:ExprParser.ProgContext):
-# def visitStat(self, ctx:ExprParser.StatContext):
-# <     def visitBinom(self, ctx:ExprParser.BinomContext): resp = ctx.getText()
-# <     def visitPm_expr(self, ctx:ExprParser.Pm_exprContext): resp = ctx.getText()
+# <     def visitBraces_var(self, ctx:ExprParser.Braces_varContext): resp = ctx.getText()
+# <     def visitVar_braces(self, ctx:ExprParser.Var_bracesContext): resp = ctx.getText()
