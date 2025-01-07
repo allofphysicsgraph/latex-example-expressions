@@ -408,35 +408,115 @@ class Calc(ExprVisitor):
 
     def visitCos(self, ctx: ExprParser.CosContext):
         print("visitCos")
-        pass
+        if ctx.atom():
+            print(ctx.atom().getType())
+            var = ctx.atom().var().getText()
+            symbol = sympy.Symbol(var)
+            resp = sympy.cos(symbol)
+        if ctx.expr():
+            expr = self.visit(ctx.expr())
+            resp = sympy.cos(expr)
+        self.output.append(resp)
+        print(resp)
+        return resp
 
     def visitCosh(self, ctx: ExprParser.CoshContext):
         print("visitCosh")
-        pass
+        if ctx.atom():
+            print(ctx.atom().getType())
+            var = ctx.atom().var().getText()
+            symbol = sympy.Symbol(var)
+            resp = sympy.cosh(symbol)
+        if ctx.expr():
+            expr = self.visit(ctx.expr())
+            resp = sympy.cosh(expr)
+        self.output.append(resp)
+        print(resp)
+        return resp
 
     def visitCot(self, ctx: ExprParser.CotContext):
         print("visitCot")
-        pass
+        if ctx.atom():
+            print(ctx.atom().getType())
+            var = ctx.atom().var().getText()
+            symbol = sympy.Symbol(var)
+            resp = sympy.cot(symbol)
+        if ctx.expr():
+            expr = self.visit(ctx.expr())
+            resp = sympy.cot(expr)
+        self.output.append(resp)
+        print(resp)
+        return resp
 
     def visitCsc(self, ctx: ExprParser.CscContext):
         print("visitCsc")
-        pass
+        if ctx.atom():
+            print(ctx.atom().getType())
+            var = ctx.atom().var().getText()
+            symbol = sympy.Symbol(var)
+            resp = sympy.csc(symbol)
+        if ctx.expr():
+            expr = self.visit(ctx.expr())
+            resp = sympy.csc(expr)
+        self.output.append(resp)
+        print(resp)
+        return resp
 
     def visitSec(self, ctx: ExprParser.SecContext):
         print("visitSec")
-        pass
+        if ctx.atom():
+            print(ctx.atom().getType())
+            var = ctx.atom().var().getText()
+            symbol = sympy.Symbol(var)
+            resp = sympy.sec(symbol)
+        if ctx.expr():
+            expr = self.visit(ctx.expr())
+            resp = sympy.sec(expr)
+        self.output.append(resp)
+        print(resp)
+        return resp
 
     def visitSinh(self, ctx: ExprParser.SinhContext):
         print("visitSinh")
-        pass
+        if ctx.atom():
+            print(ctx.atom().getType())
+            var = ctx.atom().var().getText()
+            symbol = sympy.Symbol(var)
+            resp = sympy.sinh(symbol)
+        if ctx.expr():
+            expr = self.visit(ctx.expr())
+            resp = sympy.sinh(expr)
+        self.output.append(resp)
+        print(resp)
+        return resp
 
     def visitTanh(self, ctx: ExprParser.TanhContext):
         print("visitTanh")
-        pass
+        if ctx.atom():
+            print(ctx.atom().getType())
+            var = ctx.atom().var().getText()
+            symbol = sympy.Symbol(var)
+            resp = sympy.tanh(symbol)
+        if ctx.expr():
+            expr = self.visit(ctx.expr())
+            resp = sympy.tanh(expr)
+        self.output.append(resp)
+        print(resp)
+        return resp
 
     def visitTan(self, ctx: ExprParser.TanContext):
         print("visitTan")
-        pass
+        if ctx.atom():
+            print(ctx.atom().getType())
+            var = ctx.atom().var().getText()
+            symbol = sympy.Symbol(var)
+            resp = sympy.tan(symbol)
+        if ctx.expr():
+            expr = self.visit(ctx.expr())
+            resp = sympy.tan(expr)
+        self.output.append(resp)
+        print(resp)
+        return resp
 
     def visitAtom(self, ctx: ExprParser.AtomContext):
         print("visitAtom")
