@@ -318,7 +318,9 @@ symbol
    | var '_' INT # var_underscore_int
    | var '_' '{' INT '}' # var_underscore_braces_int
    | var '_' var # var_underscore_var
-   ;
+   | '\\pi' # pi 
+   | '\\infty'  # infty
+   ; 
 
 PRIME
    : '\''

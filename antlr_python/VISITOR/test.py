@@ -99,6 +99,20 @@ class Calc(ExprVisitor):
         self.logger(ctx, resp)
         return resp
 
+    def visitVar_alpha(self, ctx: ExprParser.Var_alphaContext):
+        resp = ctx.getText()
+        resp = resp.replace("\\\\", "")
+        lhs = sympy.Symbol(resp)
+        self.logger(ctx, resp)
+        return resp
+
+    def visitVar_theta(self, ctx: ExprParser.Var_thetaContext):
+        resp = ctx.getText()
+        resp = resp.replace("\\\\", "")
+        lhs = sympy.Symbol(resp)
+        self.logger(ctx, resp)
+        return resp
+
     def visitInteger(self, ctx: ExprParser.IntegerContext):
         resp = int(ctx.INT().getText())
         self.logger(ctx, resp)
@@ -608,6 +622,7 @@ ok = []
 failed = []
 exceptions = []
 no_output = []
+debug = False
 for ix, tpl in enumerate(GOOD_PAIRS):
     k, v = tpl
     if re.findall(r"angle|sqrt|\\lim|\\infty|mathit|product", k):
@@ -621,9 +636,10 @@ for ix, tpl in enumerate(GOOD_PAIRS):
                 ok.append((k, v))
             else:
                 print(k, resp, v)
-                # inp = input("trace?")
-                # if inp != "":
-                #    set_trace()
+                if debug:
+                    inp = input("trace?")
+                    if inp != "":
+                        set_trace()
                 failed.append(k)
         else:
             failed.append(k)
