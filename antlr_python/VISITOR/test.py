@@ -72,6 +72,7 @@ class Calc(ExprVisitor):
         return resp
 
     def visitInteger_var(self, ctx: ExprParser.Integer_varContext):
+
         lhs = int(ctx.INT().getText())
         rhs = self.visit(ctx.var())
         resp = sympy.Mul(lhs, rhs, evaluate=False)
@@ -197,6 +198,7 @@ class Calc(ExprVisitor):
         return resp
 
     def visitInteger(self, ctx: ExprParser.IntegerContext):
+        # set_trace()
         resp = int(ctx.INT().getText())
         self.logger(ctx, resp)
         return resp
@@ -602,22 +604,17 @@ class Calc(ExprVisitor):
     def visitFraction(self, ctx: ExprParser.FractionContext):
         pass
 
-    def visitNumerator_integer(self, ctx: ExprParser.Numerator_integerContext):
+    def visitNumerator_single_digit(
+        self, ctx: ExprParser.Numerator_single_digitContext
+    ):
         resp = int(ctx.getText())
         self.logger(ctx, resp)
         return resp
 
     def visitNumerator_expr(self, ctx: ExprParser.Numerator_exprContext):
-        pass
-
-    def visitDenominator_integer(self, ctx: ExprParser.Denominator_integerContext):
-        pass
-
-    def visitDenominator_expr(self, ctx: ExprParser.Denominator_exprContext):
-        pass
-
-    def visitEquation(self, ctx: ExprParser.EquationContext):
-        pass
+        resp = self.visit(ctx.expr())
+        self.logger(ctx, resp)
+        return resp
 
     def visitRelational(self, ctx: ExprParser.RelationalContext):
         pass
@@ -680,7 +677,7 @@ class Calc(ExprVisitor):
         self.logger(ctx, resp)
         return resp
 
-    def visitEquation(self, ctx):
+    def visitEquation(self, ctx: ExprParser.EquationContext):
         lhs = self.visit(ctx.expr(0))
         rhs = self.visit(ctx.expr(1))
         resp = sympy.Eq(lhs, rhs, evaluate=False)
@@ -697,7 +694,9 @@ class Calc(ExprVisitor):
         self.logger(ctx, resp)
         return resp
 
-    def visitDenominator_integer(self, ctx):
+    def visitDenominator_single_digit_non_zero(
+        self, ctx: ExprParser.Denominator_single_digit_non_zeroContext
+    ):
         resp = int(ctx.getText())
         self.logger(ctx, resp)
         return resp
@@ -722,7 +721,7 @@ ok = []
 failed = []
 exceptions = []
 no_output = []
-# debug = True
+debug = True
 debug = False
 for ix, tpl in enumerate(GOOD_PAIRS):
     k, v = tpl
@@ -767,3 +766,4 @@ print(failed)
 # <     def visitOverline(self, ctx:ExprParser.OverlineContext): resp = ctx.getText()
 # <     def visitLimit(self, ctx:ExprParser.LimitContext): resp = ctx.getText()
 # <     def visitSqrt(self, ctx:ExprParser.SqrtContext): resp = ctx.getText()
+# <     def visitSingle_digit_non_zero(self, ctx:ExprParser.Single_digit_non_zeroContext): resp = ctx.getText()

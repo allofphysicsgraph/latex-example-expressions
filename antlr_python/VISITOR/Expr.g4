@@ -272,12 +272,12 @@ fraction
    ;
 
 numerator
-   : INT # numerator_integer
+   : SINGLE_DIGIT # numerator_single_digit
    | '{' expr '}' # numerator_expr
    ;
 
 denominator
-   : INT # denominator_integer
+   : SINGLE_DIGIT_NON_ZERO # denominator_single_digit_non_zero
    | '{' expr '}' # denominator_expr
    ;
 
@@ -309,6 +309,8 @@ INT
    : '0'
    | [1-9] [0-9]*
    ;
+SINGLE_DIGIT:  [0-9];
+SINGLE_DIGIT_NON_ZERO:  [1-9];
 sqrt
     : '\\sqrt' '{' expr '}'
     ;
@@ -353,8 +355,9 @@ PRIME
    : '\''
    ;
 
+
 NEWLINE
-   : '\n'
+   : '\n' -> skip
    ;
 
 WS
