@@ -16,6 +16,7 @@ visitInteger
 [1, 3, 1 + 3, 1, 1 + (1 + 3), x, x + (1 + (1 + 3)), 2, 3, 2*3, (x + (1 + (1 + 3))) + 2*3]
 """
 
+from time import sleep
 from antlr4 import *
 from ExprLexer import ExprLexer
 from ExprParser import ExprParser
@@ -145,7 +146,7 @@ class Calc(ExprVisitor):
 
     def visitBraces_var(self, ctx: ExprParser.Braces_varContext):
         lhs = self.visit(ctx.expr())
-        rhs = sympy.Symbol(ctx.var().getText())
+        rhs = self.visit(ctx.var())
         resp = sympy.Mul(lhs, rhs, evaluate=False)
         self.logger(ctx, resp)
         return resp
@@ -157,7 +158,7 @@ class Calc(ExprVisitor):
 
     def visitBrackets_var(self, ctx: ExprParser.Brackets_varContext):
         lhs = self.visit(ctx.expr())
-        rhs = sympy.Symbol(ctx.var().getText())
+        rhs = self.visit(ctx.var())
         resp = sympy.Mul(lhs, rhs, evaluate=False)
         self.logger(ctx, resp)
         return resp
@@ -303,7 +304,7 @@ class Calc(ExprVisitor):
 
     def visitFlt(self, ctx: ExprParser.FltContext):
         resp = ctx.FLOAT().getText()
-        l = re.findall("(\..*)", resp)
+        l = re.findall("(\\..*)", resp)
         if l:
             rnd = len(list(l[0]))
             resp = sympy.Float(resp, rnd)
@@ -314,7 +315,7 @@ class Calc(ExprVisitor):
         # set_trace()
         lhs = ctx.FLOAT().getText()
         rhs = sympy.Symbol(ctx.var().getText())
-        l = re.findall("(\..*)", lhs)
+        l = re.findall("(\\..*)", lhs)
         if l:
             rnd = len(list(l[0]))
             lhs = sympy.Float(lhs, rnd)
@@ -322,6 +323,10 @@ class Calc(ExprVisitor):
         self.logger(ctx, resp)
         return resp
 
+    def visitFnc_nrml(self, ctx: ExprParser.Fnc_nrmlContext):
+        return self.visitChildren(ctx)
+
+    # Visit a parse tree produced by ExprParser#func_normal.
     def visitFnctn(self, ctx: ExprParser.FnctnContext):
         resp = ctx.getText()
         resp = sympy.Function(resp, evaluate=False)
@@ -360,8 +365,7 @@ class Calc(ExprVisitor):
         return resp
 
     def visitInteger_var(self, ctx: ExprParser.Integer_varContext):
-
-        lhs = int(ctx.INT().getText())
+        lhs = self.visit(ctx)
         rhs = self.visit(ctx.var())
         resp = sympy.Mul(lhs, rhs, evaluate=False)
         self.logger(ctx, resp)
@@ -434,8 +438,6 @@ class Calc(ExprVisitor):
         self.logger(ctx, resp)
         return resp
 
-    visitNumerator_expr
-
     def visitNumerator_single_digit(
         self, ctx: ExprParser.Numerator_single_digitContext
     ):
@@ -452,6 +454,7 @@ class Calc(ExprVisitor):
         return resp
 
     def visitParens_parens(self, ctx: ExprParser.Parens_parensContext):
+        set_trace()
         lhs = self.visit(ctx.expr(0))
         rhs = self.visit(ctx.expr(1))
         resp = sympy.Mul(lhs, rhs, evaluate=False)
@@ -577,6 +580,9 @@ class Calc(ExprVisitor):
     def visitTrig_function_single(self, ctx: ExprParser.Trig_function_singleContext):
         return self.visitChildren(ctx)
 
+    def visitTrig_parens_parens(self, ctx: ExprParser.Trig_parens_parensContext):
+        return self.visitChildren(ctx)
+
     def visitVar(self, ctx):
         text = self.visit(ctx.var())
         resp = sympy.Symbol(text)
@@ -615,6 +621,10 @@ class Calc(ExprVisitor):
         return resp
 
     def visitVar_beta(self, ctx: ExprParser.Var_betaContext):
+        resp = ctx.getText()
+        resp = re.sub(r"\\+", "", resp)
+        resp = sympy.Symbol(resp)
+        self.logger(ctx, resp)
         return self.visitChildren(ctx)
 
     def visitVar_braces(self, ctx: ExprParser.Var_bracesContext):
@@ -686,6 +696,7 @@ class Calc(ExprVisitor):
         return resp
 
     def visitVar_underscore_int(self, ctx: ExprParser.Var_underscore_intContext):
+        # rewrite x_1 -> x_{1}
         lhs = ctx.getChild(0).getText() + ctx.getChild(1).getText()
         rhs = "{" + ctx.getChild(2).getText() + "}"
         resp = sympy.Symbol(lhs + rhs)
@@ -693,6 +704,7 @@ class Calc(ExprVisitor):
         return resp
 
     def visitVar_underscore_var(self, ctx: ExprParser.Var_underscore_varContext):
+        # rewrite x_a -> x_{a}
         lhs = ctx.getChild(0).getText() + ctx.getChild(1).getText()
         rhs = "{" + ctx.getChild(2).getText() + "}"
         resp = sympy.Symbol(lhs + rhs)
@@ -757,8 +769,6 @@ def run_test(k):
     calc.visit(tree)
     return calc.parse_tree
 
-
-from time import sleep
 
 ok = []
 failed = []
