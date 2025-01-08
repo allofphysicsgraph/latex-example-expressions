@@ -190,7 +190,6 @@ class Calc(ExprVisitor):
         return resp
 
     def visitVar_theta(self, ctx: ExprParser.Var_thetaContext):
-        # set_trace()
         resp = ctx.getText()
         resp = re.sub(r"\\+", "", resp)
         resp = sympy.Symbol(resp)
@@ -267,7 +266,7 @@ class Calc(ExprVisitor):
         return resp
 
     def visitVariable(self, ctx: ExprParser.VariableContext):
-        resp = sympy.Symbol(ctx.getText())
+        resp = self.visit(ctx.var())
         self.logger(ctx, resp)
         return resp
 
@@ -344,7 +343,7 @@ class Calc(ExprVisitor):
         expr = self.visit(ctx.expr())
         var = sympy.Symbol(ctx.v.text)
         resp = sympy.Integral(expr, var)
-        set_trace()
+        # set_trace()
 
     def visitFactorial(self, ctx: ExprParser.FactorialContext):
         resp = self.visit(ctx.expr())
