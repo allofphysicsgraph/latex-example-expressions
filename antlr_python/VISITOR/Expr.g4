@@ -9,13 +9,15 @@ stat
    | equation      # eqtn
    | trig_function trig_function+ # trig_function_multi
    | trig_function # trig_function_single
+   | '(' trig_function ')' '(' trig_function ')' # trig_parens_parens
    | ceiling       # clng
    | floor         # flr
    | factorial     # fctrl
+   | func_normal   # fnc_nrml
 ;
 
 func_normal:
-   | lg
+    lg
    | ln
    | log
    ;
@@ -23,6 +25,7 @@ func_normal:
 trig_function: 
     cos
    | sin
+   | tan
    ;
 
 expr
