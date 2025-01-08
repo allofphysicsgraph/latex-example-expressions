@@ -11,6 +11,7 @@ stat
    | trig_function # trig_function_single
    | ceiling       # clng
    | floor         # flr
+   | factorial     # fctrl
 ;
 
 func_normal:
@@ -101,7 +102,8 @@ integral
    ;
 
 factorial
-   : expr '!'
+   : expr '!'        # factorial_single
+   | factorial '!'   # factorial_recursive
    ;
 
 log
