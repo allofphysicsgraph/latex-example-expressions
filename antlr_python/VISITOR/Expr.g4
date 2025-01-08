@@ -5,41 +5,23 @@ prog
    ;
 
 stat
-   : expr
-   | relational
-   | arccos
-   | arccot
-   | arccsc
-   | arcosh
-   | arcsec
-   | arcsin
-   | arctan
-   | arsinh
-   | artanh
-   | ceiling
-   | cos
-   | cosh
-   | cot
-   | csc
-   | equation
-   | exp
-   | factorial
-   | floor
-   | integral
-   | limit
+   : expr          # expression           
+   | equation      # eqtn
+   | trig_function trig_function+ # trig_function_multi
+   | trig_function # trig_function_single
+   | ceiling       # clng
+   | floor         # flr
+;
+
+func_normal:
    | lg
    | ln
    | log
-   | NEWLINE
-   | sec
+   ;
+
+trig_function: 
+    cos
    | sin
-   | sinh
-   | sum
-   | product
-	| tan
-   | tanh
-   | vec
-   | overline
    ;
 
 expr
@@ -109,9 +91,6 @@ hat
    : '\\hat' '{' expr '}'
    ;
 
-IGNORE
-   : ('\\left\\'|'\\right\\'|'\\!'|'\\;'|'\\:'| '\\quad'| '\\qquad' |'\\thickspace'|'\\,' | '\\negthickspace'|'\\displaystyle' | '\\left' | '\\right' | '\\begin{align}' | '\\end{align}'|'\\negmedspace'|'\\medspace'|'\\negthinspace'|'\\thinspace') -> skip
-   ;
 
 function
    : 'f' '(' var (',' var)* ')'
@@ -151,7 +130,8 @@ ceiling
    ;
 
 sin
-   : '\\sin' atom
+   : '\\sin' trig_function 
+   | '\\sin' atom
    | '\\sin' '(' expr ')'
    ;
 
@@ -293,13 +273,6 @@ relop
    : '>'
    ;
 
-BEGIN_EQ
-   : '\\begin{equation}' -> skip
-   ;
-
-END_EQ
-   : '\\end{equation}' -> skip
-   ;
 
 EQUALS
    : '='
@@ -315,9 +288,6 @@ sqrt
     : '\\sqrt' '{' expr '}'
     ;
 
-fragment TEXT
-   : [a-zA-Z ]+
-   ;
 
 var
    : 'K' # var_K
@@ -341,7 +311,6 @@ var
    ;
 
 
-
 symbol
    : var '_' '{' var '}' # var_underscore_braces_var
    | var '_' INT # var_underscore_int
@@ -355,6 +324,17 @@ PRIME
    : '\''
    ;
 
+BEGIN_EQ
+   : '\\begin{equation}' -> skip
+   ;
+
+END_EQ
+   : '\\end{equation}' -> skip
+   ;
+
+IGNORE
+   : ('\\left\\'|'\\right\\'|'\\!'|'\\;'|'\\:'| '\\quad'| '\\qquad' |'\\thickspace'|'\\,' | '\\negthickspace'|'\\displaystyle' | '\\left' | '\\right' | '\\begin{align}' | '\\end{align}'|'\\negmedspace'|'\\medspace'|'\\negthinspace'|'\\thinspace') -> skip
+   ;
 
 NEWLINE
    : '\n' -> skip
