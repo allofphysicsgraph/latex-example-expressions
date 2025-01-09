@@ -19,6 +19,7 @@ visitInteger
 from time import sleep
 from antlr4 import *
 from ExprLexer import ExprLexer
+from ModeTagsLexer import ModeTagsLexer
 from ExprParser import ExprParser
 from ExprVisitor import ExprVisitor
 import sympy
@@ -97,16 +98,50 @@ class Calc(ExprVisitor):
         return resp
 
     def visitArcsec(self, ctx: ExprParser.ArcsecContext):
-        return self.visitChildren(ctx)
+        if ctx.atom():
+            var = self.visit(ctx.atom())
+            symbol = sympy.Symbol(atom)
+            resp = sympy.asec(symbol)
+        if ctx.expr():
+            expr = self.visit(ctx.expr())
+            resp = sympy.asec(expr)
+        self.logger(ctx, resp)
+        return resp
 
     def visitArcsin(self, ctx: ExprParser.ArcsinContext):
+        if ctx.atom():
+            var = self.visit(ctx.atom())
+            symbol = sympy.Symbol(atom)
+            resp = sympy.asin(symbol)
+        if ctx.expr():
+            expr = self.visit(ctx.expr())
+            resp = sympy.asin(expr)
+        self.logger(ctx, resp)
+        return resp
         return self.visitChildren(ctx)
 
     def visitArctan(self, ctx: ExprParser.ArctanContext):
-        return self.visitChildren(ctx)
+        if ctx.atom():
+            var = self.visit(ctx.atom())
+            symbol = sympy.Symbol(atom)
+            resp = sympy.atan(symbol)
+        if ctx.expr():
+            expr = self.visit(ctx.expr())
+            resp = sympy.atan(expr)
+        self.logger(ctx, resp)
+        return resp
 
     def visitArsinh(self, ctx: ExprParser.ArsinhContext):
-        return self.visitChildren(ctx)
+        if ctx.atom():
+            var = self.visit(ctx.atom())
+            symbol = sympy.Symbol(atom)
+            resp = sympy.asinh(symbol)
+        if ctx.expr():
+            expr = self.visit(ctx.expr())
+            resp = sympy.asinh(expr)
+        self.logger(ctx, resp)
+        return resp
+
 
     def visitArtanh(self, ctx: ExprParser.ArtanhContext):
         if ctx.atom():
@@ -128,16 +163,6 @@ class Calc(ExprVisitor):
             resp = self.visit(ctx.FLOAT())
         self.logger(ctx, resp)
         return resp
-
-    def visitBinom(self, ctx: ExprParser.BinomContext):
-        lhs = self.visit(ctx.binomial().numerator())
-        rhs = self.visit(ctx.binomial().denominator())
-        resp = sympy.binomial(lhs, rhs, evaluate=False)
-        self.logger(ctx, resp)
-        return resp
-
-    def visitBinomial(self, ctx: ExprParser.BinomialContext):
-        return self.visitChildren(ctx)
 
     def visitBraces(self, ctx: ExprParser.BracesContext):
         resp = self.visit(ctx.expr())
@@ -217,13 +242,6 @@ class Calc(ExprVisitor):
 
     def visitDenominator_expr(self, ctx):
         resp = self.visit(ctx.expr())
-        self.logger(ctx, resp)
-        return resp
-
-    def visitDenominator_single_digit_non_zero(
-        self, ctx: ExprParser.Denominator_single_digit_non_zeroContext
-    ):
-        resp = int(ctx.getText())
         self.logger(ctx, resp)
         return resp
 
@@ -334,6 +352,7 @@ class Calc(ExprVisitor):
         return resp
 
     def visitFrac(self, ctx: ExprParser.FracContext):
+        set_trace()
         lhs = self.visit(ctx.fraction().numerator())
         rhs = self.visit(ctx.fraction().denominator())
         resp = sympy.Mul(lhs, sympy.Pow(rhs, -1, evaluate=False), evaluate=False)
@@ -341,6 +360,7 @@ class Calc(ExprVisitor):
         return resp
 
     def visitFraction(self, ctx: ExprParser.FractionContext):
+        set_trace()
         return self.visitChildren(ctx)
 
     def visitFunc_normal(self, ctx: ExprParser.Func_normalContext):
@@ -438,13 +458,6 @@ class Calc(ExprVisitor):
         self.logger(ctx, resp)
         return resp
 
-    def visitNumerator_single_digit(
-        self, ctx: ExprParser.Numerator_single_digitContext
-    ):
-        resp = int(ctx.getText())
-        self.logger(ctx, resp)
-        return resp
-
     def visitOverline(self, ctx: ExprParser.OverlineContext):
         return self.visitChildren(ctx)
 
@@ -454,7 +467,6 @@ class Calc(ExprVisitor):
         return resp
 
     def visitParens_parens(self, ctx: ExprParser.Parens_parensContext):
-        set_trace()
         lhs = self.visit(ctx.expr(0))
         rhs = self.visit(ctx.expr(1))
         resp = sympy.Mul(lhs, rhs, evaluate=False)
@@ -581,7 +593,8 @@ class Calc(ExprVisitor):
         return self.visitChildren(ctx)
 
     def visitTrig_parens_parens(self, ctx: ExprParser.Trig_parens_parensContext):
-        return self.visitChildren(ctx)
+        print(ctx.getText())
+        #set_trace()
 
     def visitVar(self, ctx):
         text = self.visit(ctx.var())
@@ -759,7 +772,7 @@ class Calc(ExprVisitor):
 
 def run_test(k):
     input_stream = InputStream(k)
-    lexer = ExprLexer(input_stream)
+    lexer = ModeTagsLexer(input_stream)
     token_stream = CommonTokenStream(lexer)
     token_stream.fill()
     parser = ExprParser(token_stream)

@@ -1,4 +1,5 @@
 grammar Expr;
+options { tokenVocab=ModeTagsLexer;}
 
 prog
    : stat+
@@ -7,9 +8,9 @@ prog
 stat
    : expr          # expression           
    | equation      # eqtn
+   | '(' trig_function ')' '(' trig_function ')' # trig_parens_parens
    | trig_function trig_function+ # trig_function_multi
    | trig_function # trig_function_single
-   | '(' trig_function ')' '(' trig_function ')' # trig_parens_parens
    | ceiling       # clng
    | floor         # flr
    | factorial     # fctrl
@@ -44,8 +45,7 @@ expr
    | '[' expr ']' var  # brackets_var
    | var '[' expr ']'  # brackets_var
    | '[' expr ']'  # brackets
-   | binomial # binom
-   | fraction # frac
+   | fraction  # frac
    | INT var # integer_var
    | INT # integer
    | FLOAT var # Flt_var 
@@ -244,27 +244,17 @@ product
    : '\\prod' '_' '{' (e0 = expr | eq0 = equation) '}' '^' '{' e1 = expr '}' e2 = expr
    ;
 
-binomial
-   : '\\binom' numerator denominator
-   | '\\tbinom' numerator denominator
-   | '\\dbinom' numerator denominator
-   ;
 
 fraction
-   : '\\frac' numerator denominator
-   | '\\dfrac' numerator denominator
-   | '\\tfrac' numerator denominator
+   : FRAC numerator denominator 
    ;
 
-numerator
-   : SINGLE_DIGIT # numerator_single_digit
-   | '{' expr '}' # numerator_expr
-   ;
-
-denominator
-   : SINGLE_DIGIT_NON_ZERO # denominator_single_digit_non_zero
-   | '{' expr '}' # denominator_expr
-   ;
+numerator:
+    SINGLE_DIGIT
+    ;
+denominator:
+    SINGLE_DIGIT_NON_ZERO
+    ;
 
 equation
    : lhs = expr equals = EQUALS rhs = expr
@@ -283,12 +273,12 @@ EQUALS
    : '='
    ;
 
-INT
-   : '0'
-   | [1-9] [0-9]*
-   ;
-SINGLE_DIGIT:  [0-9];
 SINGLE_DIGIT_NON_ZERO:  [1-9];
+SINGLE_DIGIT:  [0-9];
+INT:
+    '0' | SINGLE_DIGIT_NON_ZERO SINGLE_DIGIT* ; 
+
+
 sqrt
     : '\\sqrt' '{' expr '}'
     ;
