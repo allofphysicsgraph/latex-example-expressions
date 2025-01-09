@@ -1,26 +1,25 @@
 parser grammar ExprParser;
 
-options { tokenVocab=ExprLexer;}
 
+options { tokenVocab = ExprLexer; }
 prog
    : stat+
    ;
 
 stat
-   : expr          # expression           
+   : expr # expression
    | LP trig_function RP LP trig_function RP # trig_parens_parens
    | trig_function trig_function+ # trig_function_multi
    | trig_function # trig_function_single
-;
+   ;
 
-
-trig_function: 
-    sin
+trig_function
+   : sin
    ;
 
 expr
    : < assoc = right > expr SUP expr # expo
-   | expr op = (MUL|DIV | TIMES | CDOT ) expr # mul_div
+   | expr op = (MUL | DIV | TIMES | CDOT) expr # mul_div
    | expr op = (ADD | SUB) expr # add_sub
    | expr op = (GT | LT | UNEQUAL | LTE | GTE) expr # expr_relop_expr
    | var LB expr RB # var_braces
@@ -30,35 +29,36 @@ expr
    | LP expr RP var # parens_var
    | var LP expr RP # var_parens
    | LP expr RP # parens
-   | LBR expr RBR var  # brackets_var
-   | var LBR expr RBR  # brackets_var
-   | LBR expr RBR  # brackets
-   | fraction  # frac
+   | LBR expr RBR var # brackets_var
+   | var LBR expr RBR # brackets_var
+   | LBR expr RBR # brackets
+   | fraction # frac
    | INT var # integer_var
    | INT # integer
-   | FLOAT var # Flt_var 
+   | FLOAT var # Flt_var
    | FLOAT # Flt
    | var var # var_var
    | var # variable
    | symbol # symbl
    ;
 
-
 sin
-   : SIN trig_function 
+   : SIN trig_function
    | SIN atom
    | SIN LP expr RP
    ;
 
-fraction:
-    FRAC numerator denominator;
+fraction
+   : FRAC numerator denominator
+   ;
 
-numerator:
-    SINGLE_DIGIT;
+numerator
+   : SINGLE_DIGIT
+   ;
 
-denominator:
-    SINGLE_DIGIT_NON_ZERO;
-
+denominator
+   : SINGLE_DIGIT_NON_ZERO
+   ;
 
 var
    : K_U_VAR # var_K
@@ -72,25 +72,25 @@ var
    | N_VAR # var_n
    | H_VAR # var_h
    | K_VAR # var_k
-   | U_VAR # var_u 
+   | U_VAR # var_u
    | V_VAR # var_v
    | W_VAR # var_w
    | THETA # var_theta
    | ALPHA # var_alpha
    | BETA # var_beta
-   | var PRIME # var_prime   
+   | var PRIME # var_prime
    ;
-
 
 symbol
    : var SUB LB var RB # var_underscore_braces_var
    | var SUB INT # var_underscore_int
    | var SUB LB INT RB # var_underscore_braces_int
    | var SUB var # var_underscore_var
-   ; 
+   ;
 
 atom
    : var
    | INT
    | FLOAT
    ;
+
