@@ -65,6 +65,13 @@ hat
    : HAT LB expr RB
    ;
 
+//sum:
+// SUM SUB  LB eq RB  SUP atom  expr,
+// SUM SUB  LB eq RB  SUP LB atom RB  expr,
+// SUM SUB  LB eq RB  SUP LB expr RB  atom SUP atom,
+// SUM SUP atom SUB  LB eq RB  expr,
+// SUM SUP  LB atom RB  SUB  LB eq RB  expr,
+
 log
    : LOG e = expr # log_expr
    | LOG SUB LBR a1 = atom RBR e1 = expr # log_atom_expr
