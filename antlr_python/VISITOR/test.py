@@ -152,13 +152,16 @@ class Calc(ExprParserVisitor):
         self.logger(ctx, resp)
         return resp
 
-    def visitFn_log(self, ctx: ExprParser.Fn_logContext):
+    def visitLog_expr(self, ctx: ExprParser.Log_exprContext):
         from sympy.core.numbers import E
 
-        expr = self.visit(ctx.log().expr())
+        expr = self.visit(ctx.expr())
         resp = sympy.log(expr, E, evaluate=False)
         self.logger(ctx, resp)
         return resp
+
+    def visitLog_expr_expr(self, ctx: ExprParser.Log_expr_exprContext):
+        set_trace()
 
     def visitFnc_nrml(self, ctx: ExprParser.Fnc_nrmlContext):
         # lg,ln,log
@@ -226,29 +229,22 @@ class Calc(ExprParserVisitor):
         self.logger(ctx, resp)
         return resp
 
-    def visitLog(self, ctx: ExprParser.LogContext):
-        set_trace()
-        if ctx.atom():
-            if ctx.atom().INT():
-                e1 = int(ctx.atom().INT().getText())
-            if ctx.atom().var():
-                e1 = sympy.Symbol(ctx.atom().var().getText())
-        else:
-            e1 = self.visit(ctx.e1)
-        e2 = self.visit(ctx.e2)
-        resp = sympy.log(e2, e1, evaluate=False)
-        self.logger(ctx, resp)
-        return resp
-
-    # Visit a parse tree produced by ExprParser#exp.
     def visitLn(self, ctx: ExprParser.LnContext):
         return self.visitChildren(ctx)
 
-    # Visit a parse tree produced by ExprParser#floor.
-    def visitLog(self, ctx: ExprParser.LogContext):
-        return self.visitChildren(ctx)
+    def visitLog_atom_expr(self, ctx: ExprParser.Log_atom_exprContext):
+        if ctx.atom():
+            if ctx.atom().INT():
+                a1 = int(ctx.atom().INT().getText())
+            if ctx.atom().var():
+                a1 = sympy.Symbol(ctx.atom().var().getText())
+        else:
+            e1 = self.visit(ctx.e1)
+        e1 = self.visit(ctx.e1)
+        resp = sympy.log(e1, a1, evaluate=False)
+        self.logger(ctx, resp)
+        return resp
 
-    # Visit a parse tree produced by ExprParser#lg.
     def visitMul_div(self, ctx: ExprParser.Mul_divContext):
         lhs = self.visit(ctx.expr(0))
         rhs = self.visit(ctx.expr(1))

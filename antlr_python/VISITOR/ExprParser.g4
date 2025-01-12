@@ -66,7 +66,10 @@ hat
    ;
 
 log
-   : LOG e = expr
+   : LOG e = expr # log_expr
+   | LOG SUB LBR a1 = atom RBR e1 = expr # log_atom_expr
+   | LOG SUB a1 = atom e1 = expr # log_atom_expr
+   | LOG SUB LBR e1 = expr RBR e2 = expr # log_expr_expr
    ;
 
 lg
