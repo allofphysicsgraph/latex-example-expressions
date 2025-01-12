@@ -1,5 +1,41 @@
 lexer grammar ExprLexer;
 
+HBAR
+   : '\\hbar'
+   ;
+
+HAT
+   : '\\hat'
+   ;
+
+LOG
+   : '\\log'
+   ;
+
+LG
+   : '\\lg'
+   ;
+
+EXP
+   : '\\exp'
+   ;
+
+LN
+   : '\\ln'
+   ;
+
+PRIME
+   : '\''
+   ;
+
+RFLOOR
+   : '\\rfloor'
+   ;
+
+LFLOOR
+   : '\\lfloor'
+   ;
+
 ADD
    : '+'
    ;
@@ -77,7 +113,7 @@ MINUS
    : '-'
    ;
 
-EQUAL
+EQUALS
    : '='
    | '=='
    | '\\equiv'
@@ -127,10 +163,6 @@ INT
 FLOAT
    : INT? ('.' [0-9]+)
    | '-' INT? ('.' [0-9]+)
-   ;
-
-PRIME
-   : '\''
    ;
 
 BEGIN_EQ

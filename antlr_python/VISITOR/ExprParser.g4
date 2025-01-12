@@ -11,10 +11,19 @@ stat
    | LP trig_function RP LP trig_function RP # trig_parens_parens
    | trig_function trig_function+ # trig_function_multi
    | trig_function # trig_function_single
+   | floor # flr
+   | func_normal # fnc_nrml
+   ;
+
+func_normal
+   : lg
+   | ln
+   | log
    ;
 
 trig_function
-   : sin
+   : cos
+   | sin
    ;
 
 expr
@@ -46,6 +55,39 @@ sin
    : SIN trig_function
    | SIN atom
    | SIN LP expr RP
+   ;
+
+hbar
+   : HBAR
+   ;
+
+hat
+   : HAT LB expr RB
+   ;
+
+log
+   : LOG
+   ;
+
+lg
+   : LG
+   ;
+
+exp
+   : EXP
+   ;
+
+ln
+   : LN
+   ;
+
+floor
+   : LFLOOR
+   ;
+
+cos
+   : COS atom
+   | COS LP expr RP
    ;
 
 fraction

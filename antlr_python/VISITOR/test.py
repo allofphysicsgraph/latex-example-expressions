@@ -145,6 +145,9 @@ class Calc(ExprParserVisitor):
             self.logger(ctx, resp)
             return resp
 
+    def visitAtom(self, ctx: ExprParser.AtomContext):
+        return self.visitChildren(ctx)
+
     def visitBraces(self, ctx: ExprParser.BracesContext):
         resp = self.visit(ctx.expr())
         self.logger(ctx, resp)
@@ -218,6 +221,14 @@ class Calc(ExprParserVisitor):
     #        self.logger(ctx, resp)
     #        return resp
 
+    def visitCos(self, ctx: ExprParser.CosContext):
+        return self.visitChildren(ctx)
+
+    # Visit a parse tree produced by ExprParser#fraction.
+    def visitDenominator(self, ctx: ExprParser.DenominatorContext):
+        return self.visitChildren(ctx)
+
+    # Visit a parse tree produced by ExprParser#var_G.
     def visitDenominator_expr(self, ctx):
         resp = self.visit(ctx.expr())
         self.logger(ctx, resp)
@@ -239,6 +250,10 @@ class Calc(ExprParserVisitor):
     #        self.logger(ctx, resp)
     #        return resp
 
+    def visitExp(self, ctx: ExprParser.ExpContext):
+        return self.visitChildren(ctx)
+
+    # Visit a parse tree produced by ExprParser#ln.
     def visitExpo(self, ctx: ExprParser.ExpoContext):
         lhs = self.visit(ctx.expr(0))
         rhs = self.visit(ctx.expr(1))
@@ -298,6 +313,14 @@ class Calc(ExprParserVisitor):
     #    def visitFlr(self, ctx: ExprParser.FlrContext):
     #        return self.visitChildren(ctx)
 
+    def visitFloor(self, ctx: ExprParser.FloorContext):
+        return self.visitChildren(ctx)
+
+    # Visit a parse tree produced by ExprParser#cos.
+    def visitFlr(self, ctx: ExprParser.FlrContext):
+        return self.visitChildren(ctx)
+
+    # Visit a parse tree produced by ExprParser#fnc_nrml.
     def visitFlt(self, ctx: ExprParser.FltContext):
         resp = ctx.FLOAT().getText()
         l = re.findall("(\\..*)", resp)
@@ -329,6 +352,10 @@ class Calc(ExprParserVisitor):
     #        self.logger(ctx, resp)
     #        return resp
 
+    def visitFnc_nrml(self, ctx: ExprParser.Fnc_nrmlContext):
+        return self.visitChildren(ctx)
+
+    # Visit a parse tree produced by ExprParser#func_normal.
     def visitFrac(self, ctx: ExprParser.FracContext):
         # set_trace()
         lhs = self.visit(ctx.fraction().numerator())
@@ -356,6 +383,18 @@ class Calc(ExprParserVisitor):
     #    def visitInfty(self, ctx: ExprParser.InftyContext):
     #        return self.visitChildren(ctx)
 
+    def visitFunc_normal(self, ctx: ExprParser.Func_normalContext):
+        return self.visitChildren(ctx)
+
+    # Visit a parse tree produced by ExprParser#trig_function.
+    def visitHat(self, ctx: ExprParser.HatContext):
+        return self.visitChildren(ctx)
+
+    # Visit a parse tree produced by ExprParser#log.
+    def visitHbar(self, ctx: ExprParser.HbarContext):
+        return self.visitChildren(ctx)
+
+    # Visit a parse tree produced by ExprParser#hat.
     def visitInteger(self, ctx: ExprParser.IntegerContext):
         # set_trace()
         resp = int(ctx.INT().getText())
@@ -415,6 +454,18 @@ class Calc(ExprParserVisitor):
     #        self.logger(ctx, resp)
     #        return resp
 
+    def visitLg(self, ctx: ExprParser.LgContext):
+        return self.visitChildren(ctx)
+
+    # Visit a parse tree produced by ExprParser#exp.
+    def visitLn(self, ctx: ExprParser.LnContext):
+        return self.visitChildren(ctx)
+
+    # Visit a parse tree produced by ExprParser#floor.
+    def visitLog(self, ctx: ExprParser.LogContext):
+        return self.visitChildren(ctx)
+
+    # Visit a parse tree produced by ExprParser#lg.
     def visitMul_div(self, ctx: ExprParser.Mul_divContext):
         lhs = self.visit(ctx.expr(0))
         rhs = self.visit(ctx.expr(1))
@@ -431,6 +482,10 @@ class Calc(ExprParserVisitor):
         self.logger(ctx, resp)
         return resp
 
+    def visitNumerator(self, ctx: ExprParser.NumeratorContext):
+        return self.visitChildren(ctx)
+
+    # Visit a parse tree produced by ExprParser#denominator.
     def visitNumerator_expr(self, ctx):
         resp = self.visit(ctx.expr())
         self.logger(ctx, resp)
@@ -528,6 +583,14 @@ class Calc(ExprParserVisitor):
     #        self.logger(ctx, resp)
     #        return resp
 
+    def visitProg(self, ctx: ExprParser.ProgContext):
+        return self.visitChildren(ctx)
+
+    # Visit a parse tree produced by ExprParser#expression.
+    def visitSin(self, ctx: ExprParser.SinContext):
+        return self.visitChildren(ctx)
+
+    # Visit a parse tree produced by ExprParser#hbar.
     def visitSymbl(self, ctx: ExprParser.SymblContext):
         return self.visitChildren(ctx)
 
