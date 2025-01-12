@@ -7,18 +7,18 @@ prog
    ;
 
 stat
-   : expr # expression
-   | LP trig_function RP LP trig_function RP # trig_parens_parens
+   : LP trig_function RP LP trig_function RP # trig_parens_parens
    | trig_function trig_function+ # trig_function_multi
    | trig_function # trig_function_single
    | floor # flr
    | func_normal # fnc_nrml
+   | expr # expression
    ;
 
 func_normal
-   : lg
-   | ln
-   | log
+   : lg # fn_lg
+   | ln # fn_ln
+   | log # fn_log
    ;
 
 trig_function
@@ -66,11 +66,11 @@ hat
    ;
 
 log
-   : LOG
+   : LOG e = expr
    ;
 
 lg
-   : LG
+   : LG e = expr
    ;
 
 exp
@@ -78,7 +78,7 @@ exp
    ;
 
 ln
-   : LN
+   : LN e = expr
    ;
 
 floor
