@@ -43,13 +43,6 @@ class Calc(ExprParserVisitor):
         self.logger(ctx, resp)
         return resp
 
-    def visitBinom(self, ctx: ExprParser.BinomContext):
-        return self.visitChildren(ctx)
-
-    # Visit a parse tree produced by ExprParser#var_braces.
-    def visitBinomial(self, ctx: ExprParser.BinomialContext):
-        return self.visitChildren(ctx)
-
     def visitBraces(self, ctx: ExprParser.BracesContext):
         resp = self.visit(ctx.expr())
         self.logger(ctx, resp)
@@ -75,9 +68,6 @@ class Calc(ExprParserVisitor):
         return resp
 
     def visitCos(self, ctx: ExprParser.CosContext):
-        return self.visitChildren(ctx)
-
-    def visitDenominator(self, ctx: ExprParser.DenominatorContext):
         return self.visitChildren(ctx)
 
     def visitDenominator_expr(self, ctx):
@@ -122,6 +112,7 @@ class Calc(ExprParserVisitor):
         return self.visitChildren(ctx)
 
     def visitFlr(self, ctx: ExprParser.FlrContext):
+
         return self.visitChildren(ctx)
 
     def visitFlt(self, ctx: ExprParser.FltContext):
@@ -167,81 +158,79 @@ class Calc(ExprParserVisitor):
         self.logger(ctx, resp)
         return resp
 
-    def visitLog_expr_expr(self, ctx: ExprParser.Log_expr_exprContext):
-        set_trace()
-
     def visitFnc_nrml(self, ctx: ExprParser.Fnc_nrmlContext):
         # lg,ln,log
         resp = self.visit(ctx.func_normal())
         self.logger(ctx, resp)
         return resp
 
-    # Visit a parse tree produced by ExprParser#func_normal.
-    #    def visitFnctn(self, ctx: ExprParser.FnctnContext):
-    #        resp = ctx.getText()
-    #        resp = sympy.Function(resp, evaluate=False)
-    #        self.logger(ctx, resp)
-    #        return resp
-
-    def visitFrac_expr_denom(self, ctx: ExprParser.Frac_expr_denomContext):
-        return self.visitChildren(ctx)
-
-    # Visit a parse tree produced by ExprParser#frac_numer_expr.
-    def visitFrac_expr_expr(self, ctx: ExprParser.Frac_expr_exprContext):
-        return self.visitChildren(ctx)
-
-    # Visit a parse tree produced by ExprParser#frac_expr_denom.
-    def visitFrac_numer_denom(self, ctx: ExprParser.Frac_numer_denomContext):
-        lhs = int(ctx.numerator().getText())
-        rhs = int(ctx.denominator().getText())
-        resp = sympy.Mul(lhs, sympy.Pow(rhs, -1, evaluate=False), evaluate=False)
-        self.logger(ctx, resp)
-        return resp
-
-    # Visit a parse tree produced by ExprParser#numerator_expr.
-    def visitFrac_numer_expr(self, ctx: ExprParser.Frac_numer_exprContext):
+    def visitFrac(self, ctx: ExprParser.FracContext):
+        # set_trace()
         return self.visitChildren(ctx)
 
     def visitFraction(self, ctx: ExprParser.FractionContext):
-        set_trace()
-        return self.visitChildren(ctx)
-
-    #    def visitFunc_normal(self, ctx: ExprParser.Func_normalContext):
-    #        return self.visitChildren(ctx)
-
-    #    def visitFunction(self, ctx: ExprParser.FunctionContext):
-    #        return self.visitChildren(ctx)
-
-    #    def visitHat(self, ctx: ExprParser.HatContext):
-    #        return self.visitChildren(ctx)
-
-    #    def visitHbar(self, ctx: ExprParser.HbarContext):
-    #        return self.visitChildren(ctx)
-
-    #    def visitInfty(self, ctx: ExprParser.InftyContext):
-    #        return self.visitChildren(ctx)
-
-    def visitFunc_normal(self, ctx: ExprParser.Func_normalContext):
-        return self.visitChildren(ctx)
-
-    # Visit a parse tree produced by ExprParser#trig_function.
-    def visitHat(self, ctx: ExprParser.HatContext):
-        return self.visitChildren(ctx)
-
-    # Visit a parse tree produced by ExprParser#log.
-    def visitHbar(self, ctx: ExprParser.HbarContext):
-        return self.visitChildren(ctx)
-
-    # Visit a parse tree produced by ExprParser#hat.
-    def visitInteger(self, ctx: ExprParser.IntegerContext):
         # set_trace()
-        resp = int(ctx.INT().getText())
+        return self.visitChildren(ctx)
+
+    def visitFrc_expr_expr(self, ctx: ExprParser.Frc_expr_exprContext):
+        numerator = self.visit(ctx.expr(0))
+        denominator = self.visit(ctx.expr(1))
+        resp = sympy.Mul(
+            numerator, sympy.Pow(denominator, -1, evaluate=False), evaluate=False
+        )
+        self.logger(ctx, resp)
+        return resp
+
+    def visitFrc_expr_int(self, ctx: ExprParser.Frc_expr_intContext):
+        import re
+
+        integer = ctx.getText()[-1]
+        integer = int(integer)
+        expr = self.visit(ctx.expr())
+        numerator = expr
+        denominator = integer
+        resp = sympy.Mul(
+            numerator, sympy.Pow(denominator, -1, evaluate=False), evaluate=False
+        )
+        self.logger(ctx, resp)
+        return resp
+
+    def visitFrc_int_expr(self, ctx: ExprParser.Frc_int_exprContext):
+        import re
+
+        integer = ctx.getChild(1).getText()
+        integer = int(integer)
+        expr = self.visit(ctx.getChild(2))
+        numerator = integer
+        denominator = expr
+        resp = sympy.Mul(
+            numerator, sympy.Pow(denominator, -1, evaluate=False), evaluate=False
+        )
+        self.logger(ctx, resp)
+        return resp
+
+    def visitFrc_int_int(self, ctx: ExprParser.Frc_int_intContext):
+        import re
+
+        text = ctx.getText()
+        resp = re.sub(r"(\\frac|\\tfrac|\\dfrac)", "", text)
+        resp = resp.strip()
+        numerator = int(resp[0])
+        denominator = int(resp[1])
+        resp = sympy.Mul(
+            numerator, sympy.Pow(denominator, -1, evaluate=False), evaluate=False
+        )
+        self.logger(ctx, resp)
+        return resp
+
+    def visitInteger(self, ctx: ExprParser.IntegerContext):
+        resp = int(ctx.getText())
         self.logger(ctx, resp)
         return resp
 
     def visitInteger_var(self, ctx: ExprParser.Integer_varContext):
-        lhs = self.visit(ctx)
-        rhs = self.visit(ctx.var())
+        lhs = int(ctx.INT().getText())
+        rhs = sympy.Symbol(ctx.var().getText())
         resp = sympy.Mul(lhs, rhs, evaluate=False)
         self.logger(ctx, resp)
         return resp
@@ -273,9 +262,6 @@ class Calc(ExprParserVisitor):
         self.logger(ctx, resp)
         return resp
 
-    def visitLog_expr_expr(self, ctx: ExprParser.Log_expr_exprContext):
-        set_trace()
-
     def visitMul_div(self, ctx: ExprParser.Mul_divContext):
         lhs = self.visit(ctx.expr(0))
         rhs = self.visit(ctx.expr(1))
@@ -291,19 +277,6 @@ class Calc(ExprParserVisitor):
             resp = sympy.Mul(lhs, sympy.Pow(rhs, -1, evaluate=False), evaluate=False)
         self.logger(ctx, resp)
         return resp
-
-    # Visit a parse tree produced by ExprParser#denominator.
-    def visitNumerator(self, ctx: ExprParser.NumeratorContext):
-        return self.visitChildren(ctx)
-
-    # Visit a parse tree produced by ExprParser#denominator.
-    def visitNumerator_expr(self, ctx):
-        resp = self.visit(ctx.expr())
-        self.logger(ctx, resp)
-        return resp
-
-    #    def visitOverline(self, ctx: ExprParser.OverlineContext):
-    #        return self.visitChildren(ctx)
 
     def visitParens(self, ctx: ExprParser.ParensContext):
         resp = self.visit(ctx.expr())
@@ -324,84 +297,12 @@ class Calc(ExprParserVisitor):
         self.logger(ctx, resp)
         return resp
 
-        # def visitPi(self, ctx: ExprParser.PiContext):
-
-    #        return self.visitChildren(ctx)
-
-    #    def visitProduct(self, ctx: ExprParser.ProductContext):
-    #        return self.visitChildren(ctx)
-
-    # def visitProg(self, ctx: ExprParser.ProgContext):
-    #        return self.visitChildren(ctx)
-
-    #    def visitPsi(self, ctx: ExprParser.PsiContext):
-    #        return self.visitChildren(ctx)
-
-    #    def visitRelational(self, ctx: ExprParser.RelationalContext):
-    #        return self.visitChildren(ctx)
-
-    #    def visitRelop(self, ctx: ExprParser.RelopContext):
-    #        return self.visitChildren(ctx)
-
-    #    def visitSec(self, ctx: ExprParser.SecContext):
-    #        if ctx.atom():
-    #            atom = self.visit(ctx.atom())
-    #            symbol = sympy.Symbol(atom)
-    #            resp = sympy.sec(symbol)
-    #        if ctx.expr():
-    #            expr = self.visit(ctx.expr())
-    #            resp = sympy.sec(expr)
-    #        self.logger(ctx, resp)
-    #        return resp
-
-    #    def visitSin(self, ctx: ExprParser.SinContext):
-    #        if ctx.trig_function():
-    #            trig_fnctn = self.visit(ctx.trig_function())
-    #            resp = sympy.sin(trig_fnctn)
-    #        if ctx.atom():
-    #            atom = self.visit(ctx.atom())
-    #            resp = sympy.sin(atom)
-    #        if ctx.expr():
-    #            expr = self.visit(ctx.expr())
-    #            resp = sympy.sin(expr)
-    #        self.logger(ctx, resp)
-    #        return resp
-
-    #    def visitSinh(self, ctx: ExprParser.SinhContext):
-    #        if ctx.atom():
-    #            atom = self.visit(ctx.atom())
-    #            symbol = sympy.Symbol(atom)
-    #            resp = sympy.sinh(symbol)
-    #        if ctx.expr():
-    #            expr = self.visit(ctx.expr())
-    #            resp = sympy.sinh(expr)
-    #        self.logger(ctx, resp)
-    #        return resp
-
-    #    def visitSqrt(self, ctx: ExprParser.SqrtContext):
-    #        return self.visitChildren(ctx)
-
-    #    def visitSum(self, ctx: ExprParser.SumContext):
-    #        if ctx.e0:
-    #            expr = self.visit(ctx.e0)
-    #        if ctx.eq0:
-    #            expr = self.visit(ctx.eq0)
-    #            var = expr.args[0]
-    #            start_index = expr.args[1]
-    #        expr1 = self.visit(ctx.e1)
-    #        expr2 = self.visit(ctx.e2)
-    #        resp = sympy.Sum(expr2, (var, start_index, expr1))
-    #        self.logger(ctx, resp)
-    #        return resp
-
     def visitProg(self, ctx: ExprParser.ProgContext):
         return self.visitChildren(ctx)
 
-    # Visit a parse tree produced by ExprParser#expression.
     def visitSin(self, ctx: ExprParser.SinContext):
         return self.visitChildren(ctx)
 
-    # Visit a parse tree produced by ExprParser#hbar.
     def visitSymbl(self, ctx: ExprParser.SymblContext):
         return self.visitChildren(ctx)
 
@@ -409,28 +310,6 @@ class Calc(ExprParserVisitor):
         resp = sympy.Symbol(ctx.getText())
         self.logger(ctx, resp)
         return resp
-
-    #    def visitTan(self, ctx: ExprParser.TanContext):
-    #        if ctx.atom():
-    #            atom = self.visit(ctx.atom())
-    #            symbol = sympy.Symbol(atom)
-    #            resp = sympy.tan(symbol)
-    #        if ctx.expr():
-    #            expr = self.visit(ctx.expr())
-    #            resp = sympy.tan(expr)
-    #        self.logger(ctx, resp)
-    #        return resp
-
-    #    def visitTanh(self, ctx: ExprParser.TanhContext):
-    #        if ctx.atom():
-    #            atom = self.visit(ctx.atom())
-    #            symbol = sympy.Symbol(atom)
-    #            resp = sympy.tanh(symbol)
-    #        if ctx.expr():
-    #            expr = self.visit(ctx.expr())
-    #            resp = sympy.tanh(expr)
-    #        self.logger(ctx, resp)
-    #        return resp
 
     def visitTrig_function(self, ctx: ExprParser.Trig_functionContext):
         return self.visitChildren(ctx)
@@ -447,14 +326,7 @@ class Calc(ExprParserVisitor):
 
     def visitTrig_parens_parens(self, ctx: ExprParser.Trig_parens_parensContext):
         print(ctx.getText())
-        # set_trace()
 
-    #    def visitVar(self, ctx):
-    #        text = self.visit(ctx.var())
-    #        resp = sympy.Symbol(text)
-    #        self.logger(ctx, resp)
-    #        return resp
-    #
     def visitVar_G(self, ctx: ExprParser.Var_GContext):
         resp = ctx.G().getText()
         resp = sympy.Symbol(resp)
@@ -495,12 +367,6 @@ class Calc(ExprParserVisitor):
 
     def visitVar_braces(self, ctx: ExprParser.Var_bracesContext):
         return self.visitChildren(ctx)
-
-    #    def visitVar_c(self, ctx: ExprParser.Var_cContext):
-    #        resp = ctx.getText()
-    #        resp = sympy.Symbol(resp)
-    #        self.logger(ctx, resp)
-    #        return resp
 
     def visitVar_h(self, ctx: ExprParser.Var_hContext):
         resp = ctx.getText()
@@ -637,8 +503,8 @@ ok = []
 failed = []
 exceptions = []
 no_output = []
-# debug = True
-debug = False
+debug = True
+# debug = False
 for ix, tpl in enumerate(GOOD_PAIRS):
     k, v = tpl
     if re.findall(r"\\int|\\prod|angle|sqrt|\\lim|\\infty|mathit|product", k):

@@ -151,11 +151,6 @@ RP
    : ')'
    ;
 
-INT
-   : '0'
-   | [1-9] [0-9]*
-   ;
-
 FLOAT
    : INT? ('.' [0-9]+)
    | '-' INT? ('.' [0-9]+)
@@ -269,29 +264,24 @@ COS
    : '\\cos'
    ;
 
+FRAC_INT_INT
+   : ('\\frac' | '\\tfrac' | '\\dfrac') SINGLE_DIGIT NON_ZERO_DIGIT
+   ;
+
 FRAC
-   : ('\\frac' | '\\tfrac' | '\\dfrac') -> mode (NUMERATOR)
+   : ('\\frac' | '\\tfrac' | '\\dfrac')
    ;
 
-BINOM
-   : '\\binom' -> mode (NUMERATOR)
+fragment SINGLE_DIGIT
+   : [0-9]
    ;
 
-TBINOM
-   : '\\tbinom' -> mode (NUMERATOR)
+fragment NON_ZERO_DIGIT
+   : [1-9]
    ;
 
-DBINOM
-   : '\\dbinom' -> mode (NUMERATOR)
-   ;
-
-mode NUMERATOR;
-SINGLE_DIGIT
-   : [0-9] -> mode (DENOMINATOR)
-   ;
-
-mode DENOMINATOR;
-SINGLE_DIGIT_NON_ZERO
-   : [1-9] -> mode (DEFAULT_MODE)
+INT
+   : SINGLE_DIGIT
+   | NON_ZERO_DIGIT SINGLE_DIGIT+
    ;
 

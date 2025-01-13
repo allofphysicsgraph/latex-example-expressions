@@ -29,7 +29,7 @@ trig_function
 expr
    : < assoc = right > expr SUP expr # expo
    | expr op = (MUL | DIV | TIMES | CDOT) expr # mul_div
-   | expr op = (ADD | SUB) expr # add_sub
+   | expr op = (ADD | MINUS) expr # add_sub
    | expr op = (GT | LT | UNEQUAL | LTE | GTE) expr # expr_relop_expr
    | var LB expr RB # var_braces
    | LB expr RB var # braces_var
@@ -42,14 +42,19 @@ expr
    | var LBR expr RBR # brackets_var
    | LBR expr RBR # brackets
    | fraction # frac
-   | binomial # binom
+   | fraction atom # frac_atom
+   | atom fraction # atom_frac
    | INT var # integer_var
-   | INT # integer
    | FLOAT var # Flt_var
    | FLOAT # Flt
    | var var # var_var
    | var # variable
    | symbol # symbl
+   | INT # integer
+   ;
+
+equation
+   : expr EQUALS expr
    ;
 
 sin
@@ -65,18 +70,7 @@ hbar
 hat
    : HAT LB expr RB
    ;
-   //sum:
-   
-   // SUM SUB  LB eq RB  SUP atom  expr,
-   
-   // SUM SUB  LB eq RB  SUP LB atom RB  expr,
-   
-   // SUM SUB  LB eq RB  SUP LB expr RB  atom SUP atom,
-   
-   // SUM SUP atom SUB  LB eq RB  expr,
-   
-   // SUM SUP  LB atom RB  SUB  LB eq RB  expr,
-   
+
 log
    : LOG e = expr # log_expr
    | LOG SUB LBR a1 = atom RBR e1 = expr # log_atom_expr
@@ -97,7 +91,7 @@ ln
    ;
 
 floor
-   : LFLOOR
+   : LFLOOR expr RFLOOR
    ;
 
 cos
@@ -105,34 +99,11 @@ cos
    | COS LP expr RP
    ;
 
-binomial
-   : BINOM numerator_expr denominator_expr
-   | BINOM numerator_expr denominator
-   | BINOM numerator denominator_expr
-   | BINOM numerator denominator
-   ;
-
 fraction
-   : FRAC numerator_expr denominator_expr # frac_expr_expr
-   | FRAC numerator_expr denominator # frac_expr_denom
-   | FRAC numerator denominator_expr # frac_numer_expr
-   | FRAC numerator denominator # frac_numer_denom
-   ;
-
-numerator_expr
-   : '{' expr '}'
-   ;
-
-denominator_expr
-   : '{' expr '}'
-   ;
-
-numerator
-   : SINGLE_DIGIT
-   ;
-
-denominator
-   : SINGLE_DIGIT_NON_ZERO
+   : FRAC_INT_INT # frc_int_int
+   | FRAC expr INT # frc_expr_int
+   | FRAC INT expr # frc_int_expr
+   | FRAC expr expr # frc_expr_expr
    ;
 
 var
