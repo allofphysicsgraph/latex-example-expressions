@@ -40,10 +40,6 @@ ADD
    : '+'
    ;
 
-BINOM
-   : '\\binom'
-   ;
-
 CDOT
    : '\\cdot'
    ;
@@ -274,7 +270,19 @@ COS
    ;
 
 FRAC
-   : '\\frac' -> mode (NUMERATOR)
+   : ('\\frac' | '\\tfrac' | '\\dfrac') -> mode (NUMERATOR)
+   ;
+
+BINOM
+   : '\\binom' -> mode (NUMERATOR)
+   ;
+
+TBINOM
+   : '\\tbinom' -> mode (NUMERATOR)
+   ;
+
+DBINOM
+   : '\\dbinom' -> mode (NUMERATOR)
    ;
 
 mode NUMERATOR;

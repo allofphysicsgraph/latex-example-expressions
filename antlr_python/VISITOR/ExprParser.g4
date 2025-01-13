@@ -42,6 +42,7 @@ expr
    | var LBR expr RBR # brackets_var
    | LBR expr RBR # brackets
    | fraction # frac
+   | binomial # binom
    | INT var # integer_var
    | INT # integer
    | FLOAT var # Flt_var
@@ -64,14 +65,18 @@ hbar
 hat
    : HAT LB expr RB
    ;
-
-//sum:
-// SUM SUB  LB eq RB  SUP atom  expr,
-// SUM SUB  LB eq RB  SUP LB atom RB  expr,
-// SUM SUB  LB eq RB  SUP LB expr RB  atom SUP atom,
-// SUM SUP atom SUB  LB eq RB  expr,
-// SUM SUP  LB atom RB  SUB  LB eq RB  expr,
-
+   //sum:
+   
+   // SUM SUB  LB eq RB  SUP atom  expr,
+   
+   // SUM SUB  LB eq RB  SUP LB atom RB  expr,
+   
+   // SUM SUB  LB eq RB  SUP LB expr RB  atom SUP atom,
+   
+   // SUM SUP atom SUB  LB eq RB  expr,
+   
+   // SUM SUP  LB atom RB  SUB  LB eq RB  expr,
+   
 log
    : LOG e = expr # log_expr
    | LOG SUB LBR a1 = atom RBR e1 = expr # log_atom_expr
@@ -100,8 +105,26 @@ cos
    | COS LP expr RP
    ;
 
+binomial
+   : BINOM numerator_expr denominator_expr
+   | BINOM numerator_expr denominator
+   | BINOM numerator denominator_expr
+   | BINOM numerator denominator
+   ;
+
 fraction
-   : FRAC numerator denominator
+   : FRAC numerator_expr denominator_expr # frac_expr_expr
+   | FRAC numerator_expr denominator # frac_expr_denom
+   | FRAC numerator denominator_expr # frac_numer_expr
+   | FRAC numerator denominator # frac_numer_denom
+   ;
+
+numerator_expr
+   : '{' expr '}'
+   ;
+
+denominator_expr
+   : '{' expr '}'
    ;
 
 numerator

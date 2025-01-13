@@ -43,6 +43,13 @@ class Calc(ExprParserVisitor):
         self.logger(ctx, resp)
         return resp
 
+    def visitBinom(self, ctx: ExprParser.BinomContext):
+        return self.visitChildren(ctx)
+
+    # Visit a parse tree produced by ExprParser#var_braces.
+    def visitBinomial(self, ctx: ExprParser.BinomialContext):
+        return self.visitChildren(ctx)
+
     def visitBraces(self, ctx: ExprParser.BracesContext):
         resp = self.visit(ctx.expr())
         self.logger(ctx, resp)
@@ -176,14 +183,24 @@ class Calc(ExprParserVisitor):
     #        self.logger(ctx, resp)
     #        return resp
 
-    # Visit a parse tree produced by ExprParser#func_normal.
-    def visitFrac(self, ctx: ExprParser.FracContext):
-        # set_trace()
-        lhs = self.visit(ctx.fraction().numerator())
-        rhs = self.visit(ctx.fraction().denominator())
+    def visitFrac_expr_denom(self, ctx: ExprParser.Frac_expr_denomContext):
+        return self.visitChildren(ctx)
+
+    # Visit a parse tree produced by ExprParser#frac_numer_expr.
+    def visitFrac_expr_expr(self, ctx: ExprParser.Frac_expr_exprContext):
+        return self.visitChildren(ctx)
+
+    # Visit a parse tree produced by ExprParser#frac_expr_denom.
+    def visitFrac_numer_denom(self, ctx: ExprParser.Frac_numer_denomContext):
+        lhs = int(ctx.numerator().getText())
+        rhs = int(ctx.denominator().getText())
         resp = sympy.Mul(lhs, sympy.Pow(rhs, -1, evaluate=False), evaluate=False)
         self.logger(ctx, resp)
         return resp
+
+    # Visit a parse tree produced by ExprParser#numerator_expr.
+    def visitFrac_numer_expr(self, ctx: ExprParser.Frac_numer_exprContext):
+        return self.visitChildren(ctx)
 
     def visitFraction(self, ctx: ExprParser.FractionContext):
         set_trace()
@@ -229,6 +246,9 @@ class Calc(ExprParserVisitor):
         self.logger(ctx, resp)
         return resp
 
+    def visitLg(self, ctx: ExprParser.LgContext):
+        return self.visitChildren(ctx)
+
     def visitLn(self, ctx: ExprParser.LnContext):
         return self.visitChildren(ctx)
 
@@ -244,6 +264,17 @@ class Calc(ExprParserVisitor):
         resp = sympy.log(e1, a1, evaluate=False)
         self.logger(ctx, resp)
         return resp
+
+    def visitLog_expr(self, ctx: ExprParser.Log_exprContext):
+        from sympy.core.numbers import E
+
+        expr = self.visit(ctx.expr())
+        resp = sympy.log(expr, E, evaluate=False)
+        self.logger(ctx, resp)
+        return resp
+
+    def visitLog_expr_expr(self, ctx: ExprParser.Log_expr_exprContext):
+        set_trace()
 
     def visitMul_div(self, ctx: ExprParser.Mul_divContext):
         lhs = self.visit(ctx.expr(0))
