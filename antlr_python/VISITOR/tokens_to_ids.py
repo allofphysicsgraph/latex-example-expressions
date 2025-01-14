@@ -1,15 +1,12 @@
+from collections import defaultdict
 from file_utils import read_file
-from sys import argv
 from pudb import set_trace
+from sys import argv
 import re
 
 data = read_file("ExprLexer.tokens")
 data = data.splitlines()
-integer_ids = set()
-from collections import defaultdict
-
 token_mappings = defaultdict(list)
-seen = set()
 for line in data:
     idx = re.findall("=(\d+)$", line)
     if idx:
