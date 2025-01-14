@@ -3,9 +3,9 @@ from pudb import set_trace
 from redbaron import RedBaron
 from sys import argv
 import re
-
+from os import listdir
+files = [x for x in listdir('.') if re.findall('tex$',x)]
 tokenizer = mwe.MWETokenizer(separator="")
-
 with open("ExprLexer.py", "r") as source:
     code = RedBaron(source.read())
 # print(code)
@@ -17,9 +17,6 @@ for node in node_list:
     if re.findall("symbolicNames", str(node.name)):
         symbolicNames = node.value
 
-with open(argv[1], "r") as f:
-    test_data = f.read()
-    test_data = test_data.replace("\\", "\\\\")
 tokens = list(literalNames)
 for tok in sorted(list(literalNames), key=lambda x: -len(x)):
     tok = str(tok).replace("'", "").strip()
@@ -39,8 +36,11 @@ name_pairs["\n"] = "NL"
 name_pairs[r"\\frac"] = "FRAC"
 name_pairs[r"\\infty"] = "INF"
 name_pairs["!"] = "FACT"
-
 for ix in range(10):
     name_pairs[str(ix)] = "DIGIT"
-print(test_data)
-print([name_pairs.get(x, x) for x in tokenizer.tokenize(test_data)])
+for f_name in files:
+    with open(f_name, "r") as f:
+        test_data = f.read()
+        test_data = test_data.replace("\\", "\\\\")
+        print(test_data)
+        print([name_pairs.get(x, x) for x in tokenizer.tokenize(test_data)])

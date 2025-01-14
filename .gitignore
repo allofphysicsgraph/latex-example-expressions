@@ -1,6 +1,5 @@
 *.tex
 *.jar
-*.tokens
 *.class
 *.interp
 *.java
