@@ -1,3 +1,9 @@
+*.tex
+*.jar
+*.tokens
+*.class
+*.interp
+*.java
 *.dot
 *.aux
 *.dvi

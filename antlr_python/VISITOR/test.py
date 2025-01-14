@@ -503,8 +503,8 @@ ok = []
 failed = []
 exceptions = []
 no_output = []
-debug = True
-# debug = False
+# debug = True
+debug = False
 for ix, tpl in enumerate(GOOD_PAIRS):
     k, v = tpl
     if re.findall(r"\\int|\\prod|angle|sqrt|\\lim|\\infty|mathit|product", k):

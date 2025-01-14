@@ -54,7 +54,6 @@ COMMA
 
 DIV
    : '/'
-   | '\\div'
    ;
 
 DOLLAR_SIGN
@@ -111,8 +110,6 @@ MINUS
 
 EQUALS
    : '='
-   | '=='
-   | '\\equiv'
    ;
 
 LT
@@ -121,8 +118,6 @@ LT
 
 LTE
    : '\\leq'
-   | '\\le'
-   | '\\leqslant'
    ;
 
 GT
@@ -131,16 +126,10 @@ GT
 
 GTE
    : '\\geq'
-   | '\\ge'
-   | '\\geqslant'
    ;
 
 UNEQUAL
    : '!='
-   | '!=='
-   | '\\ne'
-   | '\\neq'
-   | '\\not\\equiv'
    ;
 
 LP
@@ -151,29 +140,12 @@ RP
    : ')'
    ;
 
-FLOAT
-   : INT? ('.' [0-9]+)
-   | '-' INT? ('.' [0-9]+)
-   ;
-
 BEGIN_EQ
    : '\\begin{equation}' -> skip
    ;
 
 END_EQ
    : '\\end{equation}' -> skip
-   ;
-
-IGNORE
-   : ('\\left\\' | '\\right\\' | '\\!' | '\\;' | '\\:' | '\\quad' | '\\qquad' | '\\thickspace' | '\\,' | '\\negthickspace' | '\\displaystyle' | '\\left' | '\\right' | '\\begin{align}' | '\\end{align}' | '\\negmedspace' | '\\medspace' | '\\negthinspace' | '\\thinspace') -> skip
-   ;
-
-NEWLINE
-   : '\n' -> skip
-   ;
-
-WS
-   : [ \t]+ -> skip
    ;
 
 ALPHA
