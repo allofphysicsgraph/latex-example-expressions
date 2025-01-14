@@ -4,7 +4,8 @@ from redbaron import RedBaron
 from sys import argv
 import re
 from os import listdir
-files = [x for x in listdir('.') if re.findall('tex$',x)]
+
+files = [x for x in listdir(".") if re.findall("tex$", x)]
 tokenizer = mwe.MWETokenizer(separator="")
 with open("ExprLexer.py", "r") as source:
     code = RedBaron(source.read())

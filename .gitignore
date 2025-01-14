@@ -12,7 +12,6 @@ Expr.interp
 Expr.tokens
 xprLexer.interp
 ExprLexer.py
-ExprLexer.tokens
 ExprParser.py
 ExprVisitor.py
 __pycache__/
