@@ -1,7 +1,10 @@
 from sys import argv
+
+
 def get_file_checksum(file_name):
     try:
         import hashlib
+
         f = open(file_name, "rb")
         data = f.read()
         f.close()
@@ -10,6 +13,8 @@ def get_file_checksum(file_name):
         return {file_name: m.hexdigest(), "data": data.decode("utf-8")}
     except Exception as e:
         print(e)
+
+
 cs = get_file_checksum(argv[1])
 data = cs["data"].strip()
 print(cs)
