@@ -19,11 +19,14 @@ for node in node_list:
 
 with open(argv[1], "r") as f:
     test_data = f.read()
+    test_data = test_data.replace("\\", "\\\\")
+tokens = list(literalNames)
 for tok in sorted(list(literalNames), key=lambda x: -len(x)):
     tok = str(tok).replace("'", "").strip()
     tok = str(tok).replace('"', "").strip()
     tokenizer.add_mwe(f"{tok}")
-
+tokenizer.add_mwe(r"\\frac")
+tokenizer.add_mwe(r"\\infty")
 name_pairs = {}
 for tpl in zip(literalNames[1:], symbolicNames[1:]):
     k, v = tpl
@@ -33,5 +36,11 @@ for tpl in zip(literalNames[1:], symbolicNames[1:]):
 
 name_pairs[" "] = "WS"
 name_pairs["\n"] = "NL"
+name_pairs[r"\\frac"] = "FRAC"
+name_pairs[r"\\infty"] = "INF"
+name_pairs["!"] = "FACT"
+
+for ix in range(10):
+    name_pairs[str(ix)] = "DIGIT"
 print(test_data)
 print([name_pairs.get(x, x) for x in tokenizer.tokenize(test_data)])
