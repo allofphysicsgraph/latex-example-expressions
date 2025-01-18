@@ -52,8 +52,21 @@ def get_token_id(tok):
     resp = token_2_id.get(r"{}".format(re.escape(tok)), tok)
     if isinstance(resp, list):
         return resp[0]
+    if len(tok) == 1:
+        resp = token_2_id.get(tok)
+        if resp:
+            resp = resp[0]
+            return resp
+    if tok == " ":
+        return 100
+    if tok == "\n":
+        return 101
+    if re.findall("^\d$", tok):
+        return 102
     return -1
 
 
 print([get_symbolic_name(x) for x in lst])
+print("*" * 50)
 print([get_token_id(x) for x in lst])
+set_trace()
