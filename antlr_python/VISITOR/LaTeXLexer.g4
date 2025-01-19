@@ -9,6 +9,7 @@ VARIABLE
    | 'x'
    | 'y'
    | 'z'
+   | 'k'
    ;
 
 PI
@@ -62,6 +63,13 @@ DIVIDE
 EQUALS
    : '='
    ;
+SUM:
+    '\\sum'
+    ;
+SUB:
+    '_'
+    ;
+
 
 FLOAT
    : INTEGER? ('.' INTEGER)
