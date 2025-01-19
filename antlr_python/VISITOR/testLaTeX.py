@@ -1,4 +1,4 @@
-# antlr4 -no-listener -visitor LaTeX.g4 -Dlanguage=Python3
+# antlr4 -no-lestener -visitor LaTeX.g4 -Dlanguage=Python3
 from antlr4 import *
 from collections import OrderedDict
 from LaTeXLexer import LaTeXLexer
@@ -22,6 +22,81 @@ class Calc(LaTeXParserVisitor):
         name = type(ctx).__name__
         text = ctx.getText()
         self.parse_tree[(name, start, stop)] = (text, resp)
+
+    def visitAtom(self, ctx: LaTeXParser.AtomContext):
+        if ctx.variable():
+            resp = sympy.Symbol(ctx.variable().getText())
+        self.logger(ctx, resp)
+        return resp
+
+    def visitBinop(self, ctx: LaTeXParser.BinopContext):
+        # set_trace()
+        resp = ctx.getText()
+        self.logger(ctx, resp)
+        return self.visitChildren(ctx)
+
+    def visitConstant(self, ctx: LaTeXParser.ConstantContext):
+        # set_trace()
+        resp = ctx.getText()
+        self.logger(ctx, resp)
+        return self.visitChildren(ctx)
+
+    def visitEnclosed_expression(self, ctx: LaTeXParser.Enclosed_expressionContext):
+        # set_trace()
+        resp = ctx.getText()
+        self.logger(ctx, resp)
+        return self.visitChildren(ctx)
+
+    def visitEquation(self, ctx: LaTeXParser.EquationContext):
+        # set_trace()
+        resp = ctx.getText()
+        self.logger(ctx, resp)
+        return self.visitChildren(ctx)
+
+    def visitExpression(self, ctx: LaTeXParser.ExpressionContext):
+        # set_trace()
+        resp = ctx.getText()
+        self.logger(ctx, resp)
+        return self.visitChildren(ctx)
+
+    def visitNumber(self, ctx: LaTeXParser.NumberContext):
+        # set_trace()
+        if ctx.INTEGER():
+            resp = int(ctx.INTEGER().getText())
+        self.logger(ctx, resp)
+        return self.visitChildren(ctx)
+
+    def visitNumeric_atom(self, ctx: LaTeXParser.Numeric_atomContext):
+        # set_trace()
+        # visits Number
+
+        resp = ctx.getText()
+        self.logger(ctx, resp)
+        return self.visitChildren(ctx)
+
+    def visitProg(self, ctx: LaTeXParser.ProgContext):
+        # set_trace()
+        resp = ctx.getText()
+        self.logger(ctx, ctx.getText())
+        return self.visitChildren(ctx)
+
+    def visitRelop(self, ctx: LaTeXParser.RelopContext):
+        # set_trace()
+        resp = ctx.getText()
+        self.logger(ctx, resp)
+        return self.visitChildren(ctx)
+
+    def visitSignedAtom(self, ctx: LaTeXParser.SignedAtomContext):
+        # set_trace()
+        resp = ctx.getText()
+        self.logger(ctx, resp)
+        return self.visitChildren(ctx)
+
+    def visitVariable(self, ctx: LaTeXParser.VariableContext):
+        # set_trace()
+        resp = ctx.getText()
+        self.logger(ctx, resp)
+        return self.visitChildren(ctx)
 
 
 def run_test(k):

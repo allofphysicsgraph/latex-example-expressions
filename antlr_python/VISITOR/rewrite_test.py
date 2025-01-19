@@ -9,8 +9,8 @@ def read_file(f_name):
     return src
 
 
-exprVisitor = read_file("ExprParserVisitor.py")
-test_code = read_file("test.py")
+exprVisitor = read_file("LaTeXParserVisitor.py")
+test_code = read_file("testLaTeX.py")
 
 
 # get the index of class def
@@ -30,7 +30,7 @@ for ix in range(len(test_code[calc_class_index])):
 # get expr index
 expr_index = 0
 for ix in range(len(exprVisitor)):
-    if exprVisitor[ix].name == "ExprParserVisitor":
+    if exprVisitor[ix].name == "LaTeXParserVisitor":
         expr_index = ix
 
 
@@ -41,10 +41,6 @@ for ix in range(len(exprVisitor[expr_index])):
         exprVisitor_method_names.append(resp.name)
         if resp.name not in test_code_names:
             test_code[calc_class_index].append(resp)
-
-# with open("test2.py", "w") as source_code:
-#    source_code.write(test_code.dumps())
-
 
 # Sort function in the class Calc by def_name using RedBaron
 a = test_code[calc_class_index].copy()

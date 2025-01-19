@@ -2,8 +2,13 @@
 
 lexer grammar LaTeXLexer;
 
-X
-   : 'x'
+VARIABLE
+   : 'a'
+   | 'b'
+   | 'c'
+   | 'x'
+   | 'y'
+   | 'z'
    ;
 
 PI
@@ -34,6 +39,10 @@ RBR
    : ']'
    ;
 
+POW
+   : '^'
+   ;
+
 PLUS
    : '+'
    ;
@@ -52,6 +61,10 @@ DIVIDE
 
 EQUALS
    : '='
+   ;
+
+FLOAT
+   : INTEGER? ('.' INTEGER)
    ;
 
 INTEGER

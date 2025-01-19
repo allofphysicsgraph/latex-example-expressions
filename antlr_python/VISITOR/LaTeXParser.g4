@@ -15,19 +15,30 @@ equation
 
 expression
    : signedAtom (binop signedAtom)*
+   | numeric_atom atom
+   | atom numeric_atom
    ;
 
 signedAtom
    : PLUS signedAtom
    | MINUS signedAtom
+   | numeric_atom
    | atom
    ;
 
 atom
-   : INTEGER
-   | variable
-   | constant
+   : variable
    | enclosed_expression
+   ;
+
+numeric_atom
+   : number
+   ;
+
+number
+   : INTEGER
+   | FLOAT
+   | constant
    ;
 
 enclosed_expression
@@ -38,7 +49,7 @@ enclosed_expression
    ;
 
 variable
-   : X
+   : VARIABLE
    ;
 
 constant
@@ -54,5 +65,6 @@ binop
    | MINUS
    | MUL
    | DIVIDE
+   | POW
    ;
 
