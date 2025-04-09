@@ -4,7 +4,6 @@ lexer grammar LaTeXLexer;
 
 VARIABLE
    : 'a'
-| '\\alpha'
 |'b'
 |'c'
 |'d'
@@ -25,8 +24,54 @@ VARIABLE
 |'x'
 |'y'
 |'z'
+| GREEK
    ;
 
+GREEK:
+    '\\alpha' |
+    '\\beta' |
+    '\\chi' |
+    '\\delta' |
+    '\\Delta' |
+    '\\epsilon' |
+    '\\eta' |
+    '\\gamma' |
+    '\\Gamma' |
+    '\\iota' |
+    '\\kappa' |
+    '\\lambda' |
+    '\\Lambda' |
+    '\\mu' |
+    '\\nu' |
+    '\\omega' |
+    '\\Omega' |
+    '\\omicron' |
+    '\\phi' |
+    '\\Phi' |
+    '\\Pi' |
+    '\\psi' |
+    '\\Psi' |
+    '\\rho' |
+    '\\sigma' |
+    '\\Sigma' |
+    '\\tau' |
+    '\\theta' |
+    '\\Theta' |
+    '\\upsilon' |
+    '\\Upsilon' |
+    '\\varepsilon' |
+    '\\varphi' |
+    '\\varpi' |
+    '\\varrho' |
+    '\\varsigma' |
+    '\\vartheta' |
+    '\\xi' |
+    '\\Xi' |
+    '\\zeta' 
+    ;
+LIM:
+    '\\lim'
+    ;
 BEGIN_EQUATION
     : '\\begin{equation}'
     ;
@@ -37,7 +82,7 @@ POS_INFTY
     : '+' '\\infty'
     ;
 
-NEG_INFTY:
+NEG_INFTY
     : '-' '\\infty'
     ;
 
@@ -100,6 +145,9 @@ SUM:
     ;
 SUB:
     '_'
+    ;
+TO:
+    '\\to'
     ;
 
 

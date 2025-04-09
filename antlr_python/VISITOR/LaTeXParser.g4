@@ -5,13 +5,21 @@ parser grammar LaTeXParser;
 
 options { tokenVocab = LaTeXLexer; }
 prog
-   : sum+
+   : lim+
    | expression
    ;
 
 equation
    : BEGIN_EQUATION sum END_EQUATION 
    ;
+
+
+lim:
+    LIM SUB LB VARIABLE TO INFTY RB
+    | LIM SUB LB VARIABLE TO POS_INFTY RB
+    | LIM SUB LB VARIABLE TO NEG_INFTY RB
+    |LIM SUB LB VARIABLE TO INTEGER RB
+;
 
 sum
     : SUM sub_braces SUP VARIABLE
