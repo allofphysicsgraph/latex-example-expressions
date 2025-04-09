@@ -35,6 +35,7 @@ simple_assignment
 
 simple_expression
     : INTEGER VARIABLE
+    | INFTY
     ;
 
 

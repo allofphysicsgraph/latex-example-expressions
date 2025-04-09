@@ -9,6 +9,7 @@ VARIABLE
 |'c'
 |'d'
 |'i'
+|'j'
 |'k'
 |'K'
 |'l'
@@ -31,6 +32,13 @@ BEGIN_EQUATION
     ;
 END_EQUATION
     : '\\end{equation}'
+    ;
+POS_INFTY
+    : '+' '\\infty'
+    ;
+
+NEG_INFTY:
+    : '-' '\\infty'
     ;
 
 INFTY
