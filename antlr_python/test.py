@@ -1,15 +1,15 @@
 import sys
 from antlr4 import *
 from antlr4.InputStream import InputStream
-from LaTeXLexer import LaTeXLexer
-from LaTeXParser import LaTeXParser
-from LaTeXListener import LaTeXListener
+from LATEXLexer import LATEXLexer
+from LATEXParser import LATEXParser
+from LATEXListener import LATEXListener
 from collections import defaultdict
 from pudb import set_trace
 import sympy
 
 
-class SympyEmitter(LaTeXListener):
+class SympyEmitter(LATEXListener):
     def __init__(self):
         self.sympy = defaultdict(list)
         self.results = defaultdict(list)
@@ -155,10 +155,10 @@ class SympyEmitter(LaTeXListener):
     def exitExpression_GT_expression(self, ctx):
         return self.setSympy("exitExpression_GT_expression", ctx.getText())
 
-    def enterAddition(self, ctx: LaTeXParser.AdditionContext):
+    def enterAddition(self, ctx: LATEXParser.AdditionContext):
         print(ctx.getChildCount())
 
-    def exitAddition(self, ctx: LaTeXParser.AdditionContext):
+    def exitAddition(self, ctx: LATEXParser.AdditionContext):
         print(ctx.getChildCount())
         lh = sympy.Number(ctx.expression(0).getText())
         rh = sympy.Number(ctx.expression(1).getText())
@@ -331,13 +331,13 @@ if __name__ == "__main__":
     else:
         input_stream = InputStream(sys.stdin.readline())
 
-    lexer = LaTeXLexer(input_stream)
+    lexer = LATEXLexer(input_stream)
     token_stream = CommonTokenStream(lexer)
     # token_stream.fill()
     # for tk in token_stream.tokens:
     #    print(tk)
 
-    parser = LaTeXParser(token_stream)
+    parser = LATEXParser(token_stream)
     from pudb import set_trace
 
     parser.buildParseTrees = True

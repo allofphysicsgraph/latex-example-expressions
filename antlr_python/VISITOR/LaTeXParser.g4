@@ -5,13 +5,38 @@ parser grammar LaTeXParser;
 
 options { tokenVocab = LaTeXLexer; }
 prog
-   : equation+
+   : sum+
    | expression
    ;
 
 equation
-   : expression relop expression
+   : BEGIN_EQUATION sum END_EQUATION 
    ;
+
+sum
+    : SUM sub_braces SUP VARIABLE
+    | SUM sub_braces SUP INTEGER
+    | SUM sub_braces SUP INFTY
+    | SUM sub_braces sup_braces
+    ;
+
+sub_braces
+    :  SUB LB simple_assignment RB
+    ;
+sup_braces
+    : SUP LB simple_expression RB
+    ;
+
+simple_assignment
+    : VARIABLE EQUALS INTEGER
+    | VARIABLE EQUALS VARIABLE PLUS INTEGER
+    | VARIABLE EQUALS MINUS INFTY
+    ;
+
+simple_expression
+    : INTEGER VARIABLE
+    ;
+
 
 expression
    : signedAtom (binop signedAtom)*
@@ -65,6 +90,5 @@ binop
    | MINUS
    | MUL
    | DIVIDE
-   | POW
    ;
 

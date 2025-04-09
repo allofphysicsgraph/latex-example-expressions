@@ -4,14 +4,38 @@ lexer grammar LaTeXLexer;
 
 VARIABLE
    : 'a'
-   | 'b'
-   | 'c'
-   | 'x'
-   | 'y'
-   | 'z'
-   | 'k'
+| '\\alpha'
+|'b'
+|'c'
+|'d'
+|'i'
+|'k'
+|'K'
+|'l'
+|'L'
+|'m'
+|'M'
+|'n'
+|'N'
+|'p'
+|'r'
+|'t'
+|'T'
+|'x'
+|'y'
+|'z'
    ;
 
+BEGIN_EQUATION
+    : '\\begin{equation}'
+    ;
+END_EQUATION
+    : '\\end{equation}'
+    ;
+
+INFTY
+    : '\\infty'
+    ;
 PI
    : 'PI'
    ;
@@ -40,7 +64,7 @@ RBR
    : ']'
    ;
 
-POW
+SUP
    : '^'
    ;
 
