@@ -41,7 +41,6 @@
 \lim_{j \to \infty}
 \lim_{T\to 0}
 \lim_{t \to +\infty}
-\lim_{\eps \to 0}
 \lim_{\tau \to \infty}
 \lim_{u\to\infty}
 \lim_{d\to\infty}
@@ -52,37 +51,6 @@
 \lim_{n\rightarrow \infty}
 \lim_{x\to 0}
 \lim_{m\to 0}
-\lim_{\eps\to0}
-\lim_{V\to\infty}
-\lim_{\eta\to 0}
-\lim_{t\to 0^+}
-\lim_{l\to\infty}
-\lim_{\rho\to\infty}
-\lim_{t\to0}
-\lim_{a\to 0}
-\lim_{m\to \infty}
-\lim_{q\to 0}
-\lim_{\delta\to0}
-\lim_{j\to \infty}
-\lim_{B\Z'}
-\lim_{m \to \infty}
-\lim_{\e\to 0}
-\lim_{J\to\infty}
-\lim_{t\to +\infty}
-\lim_{i \to \infty}
-\lim_{n\uparrow\infty}
-\lim_{L \to \infty}
-\lim_{z\to\infty}
-\lim_{\delta \to 0}
-\lim_{\varepsilon \to 0}
-\lim_{t\rightarrow\infty}
-\lim_{t\to+\infty}
-\lim_{T \to \infty}
-\lim_{k\to 0}
-\lim_{L\to \infty}
-\lim_{p\to\infty}
-\lim_{\beta\to\infty}
-\lim_{\eps\to 0}
 \lim_{n\to 0}
 \lim_{z\to 0}
 \lim_{n\rightarrow\infty}
@@ -96,7 +64,6 @@
 \lim_{T\to \infty}
 \lim_{s\to\infty}
 \lim_{x\to\infty}
-\lim_{\ell\to\infty}
 \lim_{\varepsilon\to 0}
 \lim_{m\to\infty}
 \lim_{R\to\infty}

@@ -69,9 +69,10 @@ GREEK:
     '\\Xi' |
     '\\zeta' 
     ;
-LIM:
-    '\\lim'
+LIM: 
+    '\\lim' SUB LB
     ;
+
 BEGIN_EQUATION
     : '\\begin{equation}'
     ;
@@ -146,10 +147,30 @@ SUM:
 SUB:
     '_'
     ;
+
+RIGHTARROW:
+    '\\rightarrow'
+    ;
 TO:
     '\\to'
+    | RIGHTARROW
     ;
 
+POS:
+    SUP PLUS
+    ;
+
+NEG:
+    SUP MINUS
+    ;
+
+DOWNARROW:
+    '\\downarrow'
+    ;
+
+ABS_VARIABLE:
+    '|' VARIABLE '|'
+    ;
 
 FLOAT
    : INTEGER? ('.' INTEGER)

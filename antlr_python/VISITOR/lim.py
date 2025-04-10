@@ -15,11 +15,13 @@ resp = (
             ("{", "{"),
             ("}", "}"),
             ("0", "INTEGER"),
+            ("1", "INTEGER"),
             ("\\alpha", " VARIABLE "),
             ("a", " VARIABLE "),
             ("\\beta", " VARIABLE "),
             ("B", " VARIABLE "),
             ("\\delta", " VARIABLE "),
+            ("\\downarrow", " DOWNARROW "),
             ("d", " VARIABLE "),
             ("\\ell", " VARIABLE "),
             ("\\epsilon", " VARIABLE "),
@@ -41,9 +43,11 @@ resp = (
             ("L", " VARIABLE "),
             ("m", " VARIABLE "),
             ("M", " VARIABLE "),
+            ("^-", " NEG "),
             ("n", " VARIABLE "),
             ("N", " VARIABLE "),
             ("\\omega", " VARIABLE "),
+            ("^+", " POS "),
             ("p", " VARIABLE "),
             ("P", " VARIABLE "),
             ("q", " VARIABLE "),
@@ -62,8 +66,8 @@ resp = (
             ("\\varepsilon", " VARIABLE "),
             ("\\varepsilon", "VARIABLE "),
             ("V", " VARIABLE "),
+            ("|x|", " ABS_VARIABLE "),
             ("x", " VARIABLE "),
-            ("x", "VARIABLE "),
             ("z", " VARIABLE "),
         ]
     )
@@ -72,10 +76,13 @@ resp = (
 )
 with open(argv[1], "r") as f:
     data = [x.strip() for x in f.readlines()]
+output = []
 for line in data:
-    print(line)
-    print(list((f"{line}" @ resp).paths().ostrings()))
-    sleep(1)
+    lst = list((f"{line}" @ resp).paths().ostrings())
+    if lst:
+        print(line)
+        print(lst)
+        # sleep(1)
 exit()
 
 # from pynini.lib import rewrite
