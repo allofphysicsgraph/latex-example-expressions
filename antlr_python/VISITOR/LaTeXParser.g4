@@ -5,7 +5,7 @@ parser grammar LaTeXParser;
 
 options { tokenVocab = LaTeXLexer; }
 prog
-   : lim+
+   : sum+
    | expression
    ;
 
@@ -34,7 +34,7 @@ sum
     ;
 
 sub_braces
-    :  SUB LB simple_assignment RB
+    :   simple_assignment RB
     ;
 sup_braces
     : SUP LB simple_expression RB
@@ -43,11 +43,14 @@ sup_braces
 simple_assignment
     : VARIABLE EQUALS INTEGER
     | VARIABLE EQUALS VARIABLE PLUS INTEGER
-    | VARIABLE EQUALS MINUS INFTY
+    | VARIABLE EQUALS INFTY
+    | VARIABLE EQUALS POS_INFTY
+    | VARIABLE EQUALS NEG_INFTY
     ;
 
 simple_expression
     : INTEGER VARIABLE
+    | VARIABLE MINUS INTEGER
     | INFTY
     ;
 

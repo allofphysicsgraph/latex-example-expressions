@@ -142,7 +142,7 @@ EQUALS
    : '='
    ;
 SUM:
-    '\\sum'
+    '\\sum' SUB LB
     ;
 SUB:
     '_'
