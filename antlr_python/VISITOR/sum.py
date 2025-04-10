@@ -6,26 +6,34 @@ from sys import argv
 import string
 from time import sleep
 
-sigstar = pynini.union(*string.ascii_letters + "{}_\\").closure().optimize()
+sigstar = pynini.union(*string.ascii_letters + "{}_^=-+\\").closure().optimize()
 
 resp = (
     pynini.string_map(
         [
             (" ", " "),
-            ("{", "{"),
-            ("}", "}"),
             ("0", "INTEGER"),
             ("1", "INTEGER"),
+            ("2", "INTEGER"),
+            ("3", "INTEGER"),
+            ("4", "INTEGER"),
+            ("5", "INTEGER"),
+            ("6", "INTEGER"),
+            ("7", "INTEGER"),
+            ("8", "INTEGER"),
+            ("9", "INTEGER"),
             ("\\alpha", " VARIABLE "),
             ("a", " VARIABLE "),
             ("\\beta", " VARIABLE "),
             ("B", " VARIABLE "),
+            (",", " COMMA "),
             ("\\delta", " VARIABLE "),
             ("\\downarrow", " DOWNARROW "),
             ("d", " VARIABLE "),
             ("\\ell", " VARIABLE "),
             ("\\epsilon", " VARIABLE "),
             ("\\eps", " VARIABLE "),
+            ("=", " EQUALS "),
             ("\\eta", " VARIABLE "),
             ("\\e", " VARIABLE "),
             ("h", " VARIABLE "),
@@ -38,12 +46,17 @@ resp = (
             ("k", " VARIABLE "),
             ("K", " VARIABLE "),
             ("\\lambda", " VARIABLE "),
-            ("\\sum_", ""),
+            ("\\langle", " LANGLE "),
+            ("{", " LB "),
+            ("<", " LT "),
             ("l", " VARIABLE "),
             ("L", " VARIABLE "),
+            ("-", " MINUS "),
             ("m", " VARIABLE "),
             ("M", " VARIABLE "),
             ("^-", " NEG "),
+            ("\\neq", " NEQ "),
+            ("\\nu", " VARIABLE "),
             ("n", " VARIABLE "),
             ("N", " VARIABLE "),
             ("\\omega", " VARIABLE "),
@@ -51,11 +64,16 @@ resp = (
             ("p", " VARIABLE "),
             ("P", " VARIABLE "),
             ("q", " VARIABLE "),
+            ("\\rangle", " RANGLE "),
             ("\\ra", " TO "),
+            ("}", " RB "),
             ("\\rho", " VARIABLE "),
             ("\\rightarrow", " TO "),
             ("r", " VARIABLE "),
             ("R", " VARIABLE "),
+            ("\\sigma", " VARIABLE "),
+            ("\\sum_", ""),
+            ("^", " SUP "),
             ("s", " VARIABLE "),
             ("\\tau", " VARIABLE "),
             ("\\to", " TO "),
@@ -79,7 +97,7 @@ with open(argv[1], "r") as f:
 output = []
 for line in data:
     lst = list((f"{line}" @ resp).paths().ostrings())
-    if not lst:
+    if lst:
         print(line)
         print(lst)
         # sleep(1)

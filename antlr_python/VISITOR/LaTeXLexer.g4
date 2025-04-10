@@ -4,92 +4,96 @@ lexer grammar LaTeXLexer;
 
 VARIABLE
    : 'a'
-|'b'
-|'c'
-|'d'
-|'i'
-|'j'
-|'k'
-|'K'
-|'l'
-|'L'
-|'m'
-|'M'
-|'n'
-|'N'
-|'p'
-|'r'
-|'t'
-|'T'
-|'x'
-|'y'
-|'z'
-| GREEK
+   | 'b'
+   | 'c'
+   | 'd'
+   | 'i'
+   | 'j'
+   | 'k'
+   | 'K'
+   | 'l'
+   | 'L'
+   | 'm'
+   | 'M'
+   | 'n'
+   | 'N'
+   | 'p'
+   | 'r'
+   | 't'
+   | 'T'
+   | 'x'
+   | 'y'
+   | 'z'
+   | GREEK
    ;
 
-GREEK:
-    '\\alpha' |
-    '\\beta' |
-    '\\chi' |
-    '\\delta' |
-    '\\Delta' |
-    '\\epsilon' |
-    '\\eta' |
-    '\\gamma' |
-    '\\Gamma' |
-    '\\iota' |
-    '\\kappa' |
-    '\\lambda' |
-    '\\Lambda' |
-    '\\mu' |
-    '\\nu' |
-    '\\omega' |
-    '\\Omega' |
-    '\\omicron' |
-    '\\phi' |
-    '\\Phi' |
-    '\\Pi' |
-    '\\psi' |
-    '\\Psi' |
-    '\\rho' |
-    '\\sigma' |
-    '\\Sigma' |
-    '\\tau' |
-    '\\theta' |
-    '\\Theta' |
-    '\\upsilon' |
-    '\\Upsilon' |
-    '\\varepsilon' |
-    '\\varphi' |
-    '\\varpi' |
-    '\\varrho' |
-    '\\varsigma' |
-    '\\vartheta' |
-    '\\xi' |
-    '\\Xi' |
-    '\\zeta' 
-    ;
-LIM: 
-    '\\lim' SUB LB
-    ;
+GREEK
+   : '\\alpha'
+   | '\\beta'
+   | '\\chi'
+   | '\\delta'
+   | '\\Delta'
+   | '\\epsilon'
+   | '\\eta'
+   | '\\gamma'
+   | '\\Gamma'
+   | '\\iota'
+   | '\\kappa'
+   | '\\lambda'
+   | '\\Lambda'
+   | '\\mu'
+   | '\\nu'
+   | '\\omega'
+   | '\\Omega'
+   | '\\omicron'
+   | '\\phi'
+   | '\\Phi'
+   | '\\Pi'
+   | '\\psi'
+   | '\\Psi'
+   | '\\rho'
+   | '\\sigma'
+   | '\\Sigma'
+   | '\\tau'
+   | '\\theta'
+   | '\\Theta'
+   | '\\upsilon'
+   | '\\Upsilon'
+   | '\\varepsilon'
+   | '\\varphi'
+   | '\\varpi'
+   | '\\varrho'
+   | '\\varsigma'
+   | '\\vartheta'
+   | '\\xi'
+   | '\\Xi'
+   | '\\zeta'
+   ;
+
+LIM
+   : '\\lim' SUB LB
+   ;
 
 BEGIN_EQUATION
-    : '\\begin{equation}'
-    ;
+   : '\\begin{equation}'
+   ;
+
 END_EQUATION
-    : '\\end{equation}'
-    ;
+   : '\\end{equation}'
+   ;
+
 POS_INFTY
-    : '+' '\\infty'
-    ;
+   : '+' '\\infty'
+   ;
 
 NEG_INFTY
-    : '-' '\\infty'
-    ;
+   : '-' '\\infty'
+   ;
 
 INFTY
-    : '\\infty'
-    ;
+   : '\\infty'
+   ;
+
 PI
    : 'PI'
    ;
@@ -141,36 +145,59 @@ DIVIDE
 EQUALS
    : '='
    ;
-SUM:
-    '\\sum' SUB LB
-    ;
-SUB:
-    '_'
-    ;
 
-RIGHTARROW:
-    '\\rightarrow'
-    ;
-TO:
-    '\\to'
-    | RIGHTARROW
-    ;
+LANGLE
+   : '\\langle'
+   ;
 
-POS:
-    SUP PLUS
-    ;
+RANGLE
+   : '\\rangle'
+   ;
 
-NEG:
-    SUP MINUS
-    ;
+COMMA
+   : ','
+   ;
 
-DOWNARROW:
-    '\\downarrow'
-    ;
+LT
+   : '<'
+   ;
 
-ABS_VARIABLE:
-    '|' VARIABLE '|'
-    ;
+NEQ
+   : '\\neq'
+   ;
+
+SUM
+   : '\\sum'
+   ;
+
+SUB
+   : '_'
+   ;
+
+RIGHTARROW
+   : '\\rightarrow'
+   ;
+
+TO
+   : '\\to'
+   | RIGHTARROW
+   ;
+
+POS
+   : SUP PLUS
+   ;
+
+NEG
+   : SUP MINUS
+   ;
+
+DOWNARROW
+   : '\\downarrow'
+   ;
+
+ABS_VARIABLE
+   : '|' VARIABLE '|'
+   ;
 
 FLOAT
    : INTEGER? ('.' INTEGER)
