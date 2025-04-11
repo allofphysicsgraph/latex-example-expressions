@@ -4,11 +4,21 @@ lexer grammar LaTeXLexer;
 
 VARIABLE
    : 'a'
+   | 'A'
    | 'b'
-   | 'c'
+   | 'B'
+   | 'C'
    | 'd'
+   | 'e'
+   | 'E'
+   | 'F'
+   | 'g'
+   | 'h'
+   | 'H'
    | 'i'
+   | 'I'
    | 'j'
+   | 'J'
    | 'k'
    | 'K'
    | 'l'
@@ -17,57 +27,27 @@ VARIABLE
    | 'M'
    | 'n'
    | 'N'
+   | 'o'
    | 'p'
+   | 'P'
+   | 'q'
+   | 'Q'
    | 'r'
+   | 'R'
+   | 's'
+   | 'S'
    | 't'
    | 'T'
+   | 'u'
+   | 'U'
+   | 'v'
+   | 'V'
+   | 'w'
+   | 'W'
    | 'x'
    | 'y'
    | 'z'
-   | GREEK
-   ;
-
-GREEK
-   : '\\alpha'
-   | '\\beta'
-   | '\\chi'
-   | '\\delta'
-   | '\\Delta'
-   | '\\epsilon'
-   | '\\eta'
-   | '\\gamma'
-   | '\\Gamma'
-   | '\\iota'
-   | '\\kappa'
-   | '\\lambda'
-   | '\\Lambda'
-   | '\\mu'
-   | '\\nu'
-   | '\\omega'
-   | '\\Omega'
-   | '\\omicron'
-   | '\\phi'
-   | '\\Phi'
-   | '\\Pi'
-   | '\\psi'
-   | '\\Psi'
-   | '\\rho'
-   | '\\sigma'
-   | '\\Sigma'
-   | '\\tau'
-   | '\\theta'
-   | '\\Theta'
-   | '\\upsilon'
-   | '\\Upsilon'
-   | '\\varepsilon'
-   | '\\varphi'
-   | '\\varpi'
-   | '\\varrho'
-   | '\\varsigma'
-   | '\\vartheta'
-   | '\\xi'
-   | '\\Xi'
-   | '\\zeta'
+   | 'Z'
    ;
 
 LIM
@@ -92,10 +72,6 @@ NEG_INFTY
 
 INFTY
    : '\\infty'
-   ;
-
-PI
-   : 'PI'
    ;
 
 LB
@@ -223,5 +199,165 @@ fragment DIGIT
 
 WS
    : [ \r\n\t] -> skip
+   ;
+
+DELTA_UC
+   : '\\Delta'
+   ;
+
+ALPHA
+   : '\\alpha'
+   ;
+
+BETA
+   : '\\beta'
+   ;
+
+CAL
+   : '\\cal'
+   ;
+
+CDOT
+   : '\\cdot'
+   ;
+
+CFRAC
+   : '\\cfrac'
+   ;
+
+CHI
+   : '\\chi'
+   ;
+
+DELTA
+   : '\\delta'
+   ;
+
+EPSILON
+   : '\\epsilon'
+   ;
+
+ETA
+   : '\\eta'
+   ;
+
+GAMMA
+   : '\\gamma'
+   ;
+
+GAMMA_UC
+   : '\\Gamma'
+   ;
+
+HAT
+   : '\\hat'
+   ;
+
+HBAR
+   : '\\hbar'
+   ;
+
+KAPPA
+   : '\\kappa'
+   ;
+
+LAMBDA
+   : '\\lambda'
+   ;
+
+NABLA
+   : '\\nabla'
+   ;
+
+LAMBDA_UC
+   : '\\Lambda'
+   ;
+
+LOG
+   : '\\log'
+   ;
+
+MP
+   : '\\mp'
+   ;
+
+MU
+   : '\\mu'
+   ;
+
+NU
+   : '\\nu'
+   ;
+
+OMEGA
+   : '\\omega'
+   ;
+
+PHI
+   : '\\phi'
+   ;
+
+PI
+   : '\\pi'
+   ;
+
+PM
+   : '\\pm'
+   ;
+
+PRIME
+   : '\\prime'
+   ;
+
+PSI
+   : '\\psi'
+   ;
+
+RHO
+   : '\\rho'
+   ;
+
+SIGMA
+   : '\\sigma'
+   ;
+
+SQRT
+   : '\\sqrt'
+   ;
+
+TAU
+   : '\\tau'
+   ;
+
+THETA
+   : '\\theta'
+   ;
+
+TILDE
+   : '\\tilde'
+   ;
+
+UPARROW
+   : '\\uparrow'
+   ;
+
+VAREPSILON
+   : '\\varepsilon'
+   ;
+
+VARPHI
+   : '\\varphi'
+   ;
+
+VEC
+   : '\\vec'
+   ;
+
+XI
+   : '\\xi'
+   ;
+
+ZETA
+   : '\\zeta'
    ;
 
