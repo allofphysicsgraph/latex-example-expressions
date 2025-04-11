@@ -11,12 +11,20 @@ resp = (
     pynini.string_map(
         [
             (" ", " "),
+            (".", " DOT "),
             ("|", "|"),
             ("*", " TIMES "),
             ("~", " tilde "),
             ("'", " PRIME "),
             ("\\", "\\"),
             ("w", " VARIABLE "),
+            ("\\mathcal", " "),
+            ("\\rm ", " "),
+            ("D", " VARIABLE "),
+            ("E", " VARIABLE "),
+            ("H", " VARIABLE "),
+            ("C", " VARIABLE "),
+            ("T", " VARIABLE "),
             ("b", " VARIABLE "),
             ("g", " VARIABLE "),
             ("U", " VARIABLE "),
@@ -27,16 +35,16 @@ resp = (
             ("\\Delta", " DELTA_UC "),
             (" ", " "),
             ("S", " VARIABLE "),
-            ("0", "INTEGER"),
-            ("1", "INTEGER"),
-            ("2", "INTEGER"),
-            ("3", "INTEGER"),
-            ("4", "INTEGER"),
-            ("5", "INTEGER"),
-            ("6", "INTEGER"),
-            ("7", "INTEGER"),
-            ("8", "INTEGER"),
-            ("9", "INTEGER"),
+            ("0", " INTEGER "),
+            ("1", " INTEGER "),
+            ("2", " INTEGER "),
+            ("3", " INTEGER "),
+            ("4", " INTEGER "),
+            ("5", " INTEGER "),
+            ("6", " INTEGER "),
+            ("7", " INTEGER "),
+            ("8", " INTEGER "),
+            ("9", " INTEGER "),
             ("\\alpha", " ALPHA "),
             ("a", " VARIABLE "),
             ("A", " VARIABLE "),
@@ -159,11 +167,13 @@ with open(argv[1], "r") as f:
 output = []
 for line in data:
     lst = list((f"{line}" @ resp).paths().ostrings())
-    if lst:
-        print(lst)
+    # if lst:
+    #    print(line)
+    #    print(lst[-1])
 
     if not lst:
         print(line)
+        exit()
         try:
             for ix in range(len(line) - 3):
                 test_case = line[: 3 + ix]
