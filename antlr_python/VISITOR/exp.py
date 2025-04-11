@@ -159,6 +159,9 @@ with open(argv[1], "r") as f:
 output = []
 for line in data:
     lst = list((f"{line}" @ resp).paths().ostrings())
+    if lst:
+        print(lst)
+
     if not lst:
         print(line)
         try:
