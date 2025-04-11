@@ -1,4 +1,3 @@
-# grep -oP '\\[a-z]+' lim_test_cases |sort|uniq|xargs -i echo "('\\\\{}',' VARIABLE '),"
 import pynini
 import re
 from file_utils import read_file
@@ -13,8 +12,19 @@ resp = (
         [
             (" ", " "),
             ("|", "|"),
+            ("*", " TIMES "),
+            ("~", " tilde "),
+            ("'", " PRIME "),
             ("\\", "\\"),
             ("w", " VARIABLE "),
+            ("b", " VARIABLE "),
+            ("g", " VARIABLE "),
+            ("U", " VARIABLE "),
+            ("C", " VARIABLE "),
+            ("I", " VARIABLE "),
+            ("W", " VARIABLE "),
+            ("v", " VARIABLE "),
+            ("\\Delta", " DELTA_UC "),
             (" ", " "),
             ("S", " VARIABLE "),
             ("0", "INTEGER"),
@@ -58,6 +68,7 @@ resp = (
             ("\\frac", " FRAC "),
             ("F", " VARIABLE "),
             ("\\gamma", " GAMMA "),
+            ("\\Gamma", " GAMMA_UC "),
             ("\\hat", " HAT "),
             ("\\hbar", " HBAR "),
             ("h", " VARIABLE "),
@@ -73,6 +84,7 @@ resp = (
             ("k", " VARIABLE "),
             ("K", " VARIABLE "),
             ("\\lambda", " LAMBDA "),
+            ("\\nabla", " NABLA "),
             ("\\Lambda", " LAMBDA_UC "),
             ("\\langle", " LANGLE "),
             ("{", " LB "),
@@ -163,17 +175,4 @@ for line in data:
         except Exception as e:
             print(e)
 
-        # sleep(1)
 exit()
-
-# from pynini.lib import rewrite
-# sigstar.closure()
-# sigstar.optimize()
-# lexicon = pynini.union("cool","hello","\\lim","_","{","}"," ","x",'to','0').closure().optimize()
-# fst1 = pynini.union(pynini.cross('\\lim_{','').closure().optimize(),lexicon).closure().optimize()
-# print(list(('\\lim_{x to 0}' @ fst1).paths().ostrings()))
-# variables = pynini.union('x').closure().optimize()
-# rulr_1 = pynini.cross(*variables,"VAR")
-
-# rulr = pynini.cdrewrite(pynini.union(pynini.cross("\\lim_{","LIM"),rulr1),"","",sigstar)
-# print(list(('\\lim_{x \\to 0}' @rulr).paths().ostrings()))
