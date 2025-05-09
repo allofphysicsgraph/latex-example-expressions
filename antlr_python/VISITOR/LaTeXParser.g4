@@ -10,10 +10,15 @@ prog
 
 equation
    : BEGIN_EQUATION symbol EQUALS sum symbol symbol END_EQUATION
-   | BEGIN_EQUATION VARIABLE EQUALS VARIABLE END_EQUATION
+   | BEGIN_EQUATION signedAtom EQUALS signedAtom END_EQUATION
    | BEGIN_EQUATION expression EQUALS expression  END_EQUATION
+   | BEGIN_EQUATION cases END_EQUATION
+   | BEGIN_EQUATION atom (LT|GT) atom END_EQUATION
    ;
 
+cases:
+    BEGIN_CASES (expression EQUALS expression LINE_SPLIT?)+ END_CASES
+    ;
 
 symbol:
     VARIABLE SUB VARIABLE
@@ -85,17 +90,21 @@ expression
    : signedAtom (binop signedAtom)*
    | numeric_atom atom
    | atom numeric_atom
+   | signedAtom atom
    | frac
    | expression (binop expression)+
    | atom SUB braces_expression
    | atom SUB braces_expression SUP braces_expression
    | atom SUP braces_expression
+   | PARTIAL
+   | PARTIAL atom
    ;
 
 signedAtom
    : PLUS signedAtom
    | MINUS signedAtom
    | numeric_atom
+   | MINUS numeric_atom
    | atom
    ;
 

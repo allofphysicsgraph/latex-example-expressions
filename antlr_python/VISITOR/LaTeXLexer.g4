@@ -122,6 +122,7 @@ DIVIDE
 
 EQUALS
    : '='
+   | '&''='
    ;
 
 LANGLE
@@ -561,3 +562,16 @@ fragment PARTIAL_CMD: '\\partial';
 fragment EMPTYSET: '\\emptyset';
 SYMBOL: PI | PARTIAL_CMD | INFTY | EMPTYSET;
 
+PARTIAL:
+'\\partail'
+;
+
+LINE_SPLIT:
+    '\\\\'
+    ; 
+BEGIN_CASES:
+'\\begin{cases}'
+;
+END_CASES:
+'\\end{cases}'
+;
