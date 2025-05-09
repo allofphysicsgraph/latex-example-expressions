@@ -18,8 +18,8 @@ RUN apt-get update && \
          python3-pip \
          python3-dev \
 # compile .tex to verify the latex is valid
-         texlive
-
+         texlive \
+         openjdk-21-jdk
 #RUN pip3 install antlr4-python3-runtime mpmath
 
 WORKDIR /opt/
@@ -32,6 +32,9 @@ WORKDIR /opt/
 RUN wget http://mirrors.ctan.org/macros/latex/required/amsmath.zip
 RUN unzip amsmath.zip
 
+RUN curl -O https://www.antlr.org/download/antlr-4.13.2-complete.jar
+RUN cp antlr-4.13.2-complete.jar /usr/local/lib
+
 #WORKDIR /opt/sympy-master/
 
 #RUN wget https://raw.githubusercontent.com/allofphysicsgraph/proofofconcept/gh-pages/v7_pickle_web_interface/flask/data.json
@@ -39,4 +42,9 @@ RUN unzip amsmath.zip
 #COPY generate_latex_files.py /opt/sympy-master/
 
 RUN echo "alias python=python3" > /root/.bashrc
+RUN echo 'export CLASSPATH=".:/usr/local/lib/antlr-4.13.2-complete.jar:$CLASSPATH"' >> /root/.bashrc
+RUN echo "alias antlr4='java -Xmx500M -cp '/usr/local/lib/antlr-4.13.2-complete.jar:$CLASSPATH' org.antlr.v4.Tool'" >> /root/.bashrc
+RUN echo "alias grun='java -Xmx500M -cp '/usr/local/lib/antlr-4.13.2-complete.jar:$CLASSPATH' org.antlr.v4.gui.TestRig'" >> /root/.bashrc
+
+#RUN sed -i "s/antlr4=/antlr4='//g" /root/.bashrc
 #RUN /bin/bash -l /root/.bashrc
