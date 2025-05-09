@@ -87,6 +87,9 @@ expression
    | atom numeric_atom
    | frac
    | expression (binop expression)+
+   | atom SUB braces_expression
+   | atom SUB braces_expression SUP braces_expression
+   | atom SUP braces_expression
    ;
 
 signedAtom
@@ -98,8 +101,6 @@ signedAtom
 
 atom
    : variable
-   | enclosed_expression
-   
    ;
 
 numeric_atom
@@ -112,9 +113,11 @@ number
    | constant
    ;
 
+braces_expression 
+    : LB expression RB
+    ;
 enclosed_expression
    :
-   | LB expression RB
    | LP expression RP
    | LBR expression RBR
    ;

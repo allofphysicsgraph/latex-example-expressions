@@ -509,7 +509,7 @@ fragment GREEK_LETTER:
     '\\omega';
 
 GREEK_CMD: GREEK_LETTER [ ]?;
-
+IGNORE: '\\displaystyle'   -> skip;
 fragment OTHER_SYMBOL:
     '\\Bbbk'  |
     '\\wp'  |
@@ -560,5 +560,4 @@ OTHER_SYMBOL_CMD: OTHER_SYMBOL [ ]?;
 fragment PARTIAL_CMD: '\\partial';
 fragment EMPTYSET: '\\emptyset';
 SYMBOL: PI | PARTIAL_CMD | INFTY | EMPTYSET;
-
 
