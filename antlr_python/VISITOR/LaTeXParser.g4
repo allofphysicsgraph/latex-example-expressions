@@ -5,12 +5,13 @@ parser grammar LaTeXParser;
 
 options { tokenVocab = LaTeXLexer; }
 prog
-   : sum+
-   | expression
+   : equation+
    ;
 
 equation
    : BEGIN_EQUATION symbol EQUALS sum symbol symbol END_EQUATION
+   | BEGIN_EQUATION VARIABLE EQUALS VARIABLE END_EQUATION
+   | BEGIN_EQUATION expression EQUALS expression  END_EQUATION
    ;
 
 
@@ -22,9 +23,9 @@ exp:
     FUNC_EXP
     ;
 
-exp_expr:
-    
-
+frac
+    : CMD_FRAC LB expression RB LB expression RB
+    ;
 lim
    : LIM VARIABLE RB
    | LIM VARIABLE LIM_APPROACH INFTY RB
@@ -84,6 +85,8 @@ expression
    : signedAtom (binop signedAtom)*
    | numeric_atom atom
    | atom numeric_atom
+   | frac
+   | expression (binop expression)+
    ;
 
 signedAtom
@@ -96,6 +99,7 @@ signedAtom
 atom
    : variable
    | enclosed_expression
+   
    ;
 
 numeric_atom
@@ -117,6 +121,7 @@ enclosed_expression
 
 variable
    : VARIABLE
+   | VARIABLE SUB INTEGER
    ;
 
 constant
@@ -132,5 +137,6 @@ binop
    | MINUS
    | MUL
    | DIVIDE
+   | SUP
    ;
 

@@ -10,7 +10,10 @@ sigstar = pynini.union(*string.ascii_letters + "/(){}_^=-+\\").closure().optimiz
 resp = (
     pynini.string_map(
         [
+            (r"\\begin{equation}", " "),
+            (r"\\end{equation}", " "),
             (" ", " "),
+            ("&", " AMPRESAND "),
             (".", " DOT "),
             ("|", "|"),
             ("*", " TIMES "),
@@ -165,11 +168,12 @@ resp = (
 with open(argv[1], "r") as f:
     data = [x.strip() for x in f.readlines()]
 output = []
+print(data)
 for line in data:
     lst = list((f"{line}" @ resp).paths().ostrings())
-    # if lst:
-    #    print(line)
-    #    print(lst[-1])
+    if lst:
+        #print(line)
+        print(lst[-1])
 
     if not lst:
         print(line)
@@ -182,5 +186,5 @@ for line in data:
                     print("fails on:\t" + test_case)
         except Exception as e:
             print(e)
-
+print('*'*50)
 exit()

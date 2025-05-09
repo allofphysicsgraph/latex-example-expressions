@@ -7,6 +7,7 @@ VARIABLE
    | 'A'
    | 'b'
    | 'B'
+   | 'c'
    | 'C'
    | 'd'
    | 'e'
@@ -559,6 +560,5 @@ OTHER_SYMBOL_CMD: OTHER_SYMBOL [ ]?;
 fragment PARTIAL_CMD: '\\partial';
 fragment EMPTYSET: '\\emptyset';
 SYMBOL: PI | PARTIAL_CMD | INFTY | EMPTYSET;
-
 
 
